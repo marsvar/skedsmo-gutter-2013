@@ -63,6 +63,8 @@ async function initExercisesPage() {
 
   const phaseFilter = document.getElementById('phase-filter');
   const ageFilter = document.getElementById('age-filter');
+  const searchInput = document.getElementById('exercise-search');
+  const countLabel = document.getElementById('exercise-count');
 
   try {
     const data = await loadContentData();
@@ -79,10 +81,14 @@ async function initExercisesPage() {
     function render() {
       const p = phaseFilter.value;
       const a = ageFilter.value;
+      const q = (searchInput?.value || '').trim().toLowerCase();
       const filtered = exercises.filter(e =>
         (p === 'all' || e.phase === p) &&
-        (a === 'all' || e.age.includes(a))
+        (a === 'all' || e.age.includes(a)) &&
+        (q === '' || `${e.name} ${e.objective}`.toLowerCase().includes(q))
       );
+
+      if (countLabel) countLabel.textContent = `Viser ${filtered.length} av ${exercises.length} øvelser`;
 
       list.innerHTML = filtered.map(e => `
         <article class="bg-white border rounded-xl p-4">
@@ -95,6 +101,7 @@ async function initExercisesPage() {
 
     phaseFilter.addEventListener('change', render);
     ageFilter.addEventListener('change', render);
+    if (searchInput) searchInput.addEventListener('input', render);
     render();
   } catch (e) {
     list.innerHTML = `<p class="text-red-700">Feil ved lasting av øktdata: ${e.message}</p>`;

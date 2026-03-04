@@ -19,7 +19,7 @@
     <img src="https://skedsmofk.no/images/logo.png" alt="Skedsmo FK logo" class="w-12 h-12 object-contain" />
     <div>
       <h1 class="text-xl font-bold text-skedsmo-dark">Skedsmo Fotball</h1>
-      <p class="text-sm text-gray-500">Fase 2 – Økter med filter</p>
+      <p class="text-sm text-gray-500">Fase 2 – Økter med filter og søk</p>
     </div>
   </div>
 </header>
@@ -37,7 +37,7 @@
     <p class="text-sm text-gray-500 mt-1">Øvelser hentes fra <code>data/content.json</code> med enkle filtre (fase/aldersgruppe).</p>
   </div>
 
-  <div class="bg-white border rounded-xl p-4 grid md:grid-cols-2 gap-4">
+  <div class="bg-white border rounded-xl p-4 grid md:grid-cols-3 gap-4">
     <label class="text-sm">
       <span class="block mb-1 text-gray-600">Filter fase</span>
       <select id="phase-filter" class="w-full border rounded px-3 py-2">
@@ -52,8 +52,13 @@
         <option value="13-16">13–16 år</option>
       </select>
     </label>
+    <label class="text-sm">
+      <span class="block mb-1 text-gray-600">Søk øvelse</span>
+      <input id="exercise-search" type="search" placeholder="F.eks. situasjonsøvelse 24" class="w-full border rounded px-3 py-2" />
+    </label>
   </div>
 
+  <p id="exercise-count" class="text-sm text-gray-500"></p>
   <div id="exercise-list" class="space-y-3"></div>
 </main>
 <script src="assets/js/main.js"></script>
