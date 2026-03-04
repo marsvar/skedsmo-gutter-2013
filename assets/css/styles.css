@@ -1,8 +1,0 @@
-[x-cloak] { display: none; }
-.tab-btn.active { border-bottom: 3px solid #c6180e; color: #c6180e; font-weight: 700; }
-.section { display: none; }
-.section.active { display: block; }
-.periode-card { transition: box-shadow .15s; }
-.periode-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.12); }
-.top-nav-link { color: #444444; font-weight: 600; }
-.top-nav-link.active, .top-nav-link:hover { color: #c6180e; }
