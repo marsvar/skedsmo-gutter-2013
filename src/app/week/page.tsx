@@ -1,12 +1,29 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { resolveCurrentWeek } from '@/lib/resolveToday'
 import { getAdjacentWeeks } from '@/data/season'
 import WeekView from '@/components/WeekView'
 import Link from 'next/link'
 
 export default function WeekPage() {
-  const ctx = resolveCurrentWeek()
+  const [ctx, setCtx] = useState<ReturnType<typeof resolveCurrentWeek>>(null)
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    setCtx(resolveCurrentWeek())
+    setLoaded(true)
+  }, [])
+
+  if (!loaded) {
+    return (
+      <div className="animate-pulse space-y-4 mt-2">
+        <div className="h-10 bg-gray-200 rounded-xl" />
+        <div className="h-48 bg-gray-100 rounded-xl" />
+        <div className="h-32 bg-gray-100 rounded-xl" />
+      </div>
+    )
+  }
 
   if (!ctx) {
     return (
