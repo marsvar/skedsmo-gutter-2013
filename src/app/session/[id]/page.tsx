@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   getAllSessions,
@@ -16,6 +17,17 @@ interface Props {
 
 export function generateStaticParams() {
   return getAllSessions().map((s) => ({ id: s.id }))
+}
+
+export function generateMetadata({ params }: Props): Metadata {
+  const session = getSession(params.id)
+  if (!session) return { title: 'Økt ikke funnet' }
+  const week = getWeekForSession(session.id)
+  const block = getBlockForSession(session.id)
+  const title = week && block
+    ? `${DAY_LABELS[session.dayOfWeek]} · ${block.nffCode} Uke ${week.number}`
+    : DAY_LABELS[session.dayOfWeek]
+  return { title: `${title} – Skedsmo` }
 }
 
 const DAY_ACCENT: Record<string, string> = {

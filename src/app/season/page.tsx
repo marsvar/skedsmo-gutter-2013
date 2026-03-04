@@ -1,6 +1,11 @@
+import type { Metadata } from 'next'
 import { season2026 } from '@/data/season'
 import { resolveCurrentBlock } from '@/lib/resolveToday'
 import BlockCard from '@/components/BlockCard'
+
+export const metadata: Metadata = {
+  title: 'Sesongplan – Skedsmo Fotball 2013',
+}
 
 export default function SeasonPage() {
   const currentBlock = resolveCurrentBlock()

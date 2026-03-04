@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { getAllWeeks, getWeek, getBlockForWeek, getAdjacentWeeks } from '@/data/season'
 import WeekView from '@/components/WeekView'
 
@@ -8,6 +9,12 @@ interface Props {
 
 export function generateStaticParams() {
   return getAllWeeks().map((w) => ({ weekId: w.id }))
+}
+
+export function generateMetadata({ params }: Props): Metadata {
+  const week = getWeek(params.weekId)
+  if (!week) return { title: 'Uke ikke funnet' }
+  return { title: `Uke ${week.number} – ${week.focus} – Skedsmo` }
 }
 
 export default function WeekByIdPage({ params }: Props) {
