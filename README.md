@@ -34,3 +34,13 @@ Siden er startet opp i en fler-siders struktur for enklere navigering:
 - `okter.html` – økter/lenker
 - `assets/css/styles.css` – felles stil
 - `assets/js/main.js` – felles JS (tab-funksjon + aktiv toppnavigasjon)
+
+
+## Fase 2 (påbegynt)
+
+Datadrevet innhold er introdusert:
+
+- `data/content.json` – kalenderdata + øvelsesdata
+- `kalender.html` rendrer ukeøkter dynamisk fra JSON
+- `okter.html` rendrer øvelseskort dynamisk med filter på fase/alder
+- `assets/js/main.js` håndterer lasting/rendering og filtre

@@ -19,31 +19,42 @@
     <img src="https://skedsmofk.no/images/logo.png" alt="Skedsmo FK logo" class="w-12 h-12 object-contain" />
     <div>
       <h1 class="text-xl font-bold text-skedsmo-dark">Skedsmo Fotball</h1>
-      <p class="text-sm text-gray-500">Fase 1 – Økter (strukturert inngang)</p>
+      <p class="text-sm text-gray-500">Fase 2 – Økter med filter</p>
     </div>
   </div>
 </header>
 <nav class="bg-skedsmo-light border-b border-gray-200">
   <div class="max-w-6xl mx-auto px-4 py-2 flex gap-5 text-sm overflow-x-auto">
     <a data-topnav href="index.html" class="top-nav-link">Oversikt (eksisterende)</a>
-    <a data-topnav href="arsplan.html" class="top-nav-link">Ny side: Årsplan</a>
-    <a data-topnav href="kalender.html" class="top-nav-link">Ny side: Kalender</a>
-    <a data-topnav href="okter.html" class="top-nav-link">Ny side: Økter</a>
+    <a data-topnav href="arsplan.html" class="top-nav-link">Årsplan</a>
+    <a data-topnav href="kalender.html" class="top-nav-link">Kalender</a>
+    <a data-topnav href="okter.html" class="top-nav-link">Økter</a>
   </div>
 </nav>
-<main class="max-w-6xl mx-auto px-4 py-8">
-  <h2 class="text-2xl font-bold mb-2">Økter og tema</h2>
-  <p class="text-sm text-gray-500 mb-6">Fase 1 samler de viktigste øktlenkene i en egen side. Fase 2 blir filter/søk.</p>
-
-  <div class="bg-white border rounded-xl p-5">
-    <h3 class="font-semibold mb-3">Bekreftede øvelser (A1-A2)</h3>
-    <ul class="space-y-2 text-sm">
-      <li><a class="text-nff-blue underline" target="_blank" href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-20">A1-A2 Situasjonsøvelse nr. 20</a></li>
-      <li><a class="text-nff-blue underline" target="_blank" href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-21">A1-A2 Situasjonsøvelse nr. 21</a></li>
-      <li><a class="text-nff-blue underline" target="_blank" href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-24">A1-A2 Situasjonsøvelse nr. 24</a></li>
-      <li><a class="text-nff-blue underline" target="_blank" href="https://tiim.no/ovelse/a1-a2-spill-30">A1-A2 Spill nr. 30</a></li>
-    </ul>
+<main class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold">Økter og tema</h2>
+    <p class="text-sm text-gray-500 mt-1">Øvelser hentes fra <code>data/content.json</code> med enkle filtre (fase/aldersgruppe).</p>
   </div>
+
+  <div class="bg-white border rounded-xl p-4 grid md:grid-cols-2 gap-4">
+    <label class="text-sm">
+      <span class="block mb-1 text-gray-600">Filter fase</span>
+      <select id="phase-filter" class="w-full border rounded px-3 py-2">
+        <option value="all">Alle</option>
+      </select>
+    </label>
+    <label class="text-sm">
+      <span class="block mb-1 text-gray-600">Filter alder</span>
+      <select id="age-filter" class="w-full border rounded px-3 py-2">
+        <option value="all">Alle</option>
+        <option value="2013">2013-laget</option>
+        <option value="13-16">13–16 år</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="exercise-list" class="space-y-3"></div>
 </main>
 <script src="assets/js/main.js"></script>
 </body>

@@ -20,7 +20,7 @@ python3 -m http.server 8080
 
 ## Architecture
 
-Static HTML site with a phased multi-page transition. `index.html` remains the full legacy overview, while `arsplan.html`, `kalender.html`, and `okter.html` are introduced in phase 1. Shared styles/scripts live in `assets/css/styles.css` and `assets/js/main.js`. Tailwind CSS loaded via CDN. No build process, no dependencies.
+Static HTML site with a phased multi-page transition. `index.html` remains the full legacy overview, while `arsplan.html`, `kalender.html`, and `okter.html` are introduced in phase 1. In phase 2, `kalender.html` and `okter.html` render from `data/content.json` via shared `assets/js/main.js`. Shared styles/scripts live in `assets/css/styles.css` and `assets/js/main.js`. Tailwind CSS loaded via CDN. No build process, no dependencies.
 
 ## NFF domain knowledge
 

@@ -19,31 +19,28 @@
     <img src="https://skedsmofk.no/images/logo.png" alt="Skedsmo FK logo" class="w-12 h-12 object-contain" />
     <div>
       <h1 class="text-xl font-bold text-skedsmo-dark">Skedsmo Fotball</h1>
-      <p class="text-sm text-gray-500">Fase 1 – Kalender (MVP)</p>
+      <p class="text-sm text-gray-500">Fase 2 – Datadrevet kalender</p>
     </div>
   </div>
 </header>
 <nav class="bg-skedsmo-light border-b border-gray-200">
   <div class="max-w-6xl mx-auto px-4 py-2 flex gap-5 text-sm overflow-x-auto">
     <a data-topnav href="index.html" class="top-nav-link">Oversikt (eksisterende)</a>
-    <a data-topnav href="arsplan.html" class="top-nav-link">Ny side: Årsplan</a>
-    <a data-topnav href="kalender.html" class="top-nav-link">Ny side: Kalender</a>
-    <a data-topnav href="okter.html" class="top-nav-link">Ny side: Økter</a>
+    <a data-topnav href="arsplan.html" class="top-nav-link">Årsplan</a>
+    <a data-topnav href="kalender.html" class="top-nav-link">Kalender</a>
+    <a data-topnav href="okter.html" class="top-nav-link">Økter</a>
   </div>
 </nav>
-<main class="max-w-6xl mx-auto px-4 py-8">
-  <h2 class="text-2xl font-bold mb-2">Kalenderoversikt – Mars 2026</h2>
-  <p class="text-sm text-gray-500 mb-6">Start på kalenderfunksjon. I fase 2 flyttes dette til datadrevet format (JSON).</p>
-
-  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-    <div class="bg-white border rounded-xl p-4"><div class="font-bold text-blue-700">Mandag</div><p class="text-sm mt-2">90 min · Temaøvelse intro</p></div>
-    <div class="bg-white border rounded-xl p-4"><div class="font-bold text-green-700">Tirsdag</div><p class="text-sm mt-2">90 min · Aktiv motstand</p></div>
-    <div class="bg-white border rounded-xl p-4"><div class="font-bold text-orange-700">Torsdag</div><p class="text-sm mt-2">90 min · Full motstand (+ RRR uke 1–3)</p></div>
-    <div class="bg-white border rounded-xl p-4"><div class="font-bold text-purple-700">Lørdag</div><p class="text-sm mt-2">90 min · Kamp / turneringsspill</p></div>
+<main class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold">Kalenderoversikt – <span id="calendar-month">Laster…</span></h2>
+    <p class="text-sm text-gray-500 mt-1">Kalenderen rendres nå fra <code>data/content.json</code> (fase 2).</p>
   </div>
 
-  <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mt-6 text-sm text-amber-800">
-    <strong>Feriehensyn:</strong> juli–august markeres som perioder med mulig lavere oppmøte og justert oppsett.
+  <div id="calendar-root" class="space-y-4"></div>
+
+  <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
+    <strong>Feriehensyn:</strong> <span id="holiday-note">Laster…</span>
   </div>
 </main>
 <script src="assets/js/main.js"></script>
