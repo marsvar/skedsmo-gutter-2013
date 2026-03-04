@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skedsmo Fotball – Kalender</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://skedsmofk.no/favicons/favicon-32.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { nff: { blue: '#003087', red: '#c6180e', gold: '#f5a623' }, skedsmo: { red: '#c6180e', dark: '#0b0b0b', light: '#e1e8f2', gray: '#444444' } } } }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+<header class="bg-white border-b border-gray-200 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center gap-4">
+    <img src="https://skedsmofk.no/images/logo.png" alt="Skedsmo FK logo" class="w-12 h-12 object-contain" />
+    <div>
+      <h1 class="text-xl font-bold text-skedsmo-dark">Skedsmo Fotball</h1>
+      <p class="text-sm text-gray-500">Fase 2 – Datadrevet kalender</p>
+    </div>
+  </div>
+</header>
+<nav class="bg-skedsmo-light border-b border-gray-200">
+  <div class="max-w-6xl mx-auto px-4 py-2 flex gap-5 text-sm overflow-x-auto">
+    <a data-topnav href="index.html" class="top-nav-link">Oversikt (eksisterende)</a>
+    <a data-topnav href="arsplan.html" class="top-nav-link">Årsplan</a>
+    <a data-topnav href="kalender.html" class="top-nav-link">Kalender</a>
+    <a data-topnav href="okter.html" class="top-nav-link">Økter</a>
+  </div>
+</nav>
+<main class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold">Kalenderoversikt – <span id="calendar-month">Laster…</span></h2>
+    <p class="text-sm text-gray-500 mt-1">Kalenderen rendres nå fra <code>data/content.json</code> (fase 2).</p>
+  </div>
+
+  <div id="calendar-root" class="space-y-4"></div>
+
+  <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
+    <strong>Feriehensyn:</strong> <span id="holiday-note">Laster…</span>
+  </div>
+</main>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
