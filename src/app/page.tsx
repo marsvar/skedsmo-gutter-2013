@@ -80,8 +80,13 @@ export default function TodayPage() {
         <div className="text-xs font-medium opacity-80 mb-0.5">
           {block.nffCode} · Uke {week.number} – {week.focus}
         </div>
-        <div className="text-xl font-bold">
-          {DAY_LABELS[session.dayOfWeek]}
+        <div className="flex items-baseline gap-2">
+          <div className="text-xl font-bold">
+            {DAY_LABELS[session.dayOfWeek]}
+          </div>
+          <div className="text-sm opacity-75">
+            {formatShortDate(session.date)}
+          </div>
         </div>
         <div className="text-sm opacity-90 mt-0.5">
           {NFF_DESCRIPTIONS[block.nffCode]}
