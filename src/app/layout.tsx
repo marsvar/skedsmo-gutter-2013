@@ -5,6 +5,12 @@ import BottomNav from '@/components/BottomNav'
 export const metadata: Metadata = {
   title: 'Skedsmo Fotball – Treningsappen',
   description: 'Treningsplanlegger for trenere – basert på NFF retningslinjer',
+  manifest: '/manifest.webmanifest',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Trening 2013',
+  },
   icons: {
     icon: 'https://skedsmofk.no/favicons/favicon-32.png',
     apple: 'https://skedsmofk.no/favicons/favicon-180.png',

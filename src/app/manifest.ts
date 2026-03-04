@@ -1,0 +1,26 @@
+import type { MetadataRoute } from 'next'
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: 'Skedsmo Fotball – Treningsappen',
+    short_name: 'Trening 2013',
+    description: 'Treningsplanlegger for trenere – basert på NFF retningslinjer',
+    start_url: '/',
+    display: 'standalone',
+    background_color: '#f9fafb',
+    theme_color: '#c6180e',
+    orientation: 'portrait',
+    icons: [
+      {
+        src: 'https://skedsmofk.no/favicons/favicon-32.png',
+        sizes: '32x32',
+        type: 'image/png',
+      },
+      {
+        src: 'https://skedsmofk.no/favicons/favicon-180.png',
+        sizes: '180x180',
+        type: 'image/png',
+      },
+    ],
+  }
+}
