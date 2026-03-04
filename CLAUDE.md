@@ -32,7 +32,7 @@ Single-file app: `index.html` only. Tab navigation via vanilla JS (`showSection(
 - `F2` – Sperre prioritert rom
 - `F3` – Hindre avslutning og mål
 
-**Season structure**: Vinter (Jan–Feb, utendørs med ekstra fysisk trening) → Forsesong (Mars, A1-tema) → Sesong (Apr–Okt, 5 temaperioder)
+**Season structure**: Vinter (Jan–Feb, utendørs med ekstra fysisk trening) → Forsesong (Mars, A1-tema) → Sesong (Apr–Okt, 5 temaperioder). Ferieperioden i juli–august kan påvirke oppmøte og bør tas hensyn til i øktplanleggingen.
 
 **Note**: The team trains outdoors all year — no futsal/indoor. Jan–Feb includes extra physical training (RRR) at end of every Thursday session. March transitions away from physical emphasis and toward full ball-work focus; RRR only on Thursdays in weeks 1–3 of March.
 
@@ -68,8 +68,8 @@ Single-file app: `index.html` only. Tab navigation via vanilla JS (`showSection(
 4. **Oppsummering** — 5 min, one concrete observation
 
 **4-day weekly structure within a theme**:
-- Monday (75 min): theme intro — no/passive resistance
-- Tuesday (75 min): same exercise + active resistance
+- Monday (90 min): theme intro — no/passive resistance
+- Tuesday (90 min): same exercise + active resistance
 - Thursday (90 min): same exercise + full resistance + 9v9/11v11
 - Saturday (90 min): match or small-sided tournament; mention theme in team talk
 
