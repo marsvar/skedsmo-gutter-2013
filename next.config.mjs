@@ -1,8 +1,5 @@
 
 
-const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
-}
+const nextConfig = {}
 
 export default nextConfig

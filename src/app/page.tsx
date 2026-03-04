@@ -1,6 +1,3 @@
-'use client'
-
-import { useState, useEffect } from 'react'
 import { resolveToday, getNextSession } from '@/lib/resolveToday'
 import { DAY_LABELS, NFF_DESCRIPTIONS } from '@/data/types'
 import SessionTimeline from '@/components/SessionTimeline'
@@ -21,22 +18,7 @@ function formatShortDate(iso: string): string {
 }
 
 export default function TodayPage() {
-  const [today, setToday] = useState<string | null>(null)
-
-  useEffect(() => {
-    setToday(new Date().toISOString().slice(0, 10))
-  }, [])
-
-  if (!today) {
-    return (
-      <div className="animate-pulse space-y-4 mt-2">
-        <div className="h-24 bg-gray-200 rounded-xl" />
-        <div className="h-20 bg-gray-100 rounded-xl" />
-        <div className="h-48 bg-gray-100 rounded-xl" />
-      </div>
-    )
-  }
-
+  const today = new Date().toISOString().slice(0, 10)
   const ctx = resolveToday(today)
 
   if (!ctx) {

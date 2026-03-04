@@ -1,6 +1,3 @@
-'use client'
-
-import { useState, useEffect } from 'react'
 import type { Week, Block } from '@/data/types'
 import Link from 'next/link'
 import WeekDayCard from './WeekDayCard'
@@ -8,21 +5,12 @@ import WeekDayCard from './WeekDayCard'
 interface WeekViewProps {
   week: Week
   block: Block
-  /** Optionally pass today's date (YYYY-MM-DD). Defaults to actual today. */
-  today?: string
+  today: string
   prevWeekId: string | null
   nextWeekId: string | null
 }
 
-export default function WeekView({ week, block, today: todayProp, prevWeekId, nextWeekId }: WeekViewProps) {
-  const [today, setToday] = useState(todayProp ?? '')
-
-  // Hydrate with the real current date client-side
-  useEffect(() => {
-    if (!todayProp) {
-      setToday(new Date().toISOString().slice(0, 10))
-    }
-  }, [todayProp])
+export default function WeekView({ week, block, today, prevWeekId, nextWeekId }: WeekViewProps) {
   return (
     <div>
       {/* Header with prev/next nav */}
