@@ -1,5 +1,6 @@
 import type { Block } from '@/data/types'
 import { NFF_DESCRIPTIONS } from '@/data/types'
+import Link from 'next/link'
 
 interface BlockCardProps {
   block: Block
@@ -47,12 +48,13 @@ export default function BlockCard({ block, isCurrent }: BlockCardProps) {
       {/* Week progression pills */}
       <div className="flex gap-2 flex-wrap">
         {block.weeks.map((week, i) => (
-          <span
+          <Link
             key={week.id}
-            className={`text-xs px-2 py-0.5 rounded-full ${WEEK_COLORS[i % WEEK_COLORS.length]}`}
+            href={`/week/${week.id}/`}
+            className={`text-xs px-2 py-0.5 rounded-full transition-opacity hover:opacity-75 ${WEEK_COLORS[i % WEEK_COLORS.length]}`}
           >
             Uke {week.number}: {week.focus}
-          </span>
+          </Link>
         ))}
       </div>
 

@@ -633,3 +633,32 @@ export function getBlockForSession(sessionId: string) {
   }
   return null
 }
+
+/** All weeks in season order (across all blocks). */
+export function getAllWeeks() {
+  return season2026.blocks.flatMap((b) => b.weeks)
+}
+
+/** Get a specific week by id. */
+export function getWeek(weekId: string) {
+  return getAllWeeks().find((w) => w.id === weekId) ?? null
+}
+
+/** Get the block that owns a specific week. */
+export function getBlockForWeek(weekId: string) {
+  for (const block of season2026.blocks) {
+    if (block.weeks.some((w) => w.id === weekId)) return block
+  }
+  return null
+}
+
+/** Get the previous and next week ids relative to a given weekId. */
+export function getAdjacentWeeks(weekId: string): { prevId: string | null; nextId: string | null } {
+  const all = getAllWeeks()
+  const idx = all.findIndex((w) => w.id === weekId)
+  if (idx === -1) return { prevId: null, nextId: null }
+  return {
+    prevId: idx > 0 ? all[idx - 1].id : null,
+    nextId: idx < all.length - 1 ? all[idx + 1].id : null,
+  }
+}

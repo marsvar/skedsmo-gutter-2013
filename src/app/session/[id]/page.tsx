@@ -42,8 +42,8 @@ export default function SessionPage({ params }: Props) {
   return (
     <div>
       {/* Back */}
-      <Link href="/week" className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 mb-4">
-        ← Tilbake til uke
+      <Link href={`/week/${week.id}/`} className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 mb-4">
+        ← Uke {week.number} – {week.focus}
       </Link>
 
       {/* Session header strip */}
