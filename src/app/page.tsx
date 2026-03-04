@@ -1,3 +1,5 @@
+'use client'
+
 import { resolveToday } from '@/lib/resolveToday'
 import { DAY_LABELS, NFF_DESCRIPTIONS } from '@/data/types'
 import SessionTimeline from '@/components/SessionTimeline'

@@ -1,10 +1,11 @@
+'use client'
+
 import { resolveCurrentWeek } from '@/lib/resolveToday'
 import { getAdjacentWeeks } from '@/data/season'
 import WeekView from '@/components/WeekView'
 import Link from 'next/link'
 
 export default function WeekPage() {
-  const today = new Date().toISOString().slice(0, 10)
   const ctx = resolveCurrentWeek()
 
   if (!ctx) {
@@ -27,7 +28,6 @@ export default function WeekPage() {
     <WeekView
       week={week}
       block={block}
-      today={today}
       prevWeekId={prevId}
       nextWeekId={nextId}
     />

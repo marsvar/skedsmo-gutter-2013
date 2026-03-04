@@ -11,7 +11,6 @@ export function generateStaticParams() {
 }
 
 export default function WeekByIdPage({ params }: Props) {
-  const today = new Date().toISOString().slice(0, 10)
   const week = getWeek(params.weekId)
   if (!week) notFound()
 
@@ -24,7 +23,6 @@ export default function WeekByIdPage({ params }: Props) {
     <WeekView
       week={week}
       block={block}
-      today={today}
       prevWeekId={prevId}
       nextWeekId={nextId}
     />
