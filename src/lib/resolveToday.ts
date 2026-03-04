@@ -68,3 +68,16 @@ export function resolveCurrentWeek(): { week: Week; block: Block } | null {
 
   return null
 }
+
+/**
+ * Find the next scheduled session after (but not including) today.
+ */
+export function getNextSession(afterDate: string): TodayContext | null {
+  const allSessions = getAllSessions()
+  const next = allSessions.find((s) => s.date > afterDate)
+  if (!next) return null
+  const week = getWeekForSession(next.id)
+  const block = getBlockForSession(next.id)
+  if (!week || !block) return null
+  return { session: next, week, block }
+}

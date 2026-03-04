@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { resolveToday } from '@/lib/resolveToday'
+import { resolveToday, getNextSession } from '@/lib/resolveToday'
 import { DAY_LABELS, NFF_DESCRIPTIONS } from '@/data/types'
 import SessionTimeline from '@/components/SessionTimeline'
 import Link from 'next/link'
@@ -11,6 +11,13 @@ const DAY_ACCENT: Record<string, string> = {
   tuesday:  'bg-green-600',
   thursday: 'bg-orange-500',
   saturday: 'bg-purple-600',
+}
+
+const MONTHS_SHORT = ['jan','feb','mar','apr','mai','jun','jul','aug','sep','okt','nov','des']
+
+function formatShortDate(iso: string): string {
+  const d = new Date(iso + 'T00:00:00')
+  return `${d.getDate()}. ${MONTHS_SHORT[d.getMonth()]}`
 }
 
 export default function TodayPage() {
@@ -33,17 +40,30 @@ export default function TodayPage() {
   const ctx = resolveToday(today)
 
   if (!ctx) {
+    const next = getNextSession(today)
     return (
-      <div className="text-center py-16">
-        <div className="text-5xl mb-4">⚽</div>
-        <h1 className="text-xl font-bold text-gray-700 mb-2">Ingen økt i dag</h1>
-        <p className="text-sm text-gray-400 mb-6">
-          Neste økt finner du i ukeoversikten.
-        </p>
-        <Link
-          href="/week"
-          className="inline-block bg-skedsmo-red text-white text-sm px-5 py-2.5 rounded-xl font-semibold"
-        >
+      <div className="text-center py-12">
+        <div className="text-5xl mb-4">☕</div>
+        <h1 className="text-xl font-bold text-gray-700 mb-1">Ingen økt i dag</h1>
+        <p className="text-sm text-gray-400 mb-6">Hviledag – lad opp til neste økt.</p>
+
+        {next && (
+          <Link
+            href={`/session/${next.session.id}/`}
+            className="block max-w-xs mx-auto bg-white border border-gray-200 rounded-xl p-4 mb-4 hover:shadow-sm transition-shadow"
+          >
+            <p className="text-xs text-gray-400 mb-0.5">Neste økt</p>
+            <p className="font-bold text-gray-900">
+              {DAY_LABELS[next.session.dayOfWeek]}
+            </p>
+            <p className="text-sm text-gray-500">{formatShortDate(next.session.date)}</p>
+            <p className="text-xs text-gray-400 mt-1">
+              {next.block.nffCode} · Uke {next.week.number} – {next.week.focus}
+            </p>
+          </Link>
+        )}
+
+        <Link href="/week" className="text-sm text-nff-blue underline">
           Se ukeoversikt →
         </Link>
       </div>
