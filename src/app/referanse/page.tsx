@@ -115,9 +115,9 @@ export default function ReferansePage() {
           <p className="font-semibold text-gray-800 text-sm mb-3">Inndeling av troppen</p>
           <div className="grid grid-cols-3 gap-2 mb-3">
             {[
-              { label: 'A', title: 'Gruppe A', desc: '7–10 spillere\nMinst rom, mest press, maks 2 touch', bg: 'bg-red-50 border-red-200', text: 'text-red-700', badge: 'bg-red-700 text-white' },
-              { label: 'B', title: 'Gruppe B', desc: '7–10 spillere\nStandard versjon', bg: 'bg-yellow-50 border-yellow-200', text: 'text-yellow-700', badge: 'bg-yellow-600 text-white' },
-              { label: 'C', title: 'Gruppe C', desc: '6–10 spillere\nMer rom, færre forsvarere, frie touch', bg: 'bg-green-50 border-green-200', text: 'text-green-700', badge: 'bg-green-700 text-white' },
+              { label: 'A', title: 'Gruppe A', desc: '7–10 spillere\nHøyest teknisk nivå', bg: 'bg-red-50 border-red-200', text: 'text-red-700', badge: 'bg-red-700 text-white' },
+              { label: 'B', title: 'Gruppe B', desc: '7–10 spillere\nMidtre nivå', bg: 'bg-yellow-50 border-yellow-200', text: 'text-yellow-700', badge: 'bg-yellow-600 text-white' },
+              { label: 'C', title: 'Gruppe C', desc: '6–10 spillere\nTrenger mer tid og rom', bg: 'bg-green-50 border-green-200', text: 'text-green-700', badge: 'bg-green-700 text-white' },
             ].map((g) => (
               <div key={g.label} className={`border rounded-xl p-3 text-center ${g.bg}`}>
                 <div className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-lg font-black mb-1 ${g.badge}`}>
