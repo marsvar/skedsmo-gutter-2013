@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skedsmo Fotball – Treningsoversikt</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            nff: { blue: '#003087', red: '#e30613', gold: '#f5a623' },
+            attack: { light: '#fef9c3', border: '#fbbf24', text: '#92400e' },
+            defend: { light: '#dbeafe', border: '#3b82f6', text: '#1e3a8a' },
+            base:   { light: '#f0fdf4', border: '#4ade80', text: '#166534' },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    [x-cloak] { display: none; }
+    .tab-btn.active { border-bottom: 3px solid #003087; color: #003087; font-weight: 700; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .periode-card { transition: box-shadow .15s; }
+    .periode-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.12); }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+<!-- HEADER -->
+<header class="bg-white border-b border-gray-200 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center gap-4">
+    <div class="w-12 h-12 rounded-full bg-nff-blue flex items-center justify-center text-white font-black text-lg">SF</div>
+    <div>
+      <h1 class="text-xl font-bold text-gray-900">Skedsmo Fotball</h1>
+      <p class="text-sm text-gray-500">Treningsoversikt for trenere – basert på NFF retningslinjer</p>
+    </div>
+    <a href="https://tiim.no" target="_blank" class="ml-auto text-sm bg-nff-blue text-white px-3 py-2 rounded-lg hover:bg-blue-900 transition">
+      Gå til tiim.no ↗
+    </a>
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<nav class="bg-white border-b border-gray-200 sticky top-0 z-10">
+  <div class="max-w-6xl mx-auto px-4 flex gap-6 overflow-x-auto">
+    <button onclick="showSection('arsplan')" class="tab-btn active py-3 text-sm whitespace-nowrap border-b-2 border-transparent" id="tab-arsplan">Årsplan</button>
+    <button onclick="showSection('ukesmal')" class="tab-btn py-3 text-sm whitespace-nowrap border-b-2 border-transparent" id="tab-ukesmal">Ukesmal & Grupper</button>
+    <button onclick="showSection('gruppe-10-12')" class="tab-btn py-3 text-sm whitespace-nowrap border-b-2 border-transparent" id="tab-gruppe-10-12">10–12 år (7v7/9v9)</button>
+    <button onclick="showSection('gruppe-13-16')" class="tab-btn py-3 text-sm whitespace-nowrap border-b-2 border-transparent" id="tab-gruppe-13-16">13–16 år (11v11)</button>
+    <button onclick="showSection('mars2026')" class="tab-btn py-3 text-sm whitespace-nowrap border-b-2 border-transparent" id="tab-mars2026">Mars 2026</button>
+    <button onclick="showSection('spillmodell')" class="tab-btn py-3 text-sm whitespace-nowrap border-b-2 border-transparent" id="tab-spillmodell">NFF Spillmodell</button>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-4 py-8">
+
+<!-- ============================================================ -->
+<!-- ÅRSPLAN -->
+<!-- ============================================================ -->
+<section id="arsplan" class="section active">
+  <h2 class="text-2xl font-bold mb-1">Årsplan 2025</h2>
+  <p class="text-gray-500 mb-6 text-sm">Overordnet periodisering basert på NFF sin sesongstruktur</p>
+
+  <!-- Sesong-forklaring -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+      <div class="font-bold text-blue-800 mb-1">❄️ Forberedelsesperiode</div>
+      <div class="text-sm text-blue-700">Januar – Februar</div>
+      <p class="text-sm text-blue-600 mt-2">Innendørs / futsal. Teknisk grunnarbeid, ballmestring og individuelle ferdigheter.</p>
+    </div>
+    <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+      <div class="font-bold text-green-800 mb-1">🌱 Forsesong</div>
+      <div class="text-sm text-green-700">Mars</div>
+      <p class="text-sm text-green-600 mt-2">Utendørs oppkjøring. Lagsamspill, formasjoner og innføring av sesongems første tema.</p>
+    </div>
+    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+      <div class="font-bold text-yellow-800 mb-1">⚽ Sesong</div>
+      <div class="text-sm text-yellow-700">April – Oktober</div>
+      <p class="text-sm text-yellow-600 mt-2">Kamp-perioden. Temabasert trening knyttet til NFF spillmodell. ~4–6 uker per tema.</p>
+    </div>
+  </div>
+
+  <!-- Årshjul tabell -->
+  <div class="bg-white rounded-xl border border-gray-200 overflow-hidden mb-8">
+    <div class="px-5 py-3 border-b border-gray-100 font-semibold text-gray-700">Temaperioder – begge aldersgrupper</div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
+          <tr>
+            <th class="px-4 py-3 text-left">Periode</th>
+            <th class="px-4 py-3 text-left">Måneder</th>
+            <th class="px-4 py-3 text-left">10–12 år</th>
+            <th class="px-4 py-3 text-left">13–16 år</th>
+            <th class="px-4 py-3 text-left">NFF-fase</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr class="bg-blue-50">
+            <td class="px-4 py-3 font-medium">Vinter</td>
+            <td class="px-4 py-3 text-gray-600">Jan – Feb</td>
+            <td class="px-4 py-3">Ballmestring & 1v1 (futsal)</td>
+            <td class="px-4 py-3">Ballmestring, posisjonsspill grunnlag</td>
+            <td class="px-4 py-3"><span class="badge bg-base-light text-base-text border border-base-border px-2 py-0.5 rounded-full text-xs">Grunnlag</span></td>
+          </tr>
+          <tr class="bg-green-50">
+            <td class="px-4 py-3 font-medium">Forsesong</td>
+            <td class="px-4 py-3 text-gray-600">Mars</td>
+            <td class="px-4 py-3">A1: Vinne ball og spille fremover</td>
+            <td class="px-4 py-3">A1→A2: Bygge opp spillet bakfra</td>
+            <td class="px-4 py-3"><span class="bg-yellow-100 text-yellow-800 border border-yellow-300 px-2 py-0.5 rounded-full text-xs">A1</span></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium">Sesong 1</td>
+            <td class="px-4 py-3 text-gray-600">Apr – Mai</td>
+            <td class="px-4 py-3">A1→A2: Vinne ball til å komme til rom</td>
+            <td class="px-4 py-3">A2→A3: Kombinasjonsspill og avslutning</td>
+            <td class="px-4 py-3"><span class="bg-orange-100 text-orange-800 border border-orange-300 px-2 py-0.5 rounded-full text-xs">A1→A2</span></td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="px-4 py-3 font-medium">Sesong 2</td>
+            <td class="px-4 py-3 text-gray-600">Juni</td>
+            <td class="px-4 py-3">A2→A3: Prioritert rom til avslutning</td>
+            <td class="px-4 py-3">F1: Pressing og kontroll</td>
+            <td class="px-4 py-3"><span class="bg-red-100 text-red-800 border border-red-300 px-2 py-0.5 rounded-full text-xs">A2→A3</span></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium">Sesong 3</td>
+            <td class="px-4 py-3 text-gray-600">Jul – Aug</td>
+            <td class="px-4 py-3">F1: Presse, lede og kontrollere</td>
+            <td class="px-4 py-3">F1→F2: Pressing og romkontroll</td>
+            <td class="px-4 py-3"><span class="bg-blue-100 text-blue-800 border border-blue-300 px-2 py-0.5 rounded-full text-xs">F1</span></td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="px-4 py-3 font-medium">Sesong 4</td>
+            <td class="px-4 py-3 text-gray-600">September</td>
+            <td class="px-4 py-3">F1→F2: Pressing til sperring av rom</td>
+            <td class="px-4 py-3">F2→F3: Defensiv organisering</td>
+            <td class="px-4 py-3"><span class="bg-indigo-100 text-indigo-800 border border-indigo-300 px-2 py-0.5 rounded-full text-xs">F1→F2</span></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium">Sesong 5</td>
+            <td class="px-4 py-3 text-gray-600">Oktober</td>
+            <td class="px-4 py-3">F2→F3: Sperring og hindre avslutning</td>
+            <td class="px-4 py-3">A3 + F3: Avslutning og sluttspill</td>
+            <td class="px-4 py-3"><span class="bg-purple-100 text-purple-800 border border-purple-300 px-2 py-0.5 rounded-full text-xs">F2→F3</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NFF-prinsipp boks -->
+  <div class="bg-nff-blue text-white rounded-xl p-5 text-sm leading-relaxed">
+    <div class="font-bold text-base mb-2">NFF periodiseringsprinsipp</div>
+    <p>Trening deles inn i kortere perioder med ulikt mål og innhold. Hver økt bør ha én tydelig «rød tråd» (tema) fra start til slutt. Typisk fordeling: <strong>25 % prepp</strong>, <strong>25 % spillsituasjoner</strong>, <strong>50 % kamptilpasset spill</strong>.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 10–12 ÅR -->
+<!-- ============================================================ -->
+<section id="gruppe-10-12" class="section">
+  <div class="flex items-center gap-3 mb-1">
+    <h2 class="text-2xl font-bold">10–12 år</h2>
+    <span class="bg-green-100 text-green-800 border border-green-300 text-xs px-3 py-1 rounded-full font-medium">7v7 (10–11 år) / 9v9 (12 år)</span>
+  </div>
+  <p class="text-gray-500 mb-6 text-sm">Dynamisk differensiering – aldri faste ferdighetsdelte grupper. Alle aktiviteter åpne for alle.</p>
+
+  <!-- NFF-regler for gruppen -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8 text-sm">
+    <div class="bg-white border rounded-lg p-3 text-center">
+      <div class="text-2xl font-black text-nff-blue">3</div>
+      <div class="text-gray-500 text-xs mt-1">Lagaktiviteter/uke</div>
+    </div>
+    <div class="bg-white border rounded-lg p-3 text-center">
+      <div class="text-2xl font-black text-nff-blue">2</div>
+      <div class="text-gray-500 text-xs mt-1">Ekstratilbud/uke</div>
+    </div>
+    <div class="bg-white border rounded-lg p-3 text-center">
+      <div class="text-lg font-black text-nff-blue">Str. 4</div>
+      <div class="text-gray-500 text-xs mt-1">Ball (350–390g)</div>
+    </div>
+    <div class="bg-white border rounded-lg p-3 text-center">
+      <div class="text-lg font-black text-green-700">Åpen</div>
+      <div class="text-gray-500 text-xs mt-1">Alle deltar (t.o.m. 11 år)</div>
+    </div>
+  </div>
+
+  <!-- Temaperioder -->
+  <h3 class="text-lg font-bold mb-3">Temaperioder</h3>
+  <div class="grid gap-4 md:grid-cols-2 mb-10">
+
+    <div class="periode-card bg-blue-50 border border-blue-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Vinter – Ballmestring & 1v1</div>
+        <span class="text-xs bg-blue-200 text-blue-900 px-2 py-0.5 rounded-full">Jan–Feb</span>
+      </div>
+      <p class="text-sm text-blue-800 mb-3">Innendørs / futsal. Fokus på trygghet med ball, 1v1-situasjoner og morsomme aktiviteter.</p>
+      <ul class="text-xs text-blue-700 space-y-1">
+        <li>✓ Ballbehandling og teknikk (sende, motta, drible)</li>
+        <li>✓ Rondo og possessionsspill i smalt rom</li>
+        <li>✓ Futsal-kamper med mye berøringer</li>
+        <li>✓ Konkurranse i ballmestring (individ)</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-blue-600 underline hover:text-blue-800">Se øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-green-50 border border-green-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Forsesong – A1: Vinne ball og spille fremover</div>
+        <span class="text-xs bg-green-200 text-green-900 px-2 py-0.5 rounded-full">Mars</span>
+      </div>
+      <p class="text-sm text-green-800 mb-3">Første tema ute. Hvordan vinner vi ball og spiller raskt fremover i banen?</p>
+      <ul class="text-xs text-green-700 space-y-1">
+        <li>✓ Mottak og førstekontroll under press</li>
+        <li>✓ Spille fremover vs. beholde ball</li>
+        <li>✓ Enkle kombinasjoner for å komme seg fremover</li>
+        <li>✓ 3v2/4v3-situasjoner</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-green-600 underline hover:text-green-800">Se A1-øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-yellow-50 border border-yellow-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Sesong 1 – A1→A2: Fra ball til rom</div>
+        <span class="text-xs bg-yellow-200 text-yellow-900 px-2 py-0.5 rounded-full">Apr–Mai</span>
+      </div>
+      <p class="text-sm text-yellow-800 mb-3">Koblingen mellom å vinne ballen og komme til farlige rom. Løpsveier og timing.</p>
+      <ul class="text-xs text-yellow-700 space-y-1">
+        <li>✓ Løpsveier og løpstiming</li>
+        <li>✓ Tredjemann-kombinasjoner</li>
+        <li>✓ Spill i rom bak forsvarslinja</li>
+        <li>✓ Overlapping og innkryp</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-yellow-600 underline hover:text-yellow-800">Se A2-øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-orange-50 border border-orange-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Sesong 2 – A2→A3: Til avslutning</div>
+        <span class="text-xs bg-orange-200 text-orange-900 px-2 py-0.5 rounded-full">Juni</span>
+      </div>
+      <p class="text-sm text-orange-800 mb-3">Fra å komme til rom – til å avslutte og score. Skudd, avslutninger og 1v1 mot keeper.</p>
+      <ul class="text-xs text-orange-700 space-y-1">
+        <li>✓ Skuddteknikk (innsida, vrist, heading)</li>
+        <li>✓ Avslutning etter kombinasjon</li>
+        <li>✓ 1v1 mot keeper-situasjoner</li>
+        <li>✓ Mange mål og morsomme avslutningsøvelser</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-orange-600 underline hover:text-orange-800">Se A3-øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-sky-50 border border-sky-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Sesong 3 – F1: Pressing og kontroll</div>
+        <span class="text-xs bg-sky-200 text-sky-900 px-2 py-0.5 rounded-full">Jul–Aug</span>
+      </div>
+      <p class="text-sm text-sky-800 mb-3">Introduksjon til organisert pressing. Jage ballen med lag og vinne den tilbake høyt.</p>
+      <ul class="text-xs text-sky-700 space-y-1">
+        <li>✓ Individuelle pressingteknikker</li>
+        <li>✓ Lede motstanderen til ufarlig side</li>
+        <li>✓ Kompakt forsvar i midtbanen</li>
+        <li>✓ Overgang forsvar → angrep etter press</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-sky-600 underline hover:text-sky-800">Se F1-øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-indigo-50 border border-indigo-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Sesong 4 – F1→F2: Sperring av rom</div>
+        <span class="text-xs bg-indigo-200 text-indigo-900 px-2 py-0.5 rounded-full">September</span>
+      </div>
+      <p class="text-sm text-indigo-800 mb-3">Fra pressing til å sperre de prioriterte rommene. Blokkere pasningslinjene.</p>
+      <ul class="text-xs text-indigo-700 space-y-1">
+        <li>✓ Posisjonering for å blokkere innlegg</li>
+        <li>✓ Sperre senter og dyp-romspasninger</li>
+        <li>✓ Lag-forsvar i blokk</li>
+        <li>✓ Overgangsspill etter press</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-indigo-600 underline hover:text-indigo-800">Se F2-øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-purple-50 border border-purple-200 rounded-xl p-5 md:col-span-2">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Sesong 5 – F2→F3: Hindre avslutning</div>
+        <span class="text-xs bg-purple-200 text-purple-900 px-2 py-0.5 rounded-full">Oktober</span>
+      </div>
+      <p class="text-sm text-purple-800 mb-3">Siste linje. Blokkere skudd, heading i boks og redde situasjoner. Avslutte sesongen med oppsummering.</p>
+      <ul class="text-xs text-purple-700 space-y-1 md:columns-2">
+        <li>✓ Blokkere skudd</li>
+        <li>✓ Spill i boks (angrep og forsvar)</li>
+        <li>✓ Keeper-samarbeid</li>
+        <li>✓ Sesongens oppsummering og celebrering</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-purple-600 underline hover:text-purple-800">Se F3-øvelser på tiim.no ↗</a>
+    </div>
+  </div>
+
+  <!-- Økt-maler 10-12 -->
+  <h3 class="text-lg font-bold mb-3">Økt-maler (typisk struktur)</h3>
+  <div class="grid gap-4 md:grid-cols-2 mb-6">
+    <div class="bg-white border rounded-xl p-5">
+      <div class="font-bold mb-1 text-gray-800">Eksempel: A1-økt (7v7, 60 min)</div>
+      <p class="text-xs text-gray-500 mb-3">Tema: Vinne ball og spille fremover</p>
+      <div class="space-y-2 text-sm">
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">10 min</span>
+          <div><span class="font-medium">Prepp / Oppvarming</span><br/><span class="text-xs text-gray-500">Rondo 4v2, fokus på raske pasninger og mottak under press</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">15 min</span>
+          <div><span class="font-medium">Situasjonsøvelse</span><br/><span class="text-xs text-gray-500">3v2 + keeper – angripe og spille fremover raskt</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">30 min</span>
+          <div><span class="font-medium">Kamptilpasset spill</span><br/><span class="text-xs text-gray-500">7v7 med to mål – poeng for å score etter ball vunnet i motstanders halvdel</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">5 min</span>
+          <div><span class="font-medium">Oppsummering</span><br/><span class="text-xs text-gray-500">Hva lærte vi? Eksempel fra kampen.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white border rounded-xl p-5">
+      <div class="font-bold mb-1 text-gray-800">Eksempel: F1-økt (9v9, 75 min)</div>
+      <p class="text-xs text-gray-500 mb-3">Tema: Pressing og kontroll (12 år)</p>
+      <div class="space-y-2 text-sm">
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">10 min</span>
+          <div><span class="font-medium">Prepp</span><br/><span class="text-xs text-gray-500">Posisjonsspill i blokk – flytte press synkronisert</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">20 min</span>
+          <div><span class="font-medium">Pressing-drill</span><br/><span class="text-xs text-gray-500">5v5+mål: press triggeres av tilbakepasning. Signal-based press.</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">40 min</span>
+          <div><span class="font-medium">Kamptilpasset spill</span><br/><span class="text-xs text-gray-500">9v9 – poeng for å vinne ball i motstanders halvdel + score mål</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">5 min</span>
+          <div><span class="font-medium">Oppsummering</span><br/><span class="text-xs text-gray-500">Nevn en situasjon der presset fungerte / ikke fungerte</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- tiim.no lenker 10-12 -->
+  <div class="bg-gray-100 rounded-xl p-5">
+    <div class="font-semibold mb-3">Relevante lenker på tiim.no for 10–12 år</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+      <a href="https://tiim.no/artikkel/spillmodellen-og-treningsfilosofi-10-12-ar" target="_blank" class="flex items-center gap-2 text-nff-blue hover:underline">↗ Spillmodell og treningsfilosofi 10–12 år</a>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="flex items-center gap-2 text-nff-blue hover:underline">↗ Øvelsesbibliotek (200+ øvelser)</a>
+      <a href="https://tiim.no" target="_blank" class="flex items-center gap-2 text-nff-blue hover:underline">↗ Min side – lag egne øktplaner</a>
+      <a href="https://www.fotball.no/barn-og-ungdom/retningslinjer-for-barne--og-ungdomsfotball/10-11-arsklassene/" target="_blank" class="flex items-center gap-2 text-nff-blue hover:underline">↗ NFF retningslinjer 10–11 år</a>
+      <a href="https://www.fotball.no/barn-og-ungdom/retningslinjer-for-barne--og-ungdomsfotball/12-arsklassen/" target="_blank" class="flex items-center gap-2 text-nff-blue hover:underline">↗ NFF retningslinjer 12 år</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 13–16 ÅR -->
+<!-- ============================================================ -->
+<section id="gruppe-13-16" class="section">
+  <div class="flex items-center gap-3 mb-1">
+    <h2 class="text-2xl font-bold">13–16 år</h2>
+    <span class="bg-blue-100 text-blue-800 border border-blue-300 text-xs px-3 py-1 rounded-full font-medium">11v11</span>
+  </div>
+  <p class="text-gray-500 mb-6 text-sm">Fra 14 år: ferdighetsdelte grupper tillatt innad i økt. Alle som møter skal få min. halvspill kampminutter.</p>
+
+  <!-- NFF-regler for gruppen -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8 text-sm">
+    <div class="bg-white border rounded-lg p-3 text-center">
+      <div class="text-2xl font-black text-nff-blue">11v11</div>
+      <div class="text-gray-500 text-xs mt-1">Spillform</div>
+    </div>
+    <div class="bg-white border rounded-lg p-3 text-center">
+      <div class="text-lg font-black text-nff-blue">Str. 5</div>
+      <div class="text-gray-500 text-xs mt-1">Ball (13 år+)</div>
+    </div>
+    <div class="bg-white border rounded-lg p-3 text-center">
+      <div class="text-lg font-black text-nff-blue">UEFA B</div>
+      <div class="text-gray-500 text-xs mt-1">Anbefalt fra 16 år</div>
+    </div>
+    <div class="bg-white border rounded-lg p-3 text-center">
+      <div class="text-lg font-black text-orange-600">½ kamp</div>
+      <div class="text-gray-500 text-xs mt-1">Min. kampminutter</div>
+    </div>
+  </div>
+
+  <!-- Temaperioder 13-16 -->
+  <h3 class="text-lg font-bold mb-3">Temaperioder</h3>
+  <div class="grid gap-4 md:grid-cols-2 mb-10">
+
+    <div class="periode-card bg-blue-50 border border-blue-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Vinter – Ballmestring & posisjonsspill</div>
+        <span class="text-xs bg-blue-200 text-blue-900 px-2 py-0.5 rounded-full">Jan–Feb</span>
+      </div>
+      <p class="text-sm text-blue-800 mb-3">Innendørs / futsal. Teknisk fundament, rondo og grunnleggende lagposisjonering.</p>
+      <ul class="text-xs text-blue-700 space-y-1">
+        <li>✓ Individuell teknikk (mottak, vending, dribbling)</li>
+        <li>✓ Rondo og possessionsspill (6v3, 7v3)</li>
+        <li>✓ Grunnformasjoner og posisjonell bevissthet</li>
+        <li>✓ Futsal-kampspill</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-blue-600 underline hover:text-blue-800">Se øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-green-50 border border-green-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Forsesong – A1→A2: Bygge opp bakfra</div>
+        <span class="text-xs bg-green-200 text-green-900 px-2 py-0.5 rounded-full">Mars</span>
+      </div>
+      <p class="text-sm text-green-800 mb-3">Forsvarsspill ut fra bakre linje. Sikre pasninger og progresjon opp i banen.</p>
+      <ul class="text-xs text-green-700 space-y-1">
+        <li>✓ Keeper-spillet og sentralt forsvarsspill</li>
+        <li>✓ Spille gjennom eller rundt pressing</li>
+        <li>✓ Frigjøre sentrale spillere (indre midt)</li>
+        <li>✓ Diagonale og vertikale pasningslinjer</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-green-600 underline hover:text-green-800">Se A1-øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-yellow-50 border border-yellow-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Sesong 1 – A2→A3: Kombinasjon og avslutning</div>
+        <span class="text-xs bg-yellow-200 text-yellow-900 px-2 py-0.5 rounded-full">Apr–Mai</span>
+      </div>
+      <p class="text-sm text-yellow-800 mb-3">Spill i rom og avslutning. Breakaway, innlegg og kombinasjoner i siste tredjedel.</p>
+      <ul class="text-xs text-yellow-700 space-y-1">
+        <li>✓ Dype løp og tredjemann-kombinasjoner</li>
+        <li>✓ Innlegg og avslutning (fra ulikt hold)</li>
+        <li>✓ 2v1 / 3v2 i boksen</li>
+        <li>✓ Kontringsangrep</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-yellow-600 underline hover:text-yellow-800">Se A2–A3 øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-red-50 border border-red-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Sesong 2 – F1: Høypressing</div>
+        <span class="text-xs bg-red-200 text-red-900 px-2 py-0.5 rounded-full">Juni</span>
+      </div>
+      <p class="text-sm text-red-800 mb-3">Organisert press fra fremre linje. Triggere og signaler for pressingstart.</p>
+      <ul class="text-xs text-red-700 space-y-1">
+        <li>✓ Pressingtriggere (keeper-tilbakepasning, feilpasning)</li>
+        <li>✓ Kompakt blokk og press-signaler mellom spillere</li>
+        <li>✓ Lede motspiller til ufarlig side</li>
+        <li>✓ Overgang press → angrep etter ballvinst</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-red-600 underline hover:text-red-800">Se F1-øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-sky-50 border border-sky-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Sesong 3 – F1→F2: Pressing og romkontroll</div>
+        <span class="text-xs bg-sky-200 text-sky-900 px-2 py-0.5 rounded-full">Jul–Aug</span>
+      </div>
+      <p class="text-sm text-sky-800 mb-3">Kobling mellom pressing og blokkering av prioriterte rom bak presset.</p>
+      <ul class="text-xs text-sky-700 space-y-1">
+        <li>✓ Sperre rom mellom linjene</li>
+        <li>✓ Sideforskyvning og komprimering</li>
+        <li>✓ Dekke dype rom ved press</li>
+        <li>✓ 11v11 med pressingregler</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-sky-600 underline hover:text-sky-800">Se F1–F2 øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-indigo-50 border border-indigo-200 rounded-xl p-5">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Sesong 4 – F2→F3: Defensiv organisering</div>
+        <span class="text-xs bg-indigo-200 text-indigo-900 px-2 py-0.5 rounded-full">September</span>
+      </div>
+      <p class="text-sm text-indigo-800 mb-3">Kompakt forsvar i lav blokk. Blokkere rom og hindre farlige innlegg og avslutninger.</p>
+      <ul class="text-xs text-indigo-700 space-y-1">
+        <li>✓ 4-bakre-linja og samarbeid med keeper</li>
+        <li>✓ Stoppe innlegg fra flanke</li>
+        <li>✓ Defensivt spill i boks</li>
+        <li>✓ Klarering og kast/sparke videre</li>
+      </ul>
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="mt-3 inline-block text-xs text-indigo-600 underline hover:text-indigo-800">Se F2–F3 øvelser på tiim.no ↗</a>
+    </div>
+
+    <div class="periode-card bg-purple-50 border border-purple-200 rounded-xl p-5 md:col-span-2">
+      <div class="flex justify-between items-start mb-2">
+        <div class="font-bold">Sesong 5 – A3 + F3: Avslutning og sluttspill</div>
+        <span class="text-xs bg-purple-200 text-purple-900 px-2 py-0.5 rounded-full">Oktober</span>
+      </div>
+      <p class="text-sm text-purple-800 mb-3">Sesongsavslutning. Avslutning i boksen (angrep) og hindre mål (forsvar). Oppsummer sesongen.</p>
+      <ul class="text-xs text-purple-700 space-y-1 md:columns-2">
+        <li>✓ Avslutninger under press</li>
+        <li>✓ Heading (angrep og forsvar)</li>
+        <li>✓ Blokkere skudd</li>
+        <li>✓ Sesongsoppsummering – hva har vi lært?</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Økt-maler 13-16 -->
+  <h3 class="text-lg font-bold mb-3">Økt-maler (typisk struktur)</h3>
+  <div class="grid gap-4 md:grid-cols-2 mb-6">
+    <div class="bg-white border rounded-xl p-5">
+      <div class="font-bold mb-1">Eksempel: A2→A3-økt (11v11, 90 min)</div>
+      <p class="text-xs text-gray-500 mb-3">Tema: Kombinasjonsspill og avslutning</p>
+      <div class="space-y-2 text-sm">
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">15 min</span>
+          <div><span class="font-medium">Prepp / aktivering</span><br/><span class="text-xs text-gray-500">Rondo 8v3 med skudd på mål som avslutning</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">25 min</span>
+          <div><span class="font-medium">Situasjonsøvelse</span><br/><span class="text-xs text-gray-500">5v4+keeper: innlegg og avslutning fra senter og flanker</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">45 min</span>
+          <div><span class="font-medium">Kamptilpasset spill</span><br/><span class="text-xs text-gray-500">11v11 – dobbelt poeng for mål etter kombinasjon på siste tredjedel</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">5 min</span>
+          <div><span class="font-medium">Oppsummering</span><br/><span class="text-xs text-gray-500">Hva ga rom? Hva stoppet oss?</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white border rounded-xl p-5">
+      <div class="font-bold mb-1">Eksempel: F1-økt (11v11, 90 min)</div>
+      <p class="text-xs text-gray-500 mb-3">Tema: Høypressing med triggere</p>
+      <div class="space-y-2 text-sm">
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">15 min</span>
+          <div><span class="font-medium">Prepp</span><br/><span class="text-xs text-gray-500">Posisjonsspill: pressingtrigger ved «keeper-ball»</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">25 min</span>
+          <div><span class="font-medium">Pressingdrill</span><br/><span class="text-xs text-gray-500">7v7: press i motstanders halvdel, overgang ved ballvinst</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">45 min</span>
+          <div><span class="font-medium">Kamptilpasset spill</span><br/><span class="text-xs text-gray-500">11v11 med pressingpunkter – bonus-poeng for ballvinst høyt</span></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="w-16 text-right text-gray-400 shrink-0 text-xs pt-0.5">5 min</span>
+          <div><span class="font-medium">Oppsummering</span><br/><span class="text-xs text-gray-500">Hvilke triggere brukte vi? Hva skjedde etter ballvinst?</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- tiim.no lenker 13-16 -->
+  <div class="bg-gray-100 rounded-xl p-5">
+    <div class="font-semibold mb-3">Relevante lenker på tiim.no for 13–16 år</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+      <a href="https://tiim.no/okter-og-ovelser" target="_blank" class="text-nff-blue hover:underline">↗ Øvelsesbibliotek – alle temaer (A1–F3)</a>
+      <a href="https://tiim.no/artikkel/landslagsskolens-ovelsesbank" target="_blank" class="text-nff-blue hover:underline">↗ Landslagsskolens øvelsesbank</a>
+      <a href="https://tiim.no" target="_blank" class="text-nff-blue hover:underline">↗ Bygg egne øktplaner på tiim.no</a>
+      <a href="https://www.fotball.no/barn-og-ungdom/retningslinjer-for-barne--og-ungdomsfotball/13-16-arsklassen/" target="_blank" class="text-nff-blue hover:underline">↗ NFF retningslinjer 13–16 år</a>
+      <a href="https://www.fotball.no/barn-og-ungdom/sportsplaner/sportsplan-13-16/okter-og-ovelser/" target="_blank" class="text-nff-blue hover:underline">↗ NFF sportsplan 13–16 – økter og øvelser</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- NFF SPILLMODELL -->
+<!-- ============================================================ -->
+<section id="spillmodell" class="section">
+  <h2 class="text-2xl font-bold mb-1">NFF Spillmodell</h2>
+  <p class="text-gray-500 mb-6 text-sm">Seks faser som strukturerer all temabasert treningsplanlegging fra 10 år og oppover</p>
+
+  <div class="grid md:grid-cols-2 gap-6 mb-8">
+    <!-- Angrep -->
+    <div>
+      <h3 class="text-lg font-bold text-orange-700 mb-3">Angrep (A)</h3>
+      <div class="space-y-3">
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+          <div class="font-bold text-yellow-800 mb-1">A1 – Behandle/vinne ballen og spille fremover</div>
+          <p class="text-sm text-yellow-700">Vinner ballen og spiller raskt fremover i banen. Mottak under press, pasninger i dybden, omstilling til angrep.</p>
+        </div>
+        <div class="bg-orange-50 border border-orange-200 rounded-xl p-4">
+          <div class="font-bold text-orange-800 mb-1">A2 – Komme til prioritert rom</div>
+          <p class="text-sm text-orange-700">Løpsveier, tredjemann-kombinasjoner, timing for å komme til farlige rom bak forsvaret.</p>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+          <div class="font-bold text-red-800 mb-1">A3 – Avgjøre / score mål</div>
+          <p class="text-sm text-red-700">Avslutning, 1v1 mot keeper, heading, skudd under press, spill i boksen.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forsvar -->
+    <div>
+      <h3 class="text-lg font-bold text-blue-700 mb-3">Forsvar (F)</h3>
+      <div class="space-y-3">
+        <div class="bg-sky-50 border border-sky-200 rounded-xl p-4">
+          <div class="font-bold text-sky-800 mb-1">F1 – Presse, lede og kontrollere</div>
+          <p class="text-sm text-sky-700">Organisert pressing. Triggere for å starte press, lede motspiller til ufarlig side.</p>
+        </div>
+        <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4">
+          <div class="font-bold text-indigo-800 mb-1">F2 – Sperre prioritert rom</div>
+          <p class="text-sm text-indigo-700">Blokkere rom mellom linjene, sperre pasningslinjer inn i senter og bak forsvarslinja.</p>
+        </div>
+        <div class="bg-purple-50 border border-purple-200 rounded-xl p-4">
+          <div class="font-bold text-purple-800 mb-1">F3 – Hindre avslutning og mål</div>
+          <p class="text-sm text-purple-700">Blokkere skudd, heading i boks, keeper-samarbeid, klarering.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Økt-struktur -->
+  <div class="bg-white border rounded-xl p-5 mb-6">
+    <h3 class="font-bold text-gray-800 mb-4">Anbefalt øktstruktur (NFF)</h3>
+    <div class="flex gap-1 h-8 rounded-lg overflow-hidden mb-3">
+      <div class="bg-green-400 flex items-center justify-center text-white text-xs font-bold" style="width:25%">Prepp 25%</div>
+      <div class="bg-yellow-400 flex items-center justify-center text-white text-xs font-bold" style="width:25%">Situasjon 25%</div>
+      <div class="bg-orange-500 flex items-center justify-center text-white text-xs font-bold" style="width:50%">Kamptilpasset spill 50%</div>
+    </div>
+    <ul class="text-sm text-gray-600 space-y-1">
+      <li><strong>Prepp (25%)</strong>: Ballmestring, hurtighetsaktivering, oppvarming med tematisk vinkling</li>
+      <li><strong>Spillsituasjoner (25%)</strong>: Isolerte øvelser direkte på temaet (f.eks. 3v2, pressinggrid)</li>
+      <li><strong>Kamptilpasset spill (50%)</strong>: Spill med mål der temaet er i fokus, med regler som fremhever det</li>
+    </ul>
+  </div>
+
+  <!-- NFF-visjon -->
+  <div class="bg-nff-blue text-white rounded-xl p-5">
+    <div class="font-bold text-lg mb-2">NFF-visjon: «Fotball for alle»</div>
+    <div class="text-sm leading-relaxed opacity-90 mb-3">«Flest mulig – lengst mulig – best mulig» i et trygt og utviklende miljø.</div>
+    <div class="grid md:grid-cols-3 gap-4 text-sm">
+      <div>
+        <div class="font-semibold mb-1">Mestring</div>
+        <p class="opacity-80 text-xs">Fokus på mestring fremfor kortsiktige resultater. Barn som opplever mestring fortsetter lenger.</p>
+      </div>
+      <div>
+        <div class="font-semibold mb-1">Differensiering</div>
+        <p class="opacity-80 text-xs">Dynamisk differensiering innad i økt – aldri faste ferdighetsdelte grupper (t.o.m. 13 år).</p>
+      </div>
+      <div>
+        <div class="font-semibold mb-1">Rød tråd</div>
+        <p class="opacity-80 text-xs">Én tydelig tematisk rød tråd gjennom hele treningsøkta for best mulig læringsutbytte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================ -->
+<!-- UKESMAL & GRUPPEINNDELING -->
+<!-- ============================================================ -->
+<section id="ukesmal" class="section">
+  <h2 class="text-2xl font-bold mb-1">Ukesmal &amp; Gruppeinndeling</h2>
+  <p class="text-gray-500 mb-6 text-sm">20–30 spillere, 4 treningsdager per uke – mandag / tirsdag / torsdag / lørdag</p>
+
+  <!-- Gruppe-inndeling -->
+  <div class="bg-white border rounded-xl p-5 mb-6">
+    <div class="font-bold text-gray-800 mb-3">Inndeling av troppen</div>
+    <div class="grid md:grid-cols-3 gap-4 mb-4">
+      <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+        <div class="text-2xl font-black text-red-700 mb-1">A</div>
+        <div class="font-semibold text-red-800 text-sm mb-1">Gruppe A</div>
+        <div class="text-xs text-red-600">7–10 spillere<br/>Høyest teknisk nivå</div>
+      </div>
+      <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-center">
+        <div class="text-2xl font-black text-yellow-700 mb-1">B</div>
+        <div class="font-semibold text-yellow-800 text-sm mb-1">Gruppe B</div>
+        <div class="text-xs text-yellow-600">7–10 spillere<br/>Midtre nivå</div>
+      </div>
+      <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+        <div class="text-2xl font-black text-green-700 mb-1">C</div>
+        <div class="font-semibold text-green-800 text-sm mb-1">Gruppe C</div>
+        <div class="text-xs text-green-600">6–10 spillere<br/>Trenger mer tid og rom</div>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-3 text-sm">
+      <div class="bg-gray-50 rounded-lg p-3">
+        <span class="font-medium">2 grupper (20–22 fremmøtte):</span>
+        <span class="text-gray-600"> Slå B og C sammen → gruppe B/C (~10–12 spillere)</span>
+      </div>
+      <div class="bg-gray-50 rounded-lg p-3">
+        <span class="font-medium">3 grupper (23–30 fremmøtte):</span>
+        <span class="text-gray-600"> Kjør A, B og C separat</span>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 mt-3">Oppstart er alltid felles (rondo + sjef over ballen). Grupper splittes først til temaøvelsen.</p>
+  </div>
+
+  <!-- Faste åpningsøkter -->
+  <h3 class="text-lg font-bold mb-3">Faste åpningsøvelser <span class="text-sm font-normal text-gray-500">(uansett tema – hele troppen samlet)</span></h3>
+  <div class="grid md:grid-cols-2 gap-4 mb-8">
+
+    <!-- Rondo -->
+    <div class="bg-nff-blue text-white rounded-xl p-5">
+      <div class="font-bold text-lg mb-1">1. Rondo <span class="text-blue-200 text-sm font-normal">10 min alltid</span></div>
+      <p class="text-blue-100 text-sm mb-3">20–30 spillere → 4–6 grupper av 5–6. Aldri endre format midt i sesongen.</p>
+      <div class="space-y-2 text-sm">
+        <div class="flex gap-3 items-start">
+          <span class="bg-blue-700 text-blue-100 px-2 py-0.5 rounded text-xs shrink-0">Apr–Mai</span>
+          <span><strong>4v2</strong> – bli kjent med formatet, korte pasninger</span>
+        </div>
+        <div class="flex gap-3 items-start">
+          <span class="bg-blue-700 text-blue-100 px-2 py-0.5 rounded text-xs shrink-0">Jun–Aug</span>
+          <span><strong>5v2</strong> – mer rom, mer pasningsvariasjon</span>
+        </div>
+        <div class="flex gap-3 items-start">
+          <span class="bg-blue-700 text-blue-100 px-2 py-0.5 rounded text-xs shrink-0">Sep–Okt</span>
+          <span><strong>6v3</strong> – høy intensitet, beslutningshurtighet</span>
+        </div>
+      </div>
+      <p class="text-xs text-blue-200 mt-3">Regler: maks 2 berøringer, frigjøringspassning = rollbytte for innenspilleren som mistet.</p>
+    </div>
+
+    <!-- Sjef over ballen -->
+    <div class="bg-white border-2 border-gray-200 rounded-xl p-5">
+      <div class="font-bold text-lg mb-1 text-gray-800">2. Sjef over ballen <span class="text-gray-400 text-sm font-normal">10 min alltid</span></div>
+      <p class="text-gray-500 text-sm mb-3">Individuell ballmestring. <strong>Samme øvelse hele uka</strong> (man/tirs/tors), ny type neste uke. Ikke tema-basert – roterer i en fast 4-ukers syklus.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs">
+          <thead class="bg-gray-50 text-gray-500">
+            <tr>
+              <th class="px-3 py-2 text-left">Uketype</th>
+              <th class="px-3 py-2 text-left">Øvelse</th>
+              <th class="px-3 py-2 text-left">Eksempel</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 text-gray-700">
+            <tr>
+              <td class="px-3 py-2 font-medium">Uke 1</td>
+              <td class="px-3 py-2">Pasning &amp; mottak</td>
+              <td class="px-3 py-2 text-gray-500">Par, 1–2 berøringer, veksle fot</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-3 py-2 font-medium">Uke 2</td>
+              <td class="px-3 py-2">Dribbling &amp; vendinger</td>
+              <td class="px-3 py-2 text-gray-500">Cruyff, rolling, cuts – kurs</td>
+            </tr>
+            <tr>
+              <td class="px-3 py-2 font-medium">Uke 3</td>
+              <td class="px-3 py-2">1v1 dueller</td>
+              <td class="px-3 py-2 text-gray-500">Par: en fører, en presser passivt → aktivt</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="px-3 py-2 font-medium">Uke 4</td>
+              <td class="px-3 py-2">Fri ballmestring</td>
+              <td class="px-3 py-2 text-gray-500">Spillerne velger selv – konkurranse</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4-dagers ukesmal -->
+  <h3 class="text-lg font-bold mb-3">4-dagers ukesmal <span class="text-sm font-normal text-gray-500">(innenfor én temaperiode)</span></h3>
+  <p class="text-sm text-gray-500 mb-4">Temaøvelsen er den <strong>samme alle fire dagene</strong> – variasjonen ligger i progresjon (motstand og tempo), ikke i å bytte øvelse.</p>
+
+  <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+
+    <!-- Mandag -->
+    <div class="bg-blue-50 border border-blue-200 rounded-xl overflow-hidden">
+      <div class="bg-blue-600 text-white px-4 py-2 font-bold text-sm flex justify-between">
+        <span>Mandag</span><span class="font-normal opacity-80">75 min</span>
+      </div>
+      <div class="p-4 space-y-3 text-sm">
+        <div class="flex gap-2">
+          <span class="text-xs text-blue-400 w-12 shrink-0 pt-0.5">10 min</span>
+          <div><span class="font-medium text-blue-800">Rondo</span><br/><span class="text-xs text-blue-600">Hele troppen samlet</span></div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-xs text-blue-400 w-12 shrink-0 pt-0.5">10 min</span>
+          <div><span class="font-medium text-blue-800">Sjef over ballen</span><br/><span class="text-xs text-blue-600">Hele troppen samlet</span></div>
+        </div>
+        <div class="border-t border-blue-200 pt-2 text-xs text-blue-500 italic">↓ Splitt i 2–3 grupper</div>
+        <div class="flex gap-2">
+          <span class="text-xs text-blue-400 w-12 shrink-0 pt-0.5">25 min</span>
+          <div><span class="font-medium text-blue-800">Tema-intro</span><br/><span class="text-xs text-blue-600">Øvelsen uten motstand → passiv forsvarer. Bli kjent med bevegelsene.</span></div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-xs text-blue-400 w-12 shrink-0 pt-0.5">25 min</span>
+          <div><span class="font-medium text-blue-800">Smålagskamp</span><br/><span class="text-xs text-blue-600">3v3–5v5 med enkel temaregel</span></div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-xs text-blue-400 w-12 shrink-0 pt-0.5">5 min</span>
+          <div><span class="font-medium text-blue-800">Oppsummering</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tirsdag -->
+    <div class="bg-green-50 border border-green-200 rounded-xl overflow-hidden">
+      <div class="bg-green-600 text-white px-4 py-2 font-bold text-sm flex justify-between">
+        <span>Tirsdag</span><span class="font-normal opacity-80">75 min</span>
+      </div>
+      <div class="p-4 space-y-3 text-sm">
+        <div class="flex gap-2">
+          <span class="text-xs text-green-400 w-12 shrink-0 pt-0.5">10 min</span>
+          <div><span class="font-medium text-green-800">Rondo</span><br/><span class="text-xs text-green-600">Hele troppen</span></div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-xs text-green-400 w-12 shrink-0 pt-0.5">10 min</span>
+          <div><span class="font-medium text-green-800">Sjef over ballen</span><br/><span class="text-xs text-green-600">Samme øvelse som mandag</span></div>
+        </div>
+        <div class="border-t border-green-200 pt-2 text-xs text-green-500 italic">↓ Splitt i grupper</div>
+        <div class="flex gap-2">
+          <span class="text-xs text-green-400 w-12 shrink-0 pt-0.5">25 min</span>
+          <div><span class="font-medium text-green-800">Tema + aktiv motstand</span><br/><span class="text-xs text-green-600">Samme øvelse som mandag, nå med aktiv forsvarer. Grupper A/B/C tilpasses.</span></div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-xs text-green-400 w-12 shrink-0 pt-0.5">25 min</span>
+          <div><span class="font-medium text-green-800">Kamptilpasset spill</span><br/><span class="text-xs text-green-600">Tema fremheves med poeng-regler</span></div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-xs text-green-400 w-12 shrink-0 pt-0.5">5 min</span>
+          <div><span class="font-medium text-green-800">Oppsummering</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Torsdag -->
+    <div class="bg-orange-50 border border-orange-200 rounded-xl overflow-hidden">
+      <div class="bg-orange-500 text-white px-4 py-2 font-bold text-sm flex justify-between">
+        <span>Torsdag</span><span class="font-normal opacity-80">90 min</span>
+      </div>
+      <div class="p-4 space-y-3 text-sm">
+        <div class="flex gap-2">
+          <span class="text-xs text-orange-400 w-12 shrink-0 pt-0.5">10 min</span>
+          <div><span class="font-medium text-orange-800">Rondo</span><br/><span class="text-xs text-orange-600">Hele troppen</span></div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-xs text-orange-400 w-12 shrink-0 pt-0.5">10 min</span>
+          <div><span class="font-medium text-orange-800">Sjef over ballen</span><br/><span class="text-xs text-orange-600">Samme øvelse</span></div>
+        </div>
+        <div class="border-t border-orange-200 pt-2 text-xs text-orange-500 italic">↓ Splitt i grupper</div>
+        <div class="flex gap-2">
+          <span class="text-xs text-orange-400 w-12 shrink-0 pt-0.5">25 min</span>
+          <div><span class="font-medium text-orange-800">Tema + full motstand</span><br/><span class="text-xs text-orange-600">Høy intensitet. Legg til ukens siste detalj/progresjon.</span></div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-xs text-orange-400 w-12 shrink-0 pt-0.5">40 min</span>
+          <div><span class="font-medium text-orange-800">Kampspill + oppsummering</span><br/><span class="text-xs text-orange-600">9v9 eller 11v11, gjennomgang i pause</span></div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-xs text-orange-400 w-12 shrink-0 pt-0.5">5 min</span>
+          <div><span class="font-medium text-orange-800">Oppsummering</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lørdag -->
+    <div class="bg-purple-50 border border-purple-200 rounded-xl overflow-hidden">
+      <div class="bg-purple-600 text-white px-4 py-2 font-bold text-sm flex justify-between">
+        <span>Lørdag</span><span class="font-normal opacity-80">90 min</span>
+      </div>
+      <div class="p-4 space-y-3 text-sm">
+        <div class="flex gap-2">
+          <span class="text-xs text-purple-400 w-12 shrink-0 pt-0.5">10 min</span>
+          <div><span class="font-medium text-purple-800">Rondo (kort)</span><br/><span class="text-xs text-purple-600">Hele troppen, aktivering</span></div>
+        </div>
+        <div class="border-t border-purple-200 pt-2 text-xs text-purple-500 italic mb-1">Alternativ A – kamp foreligger:</div>
+        <div class="flex gap-2">
+          <span class="text-xs text-purple-400 w-12 shrink-0 pt-0.5">70 min</span>
+          <div><span class="font-medium text-purple-800">Kamp (9v9/11v11)</span><br/><span class="text-xs text-purple-600">Tema nevnes i lagsamtale. Alle spiller minst halvkamp.</span></div>
+        </div>
+        <div class="border-t border-purple-200 pt-2 text-xs text-purple-500 italic mb-1">Alternativ B – ingen kamp:</div>
+        <div class="flex gap-2">
+          <span class="text-xs text-purple-400 w-12 shrink-0 pt-0.5">75 min</span>
+          <div><span class="font-medium text-purple-800">Turneringsspill</span><br/><span class="text-xs text-purple-600">3v3 eller 5v5 mini-turnering. Mange kamper, lite venting.</span></div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-xs text-purple-400 w-12 shrink-0 pt-0.5">10 min</span>
+          <div><span class="font-medium text-purple-800">Oppsummering</span><br/><span class="text-xs text-purple-600">Hva så vi av ukens tema i kampspill?</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3-ukers tema-progresjon -->
+  <h3 class="text-lg font-bold mb-3">3-ukers progresjon innenfor ett tema</h3>
+  <p class="text-sm text-gray-500 mb-4">Kjerneøvelsen er den <strong>samme i alle tre ukene</strong>. Det som øker er motstand, tempo og kompleksitet.</p>
+  <div class="grid md:grid-cols-3 gap-4 mb-8">
+
+    <div class="bg-white border-2 border-gray-200 rounded-xl p-5">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-black text-gray-600">1</span>
+        <div class="font-bold text-gray-800">Uke 1 – Bli kjent</div>
+      </div>
+      <ul class="text-sm text-gray-600 space-y-1.5">
+        <li>✓ Introduser kjerneøvelsen uten motstand</li>
+        <li>✓ Alle grupper bruker god tid på bevegelsesmønster</li>
+        <li>✓ Trenerne korrigerer teknikk og timing</li>
+        <li>✓ Avslutt med enkel kamp (lav suksessterskel)</li>
+      </ul>
+      <p class="text-xs text-gray-400 mt-3 italic">Mål: Alle spillere forstår øvelsen og hva som øves.</p>
+    </div>
+
+    <div class="bg-white border-2 border-yellow-300 rounded-xl p-5">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center font-black text-yellow-700">2</span>
+        <div class="font-bold text-gray-800">Uke 2 – Øk presset</div>
+      </div>
+      <ul class="text-sm text-gray-600 space-y-1.5">
+        <li>✓ Aktiv motstand på kjerneøvelsen</li>
+        <li>✓ Reduser plass eller tid til avgjørelse</li>
+        <li>✓ Gruppe A: ekstra utfordring. Gruppe C: mer støtte</li>
+        <li>✓ Kamp med tydelig temaregel som forsterker læringen</li>
+      </ul>
+      <p class="text-xs text-gray-400 mt-3 italic">Mål: Spillerne gjenkjenner situasjonen under lett press.</p>
+    </div>
+
+    <div class="bg-white border-2 border-green-400 rounded-xl p-5">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center font-black text-green-700">3</span>
+        <div class="font-bold text-gray-800">Uke 3 – Integrasjon</div>
+      </div>
+      <ul class="text-sm text-gray-600 space-y-1.5">
+        <li>✓ Full motstand på kjerneøvelsen</li>
+        <li>✓ Høy intensitet, konkurranseelement</li>
+        <li>✓ Kamp der tema er naturlig del av spillet</li>
+        <li>✓ Oppsummer temaperioden på torsdag/lørdag</li>
+      </ul>
+      <p class="text-xs text-gray-400 mt-3 italic">Mål: Spillerne bruker det lærte automatisk i spill.</p>
+    </div>
+  </div>
+
+  <!-- Gruppe-tilpasning -->
+  <h3 class="text-lg font-bold mb-3">Gruppe-tilpasning for alle øvelser</h3>
+  <div class="bg-white border rounded-xl overflow-hidden mb-6">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
+          <tr>
+            <th class="px-4 py-3 text-left">Parameter</th>
+            <th class="px-4 py-3 text-left text-red-700">Gruppe A</th>
+            <th class="px-4 py-3 text-left text-yellow-700">Gruppe B</th>
+            <th class="px-4 py-3 text-left text-green-700">Gruppe C</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr>
+            <td class="px-4 py-3 font-medium text-gray-700">Bane/rom</td>
+            <td class="px-4 py-3 text-red-700">Minst – trange rom, rask avgjørelse</td>
+            <td class="px-4 py-3 text-yellow-700">Standard</td>
+            <td class="px-4 py-3 text-green-700">Størst – mer tid og plass</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="px-4 py-3 font-medium text-gray-700">Motstand</td>
+            <td class="px-4 py-3 text-red-700">Flest forsvarere, aktiv press</td>
+            <td class="px-4 py-3 text-yellow-700">Standard antall</td>
+            <td class="px-4 py-3 text-green-700">Færre / mer passiv motstand</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-gray-700">Berøringer</td>
+            <td class="px-4 py-3 text-red-700">Maks 2 berøringer</td>
+            <td class="px-4 py-3 text-yellow-700">Maks 3 berøringer</td>
+            <td class="px-4 py-3 text-green-700">Fritt antall</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="px-4 py-3 font-medium text-gray-700">Suksesskriterier</td>
+            <td class="px-4 py-3 text-red-700">Høyere krav (f.eks. 10 pasn.)</td>
+            <td class="px-4 py-3 text-yellow-700">Standard (f.eks. 7 pasn.)</td>
+            <td class="px-4 py-3 text-green-700">Lavere terskel (f.eks. 5 pasn.)</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-gray-700">Progresjon</td>
+            <td class="px-4 py-3 text-red-700">Neste progresjonssteg når kriteriet nås</td>
+            <td class="px-4 py-3 text-yellow-700">Standard versjon</td>
+            <td class="px-4 py-3 text-green-700">Mer repetisjonstid – slutter seg til kampfasen litt etter A og B</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Eksempel-uke: A1 -->
+  <h3 class="text-lg font-bold mb-3">Eksempel: En uke på A1-tema (vinne ball og spille fremover)</h3>
+  <div class="bg-white border rounded-xl overflow-hidden mb-6">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-yellow-50 text-gray-600 text-xs uppercase tracking-wide">
+          <tr>
+            <th class="px-4 py-3 text-left w-28">Dag</th>
+            <th class="px-4 py-3 text-left">Kjerneøvelse</th>
+            <th class="px-4 py-3 text-left">Motstand / nivå</th>
+            <th class="px-4 py-3 text-left">Kamp-regel</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr>
+            <td class="px-4 py-3 font-medium text-blue-700">Mandag</td>
+            <td class="px-4 py-3">3v2 – angrip med 3, spill fremover til linje</td>
+            <td class="px-4 py-3 text-gray-500">Passiv forsvarer, bredt rom</td>
+            <td class="px-4 py-3 text-gray-500">Poeng for pasning som bryter 2-forsvar</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="px-4 py-3 font-medium text-green-700">Tirsdag</td>
+            <td class="px-4 py-3">3v2 – samme øvelse</td>
+            <td class="px-4 py-3 text-gray-500">Aktiv forsvarer, normalt rom</td>
+            <td class="px-4 py-3 text-gray-500">4v4 – dobbeltpoeng for mål etter ballvinst i motst. halvdel</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-orange-700">Torsdag</td>
+            <td class="px-4 py-3">3v2 – legg til keeper i mål</td>
+            <td class="px-4 py-3 text-gray-500">Aktiv press, smalt rom (Gruppe A)</td>
+            <td class="px-4 py-3 text-gray-500">9v9: poeng for kombinasjon som slipper gjennom midtbanen</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="px-4 py-3 font-medium text-purple-700">Lørdag</td>
+            <td class="px-4 py-3 text-gray-500">– (kamp eller turneringsspill)</td>
+            <td class="px-4 py-3 text-gray-500">Kamp</td>
+            <td class="px-4 py-3 text-gray-500">Nevn A1 i lagsamtale – hva så vi?</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Treningsdag-notat -->
+  <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm">
+    <span class="font-semibold text-amber-800">Husk: </span>
+    <span class="text-amber-700">Det er bedre å øve på én ting grundig enn fire ting overfladisk. Gi spillerne nok tid til å lykkes med øvelsen før du øker motstanden. Frustrasjon = for høy progresjonshastighet.</span>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================ -->
+<!-- MARS 2026 -->
+<!-- ============================================================ -->
+<section id="mars2026" class="section">
+  <h2 class="text-2xl font-bold mb-1">Mars 2026 – Treningsplan</h2>
+  <p class="text-gray-500 mb-2 text-sm">Forsesong · Tema: <strong>A1 – Vinne ball og spille fremover</strong> · Man / Tirs / Tors / Lør</p>
+
+  <!-- Tema-intro -->
+  <div class="grid md:grid-cols-4 gap-3 mb-6 text-sm">
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+      <div class="font-bold text-blue-800 mb-1">Uke 1 – Bli kjent</div>
+      <div class="text-xs text-blue-600">2–7 mars<br/>Øvelse 20 uten motstand. Lær bevegelsesmønster.</div>
+    </div>
+    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+      <div class="font-bold text-yellow-800 mb-1">Uke 2 – Øk presset</div>
+      <div class="text-xs text-yellow-600">9–14 mars<br/>Øvelse 21. Bygg ut mot aktiv pressing.</div>
+    </div>
+    <div class="bg-orange-50 border border-orange-200 rounded-lg p-3">
+      <div class="font-bold text-orange-800 mb-1">Uke 3 – A1→A2</div>
+      <div class="text-xs text-orange-600">16–21 mars<br/>Øvelse 24. 7v4 – bryt ut bakfra i full bredde.</div>
+    </div>
+    <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+      <div class="font-bold text-green-800 mb-1">Uke 4 – Sesongklar</div>
+      <div class="text-xs text-green-600">23–28 mars<br/>Reprise + full integrasjon. Treningskamp lørdag.</div>
+    </div>
+  </div>
+
+  <!-- Nøkkelinfo -->
+  <div class="bg-gray-100 rounded-xl p-4 mb-6 text-xs text-gray-600 flex flex-wrap gap-4">
+    <span><strong>Rondo:</strong> 4v2 hele mars (→ 5v2 fra april)</span>
+    <span><strong>Sjef over ballen:</strong> Uke 1 = pasning/mottak · Uke 2 = dribbling · Uke 3 = 1v1 · Uke 4 = fri</span>
+    <span><strong>Fysisk RRR:</strong> Torsdag uke 1–3 (siste del av økt, etter kampspill)</span>
+    <span><strong>Lørdag uke 4:</strong> Treningskamp</span>
+  </div>
+
+  <!-- ===== UKE 1 ===== -->
+  <div class="mb-2 flex items-center gap-3">
+    <h3 class="text-base font-bold text-gray-800">Uke 1 · 2–7 mars · Bli kjent med A1</h3>
+    <span class="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Kjerneøvelse: A1-A2 Situasjonsøvelse nr. 20</span>
+  </div>
+  <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-3 mb-8">
+
+    <!-- Man 2 -->
+    <div class="border border-blue-200 rounded-xl overflow-hidden">
+      <div class="bg-blue-600 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Mandag 2. mars</span><span class="font-normal text-xs opacity-80">75 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: Pasning &amp; mottak</span></div>
+        <div class="border-t border-blue-100 pt-2 flex gap-2">
+          <span class="text-blue-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-20" target="_blank" class="font-semibold text-blue-700 hover:underline">A1-A2 Situasjonsøvelse nr. 20 ↗</a>
+            <p class="text-gray-500 mt-0.5">3 angripere skal nå paret på motsatt side. Start <strong>uten motstand</strong> – jobb med timing og pasningsvinkel. Gr. A: smalt rom. Gr. B: standard. Gr. C: bredt rom.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-blue-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-blue-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">7v7 (forenklet versjon). Alltid 3 linjer. Poeng for gjennomspilling av midtbanelinja.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">5 min</span><span>Oppsummering: Hva hjelper oss å nå de på andre siden?</span></div>
+      </div>
+    </div>
+
+    <!-- Tirs 3 -->
+    <div class="border border-green-200 rounded-xl overflow-hidden">
+      <div class="bg-green-600 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Tirsdag 3. mars</span><span class="font-normal text-xs opacity-80">75 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: Pasning &amp; mottak (samme som mandag)</span></div>
+        <div class="border-t border-green-100 pt-2 flex gap-2">
+          <span class="text-green-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-20" target="_blank" class="font-semibold text-green-700 hover:underline">A1-A2 Situasjonsøvelse nr. 20 ↗</a>
+            <p class="text-gray-500 mt-0.5"><strong>+1 passiv forsvarer</strong> i midten. Angriperne må velge pasningslinje forbi forsvareren. Gi mer tid til Gr. C.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-green-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-green-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">9v9. Dobbeltpoeng for mål etter gjennomspilling av midtbanelinja i én touch.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">5 min</span><span>Oppsummering: Nevn en god pasningslinje vi skapte.</span></div>
+      </div>
+    </div>
+
+    <!-- Tors 5 -->
+    <div class="border border-orange-200 rounded-xl overflow-hidden">
+      <div class="bg-orange-500 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Torsdag 5. mars</span><span class="font-normal text-xs opacity-80">90 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-orange-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-orange-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: Pasning &amp; mottak</span></div>
+        <div class="border-t border-orange-100 pt-2 flex gap-2">
+          <span class="text-orange-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-20" target="_blank" class="font-semibold text-orange-700 hover:underline">A1-A2 Situasjonsøvelse nr. 20 ↗</a>
+            <p class="text-gray-500 mt-0.5"><strong>Aktiv forsvarer</strong>. Suksess = 5 vellykkede gjennomspillinger. Gr. A: 2 forsvarere.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-orange-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-orange-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">9v9 / 11v11. Full spillform med 3 linjer. Gjennomgå A1-tema i halvtidspause.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-orange-400 w-10 shrink-0 text-right font-medium">20 min</span>
+          <span class="bg-red-50 border border-red-200 rounded px-2 py-1 text-red-700"><strong>Fysisk RRR</strong> – dedikert trener. Hurtighet og eksplosivitet.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lør 7 -->
+    <div class="border border-purple-200 rounded-xl overflow-hidden">
+      <div class="bg-purple-600 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Lørdag 7. mars</span><span class="font-normal text-xs opacity-80">90 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-purple-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2 (aktivering)</span></div>
+        <div class="border-t border-purple-100 pt-2 flex gap-2">
+          <span class="text-purple-400 w-10 shrink-0 text-right font-medium">10 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-20" target="_blank" class="font-semibold text-purple-700 hover:underline">A1-A2 Situasjonsøvelse nr. 20 ↗</a>
+            <p class="text-gray-500 mt-0.5">Hurtigrunde – høy intensitet, vinneren av uke 1. Korte serier.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-purple-400 w-10 shrink-0 text-right font-medium">60 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-purple-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">Mini-turnering 5v5 eller 7v7. Mange kamper, lite venting. A1-tema i lagsamtale.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-purple-400 w-10 shrink-0 text-right">10 min</span><span>Oppsummering: Hva tok vi med oss fra uke 1?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== UKE 2 ===== -->
+  <div class="mb-2 flex items-center gap-3">
+    <h3 class="text-base font-bold text-gray-800">Uke 2 · 9–14 mars · Øk presset</h3>
+    <span class="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Ny øvelse: A1-A2 Situasjonsøvelse nr. 21</span>
+  </div>
+  <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-3 mb-8">
+
+    <!-- Man 9 -->
+    <div class="border border-blue-200 rounded-xl overflow-hidden">
+      <div class="bg-blue-600 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Mandag 9. mars</span><span class="font-normal text-xs opacity-80">75 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: Dribbling &amp; vendinger</span></div>
+        <div class="border-t border-blue-100 pt-2 flex gap-2">
+          <span class="text-blue-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-21" target="_blank" class="font-semibold text-blue-700 hover:underline">A1-A2 Situasjonsøvelse nr. 21 ↗</a>
+            <p class="text-gray-500 mt-0.5">Keeper + 3 fors + 3 angrep vs <strong>2 pressende</strong>. Rød scorer ved å drible over sidelinjer. Blå scorer ved ballvinst. Start med 2 pressende.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-blue-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-blue-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">9v9, 3 linjer. Poeng for å bryte midtbanelinja under motstanderpress.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">5 min</span><span>Oppsummering: Når fungerte det å spille forbi presset?</span></div>
+      </div>
+    </div>
+
+    <!-- Tirs 10 -->
+    <div class="border border-green-200 rounded-xl overflow-hidden">
+      <div class="bg-green-600 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Tirsdag 10. mars</span><span class="font-normal text-xs opacity-80">75 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: Dribbling &amp; vendinger (samme)</span></div>
+        <div class="border-t border-green-100 pt-2 flex gap-2">
+          <span class="text-green-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-21" target="_blank" class="font-semibold text-green-700 hover:underline">A1-A2 Situasjonsøvelse nr. 21 ↗</a>
+            <p class="text-gray-500 mt-0.5"><strong>Øk til 3 pressende</strong>. Rød må bruke keeper mer aktivt. Gr. A: 3 press + tidspress. Gr. C: 2 press, mer rom.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-green-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-green-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">9v9 med joker for angripende lag. Joker = ekstra mann i midtbanen.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">5 min</span><span>Oppsummering: Hva skjedde etter vi spilte forbi presset?</span></div>
+      </div>
+    </div>
+
+    <!-- Tors 12 -->
+    <div class="border border-orange-200 rounded-xl overflow-hidden">
+      <div class="bg-orange-500 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Torsdag 12. mars</span><span class="font-normal text-xs opacity-80">90 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-orange-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-orange-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: Dribbling &amp; vendinger</span></div>
+        <div class="border-t border-orange-100 pt-2 flex gap-2">
+          <span class="text-orange-400 w-10 shrink-0 text-right font-medium">20 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-21" target="_blank" class="font-semibold text-orange-700 hover:underline">A1-A2 Situasjonsøvelse nr. 21 ↗</a>
+            <p class="text-gray-500 mt-0.5">Full versjon, <strong>høy intensitet</strong>. 30 sek serier. Gr. A: 3 press + smal bane.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-orange-400 w-10 shrink-0 text-right font-medium">30 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-orange-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">11v11 der det er mulig. A1-tema nevnes i halvpausestopp.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-orange-400 w-10 shrink-0 text-right font-medium">20 min</span>
+          <span class="bg-red-50 border border-red-200 rounded px-2 py-1 text-red-700"><strong>Fysisk RRR</strong> – utholdenhet + agilitet, dedikert trener.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lør 14 -->
+    <div class="border border-purple-200 rounded-xl overflow-hidden">
+      <div class="bg-purple-600 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Lørdag 14. mars</span><span class="font-normal text-xs opacity-80">90 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-purple-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="border-t border-purple-100 pt-2 flex gap-2">
+          <span class="text-purple-400 w-10 shrink-0 text-right font-medium">10 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-21" target="_blank" class="font-semibold text-purple-700 hover:underline">A1-A2 Situasjonsøvelse nr. 21 ↗</a>
+            <p class="text-gray-500 mt-0.5">Reprise – hurtigrunde på ukens øvelse.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-purple-400 w-10 shrink-0 text-right font-medium">60 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-purple-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">Mini-turnering 7v7 eller 9v9. Fokus på kampspill, A1 i lagsamtale.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-purple-400 w-10 shrink-0 text-right">10 min</span><span>Oppsummering: Hva er blitt bedre fra uke 1?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== UKE 3 ===== -->
+  <div class="mb-2 flex items-center gap-3">
+    <h3 class="text-base font-bold text-gray-800">Uke 3 · 16–21 mars · A1→A2 – Integrasjon</h3>
+    <span class="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Ny øvelse: A1-A2 Situasjonsøvelse nr. 24 (7v4 bakfra)</span>
+  </div>
+  <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-3 mb-8">
+
+    <!-- Man 16 -->
+    <div class="border border-blue-200 rounded-xl overflow-hidden">
+      <div class="bg-blue-600 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Mandag 16. mars</span><span class="font-normal text-xs opacity-80">75 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: 1v1 dueller</span></div>
+        <div class="border-t border-blue-100 pt-2 flex gap-2">
+          <span class="text-blue-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-24" target="_blank" class="font-semibold text-blue-700 hover:underline">A1-A2 Situasjonsøvelse nr. 24 ↗</a>
+            <p class="text-gray-500 mt-0.5">Keeper + 4-back + 2 CM (7 spillere) bryter mot 4 pressende. Mål = komme til prioritert rom. Intro uten pressing, jobb med formasjon.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-blue-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-blue-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">7v7. Poeng for å nå siderom eller bakrom etter oppbygning bakfra.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">5 min</span><span>Oppsummering: Hvem frigjorde seg for å motta?</span></div>
+      </div>
+    </div>
+
+    <!-- Tirs 17 -->
+    <div class="border border-green-200 rounded-xl overflow-hidden">
+      <div class="bg-green-600 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Tirsdag 17. mars</span><span class="font-normal text-xs opacity-80">75 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: 1v1 dueller (samme)</span></div>
+        <div class="border-t border-green-100 pt-2 flex gap-2">
+          <span class="text-green-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-24" target="_blank" class="font-semibold text-green-700 hover:underline">A1-A2 Situasjonsøvelse nr. 24 ↗</a>
+            <p class="text-gray-500 mt-0.5">Nå med <strong>aktive 4 pressende</strong>. Gr. A: 5 pressende. Gr. C: 3 pressende + mer rom på sidene.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-green-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-green-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">9v9. Backlinjene har lov til å gå fremover. Bryt opp med 3 linjer.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">5 min</span><span>Oppsummering: Hvilken pasning skapte rom?</span></div>
+      </div>
+    </div>
+
+    <!-- Tors 19 -->
+    <div class="border border-orange-200 rounded-xl overflow-hidden">
+      <div class="bg-orange-500 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Torsdag 19. mars</span><span class="font-normal text-xs opacity-80">90 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-orange-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-orange-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: 1v1 dueller</span></div>
+        <div class="border-t border-orange-100 pt-2 flex gap-2">
+          <span class="text-orange-400 w-10 shrink-0 text-right font-medium">20 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-24" target="_blank" class="font-semibold text-orange-700 hover:underline">A1-A2 Situasjonsøvelse nr. 24 ↗</a>
+            <p class="text-gray-500 mt-0.5">Full versjon. <strong>Gr. A: backar kan overlære fremover</strong>. Gr. C: 3 pressende.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-orange-400 w-10 shrink-0 text-right font-medium">35 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-orange-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">11v11. Halvpause: gjennomgå én konkret A1→A2-situasjon fra kampen.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-orange-400 w-10 shrink-0 text-right font-medium">15 min</span>
+          <span class="bg-red-50 border border-red-200 rounded px-2 py-1 text-red-700"><strong>Fysisk RRR</strong> – siste torsdag med RRR. Fokus: retningsskifte og akselerasjon.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lør 21 -->
+    <div class="border border-purple-200 rounded-xl overflow-hidden">
+      <div class="bg-purple-600 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Lørdag 21. mars</span><span class="font-normal text-xs opacity-80">90 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-purple-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="border-t border-purple-100 pt-2 flex gap-2">
+          <span class="text-purple-400 w-10 shrink-0 text-right font-medium">15 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-24" target="_blank" class="font-semibold text-purple-700 hover:underline">A1-A2 Situasjonsøvelse nr. 24 ↗</a>
+            <p class="text-gray-500 mt-0.5">Hurtigrunde – beste treffen fra uka. Høy intensitet.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-purple-400 w-10 shrink-0 text-right font-medium">55 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-purple-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">9v9 kamp – sesongforberedende. A1→A2 nevnes i lagprat: «Kom oss til prioriterte rom».</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-purple-400 w-10 shrink-0 text-right">10 min</span><span>Oppsummering + forventninger til siste uka.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== UKE 4 ===== -->
+  <div class="mb-2 flex items-center gap-3">
+    <h3 class="text-base font-bold text-gray-800">Uke 4 · 23–28 mars · Sesongklar – Full integrasjon</h3>
+    <span class="text-xs bg-green-200 text-green-800 px-2 py-0.5 rounded-full">Reprise beste øvelser · Treningskamp lørdag</span>
+  </div>
+  <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-3 mb-8">
+
+    <!-- Man 23 -->
+    <div class="border border-blue-200 rounded-xl overflow-hidden">
+      <div class="bg-blue-600 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Mandag 23. mars</span><span class="font-normal text-xs opacity-80">75 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: Fri ballmestring</span></div>
+        <div class="border-t border-blue-100 pt-2 flex gap-2">
+          <span class="text-blue-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-21" target="_blank" class="font-semibold text-blue-700 hover:underline">A1-A2 Situasjonsøvelse nr. 21 ↗</a>
+            <p class="text-gray-500 mt-0.5">Reprise av uke 2 – men nå med høy intensitet og konkurranseelement. Gruppe A mot gruppe B i par-serier.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-blue-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-blue-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">9v9 med spillervalgt temaregel – la spillerne bestemme hva som gir dobbeltpoeng.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-blue-400 w-10 shrink-0 text-right">5 min</span><span>Oppsummering: Hva er vi blitt bedre på siden 2. mars?</span></div>
+      </div>
+    </div>
+
+    <!-- Tirs 24 -->
+    <div class="border border-green-200 rounded-xl overflow-hidden">
+      <div class="bg-green-600 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Tirsdag 24. mars</span><span class="font-normal text-xs opacity-80">75 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: Fri ballmestring (samme)</span></div>
+        <div class="border-t border-green-100 pt-2 flex gap-2">
+          <span class="text-green-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-24" target="_blank" class="font-semibold text-green-700 hover:underline">A1-A2 Situasjonsøvelse nr. 24 ↗</a>
+            <p class="text-gray-500 mt-0.5">Reprise nr. 24 – legg til at backar kan overlappere. Gr. A kobler A1→A2 i én øvelse.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-green-400 w-10 shrink-0 text-right font-medium">25 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-green-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">11v11 eller 9v9. Forbered spillerne på treningskampen lørdag.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-green-400 w-10 shrink-0 text-right">5 min</span><span>Sesongprat: «Hva tar vi med oss inn i sesongen?»</span></div>
+      </div>
+    </div>
+
+    <!-- Tors 26 -->
+    <div class="border border-orange-200 rounded-xl overflow-hidden">
+      <div class="bg-orange-500 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Torsdag 26. mars</span><span class="font-normal text-xs opacity-80">75 min</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-orange-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2</span></div>
+        <div class="flex gap-2"><span class="text-orange-400 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Sjef over ballen: Fri ballmestring</span></div>
+        <div class="border-t border-orange-100 pt-2 flex gap-2">
+          <span class="text-orange-400 w-10 shrink-0 text-right font-medium">15 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-20" target="_blank" class="font-semibold text-orange-700 hover:underline">A1-A2 Situasjonsøvelse nr. 20 ↗</a>
+            <p class="text-gray-500 mt-0.5">Kort reprise av uke 1-øvelsen. Høy intensitet, mange serier. Vis progresjon.</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-orange-400 w-10 shrink-0 text-right font-medium">35 min</span>
+          <div>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="font-semibold text-orange-700 hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <p class="text-gray-500 mt-0.5">Lett 11v11 – kampforberedelse. Ikke RRR i dag. La spillerne ha energi til lørdag.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-orange-400 w-10 shrink-0 text-right">5 min</span><span>Oppsummering + info om treningskampen.</span></div>
+      </div>
+    </div>
+
+    <!-- Lør 28 -->
+    <div class="border-2 border-green-400 rounded-xl overflow-hidden">
+      <div class="bg-green-700 text-white px-3 py-2 text-sm font-bold flex justify-between items-center">
+        <span>Lørdag 28. mars</span><span class="font-normal text-xs opacity-80">Treningskamp</span>
+      </div>
+      <div class="p-3 space-y-2 text-xs">
+        <div class="flex gap-2"><span class="text-green-500 w-10 shrink-0 text-right">10 min</span><span class="text-gray-500 italic">Rondo 4v2 (aktivering)</span></div>
+        <div class="border-t border-green-100 pt-2 flex gap-2">
+          <span class="text-green-500 w-10 shrink-0 text-right font-medium">5 min</span>
+          <span>Lagsamtale: «Vi spiller fremover – vi vinner ball – vi bruker rommet»</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-green-500 w-10 shrink-0 text-right font-medium">2×30</span>
+          <div>
+            <span class="font-semibold text-green-700">Treningskamp</span>
+            <p class="text-gray-500 mt-0.5">Alle spillere spiller minimum én hel omgang. Observer A1-situasjoner. Notat til halvtidsprat.</p>
+          </div>
+        </div>
+        <div class="flex gap-2"><span class="text-green-500 w-10 shrink-0 text-right">10 min</span><span>Oppsummering: Hva var bra? Hva tar vi med inn i sesong?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Øvelsesreferanser -->
+  <div class="bg-white border rounded-xl p-5">
+    <div class="font-semibold mb-3 text-gray-800">Øvelsesreferanser mars – A1-A2</div>
+    <div class="grid md:grid-cols-2 gap-3 text-sm">
+      <div>
+        <div class="font-medium text-gray-700 mb-2">Situasjonsøvelser (temaøvelse)</div>
+        <div class="space-y-1.5">
+          <div class="flex gap-2 items-start">
+            <span class="text-xs bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded shrink-0">Uke 1</span>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-20" target="_blank" class="text-nff-blue hover:underline">A1-A2 Situasjonsøvelse nr. 20 ↗</a>
+            <span class="text-gray-400">3v2, send ball til par på motsatt side</span>
+          </div>
+          <div class="flex gap-2 items-start">
+            <span class="text-xs bg-orange-100 text-orange-800 px-1.5 py-0.5 rounded shrink-0">Uke 2</span>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-21" target="_blank" class="text-nff-blue hover:underline">A1-A2 Situasjonsøvelse nr. 21 ↗</a>
+            <span class="text-gray-400">Keeper+fors+angrep vs 2–3 pressende</span>
+          </div>
+          <div class="flex gap-2 items-start">
+            <span class="text-xs bg-red-100 text-red-800 px-1.5 py-0.5 rounded shrink-0">Uke 3</span>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-24" target="_blank" class="text-nff-blue hover:underline">A1-A2 Situasjonsøvelse nr. 24 ↗</a>
+            <span class="text-gray-400">7v4 bakfra – bryt pressing med keeper og 4-back</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="font-medium text-gray-700 mb-2">Kampspill (avsluttende del)</div>
+        <div class="space-y-1.5">
+          <div class="flex gap-2 items-start">
+            <span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded shrink-0">Hele mars</span>
+            <a href="https://tiim.no/ovelse/a1-a2-spill-30" target="_blank" class="text-nff-blue hover:underline">A1-A2 Spill nr. 30 ↗</a>
+            <span class="text-gray-400">70×50m, alltid 3 linjer. Skalér fra 7v7 → 11v11</span>
+          </div>
+          <div class="flex gap-2 items-start">
+            <span class="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded shrink-0">Prepp</span>
+            <a href="https://tiim.no/ovelse/prepp-n-6" target="_blank" class="text-nff-blue hover:underline">Prepp'n nr. 6 ↗</a>
+            <span class="text-gray-400">1F-ferdigheter 1v1 i sirkel – kan erstatte sjef over ballen uke 3</span>
+          </div>
+          <div class="flex gap-2 items-start">
+            <span class="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded shrink-0">Uke 3+</span>
+            <a href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-19" target="_blank" class="text-nff-blue hover:underline">A1-A2 Situasjonsøvelse nr. 19 ↗</a>
+            <span class="text-gray-400">Alternativ til nr. 20 ved behov for variasjon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="mt-12 border-t border-gray-200 bg-white py-6">
+  <div class="max-w-6xl mx-auto px-4 text-sm text-gray-400 flex flex-col md:flex-row gap-2 justify-between">
+    <span>Skedsmo Fotball – Treningsoversikt for trenere</span>
+    <span>Basert på <a href="https://www.fotball.no/barn-og-ungdom/retningslinjer-for-barne--og-ungdomsfotball/" class="text-nff-blue hover:underline" target="_blank">NFF retningslinjer 2024</a> og <a href="https://tiim.no" class="text-nff-blue hover:underline" target="_blank">tiim.no</a></span>
+  </div>
+</footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
