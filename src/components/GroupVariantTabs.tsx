@@ -32,7 +32,9 @@ const SPACE_LABELS = {
 }
 
 export default function GroupVariantTabs({ variants }: GroupVariantTabsProps) {
-  const [active, setActive] = useState<GroupLabel>(variants[0]?.group ?? 'B')
+  // Default to group B (standard version) if available
+  const defaultGroup = variants.find((v) => v.group === 'B')?.group ?? variants[0]?.group ?? 'B'
+  const [active, setActive] = useState<GroupLabel>(defaultGroup)
 
   const current = variants.find((v) => v.group === active)
 
