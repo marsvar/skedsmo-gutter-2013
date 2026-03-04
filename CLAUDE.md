@@ -125,3 +125,14 @@ Prefer exercises from tiim.no. Include: exercise name, player numbers, field siz
 - Norges Fotballforbund – Landslagsskolen / sportsplan - https://www.fotball.no/barn-og-ungdom/sportsplaner/landslagsskolen/
 - Coerver Coaching - https://coervercoaching.com
 - The Coaching Manual - https://www.thecoachingmanual.com
+
+
+## Branding references
+
+- Primary club red used on skedsmofk.no: `#c6180e`
+- Neutral dark text/background tone: `#0b0b0b`
+- Light neutral border tone: `#e1e8f2`
+- Logo URL (official site): `https://skedsmofk.no/images/logo.png`
+- Favicon URL (32px): `https://skedsmofk.no/favicons/favicon-32.png`
+
+Use these for lightweight visual branding in static pages when appropriate.

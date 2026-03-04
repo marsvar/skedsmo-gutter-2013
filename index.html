@@ -4,13 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skedsmo Fotball – Treningsoversikt</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://skedsmofk.no/favicons/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://skedsmofk.no/favicons/favicon-180.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            nff: { blue: '#003087', red: '#e30613', gold: '#f5a623' },
+            nff: { blue: '#003087', red: '#c6180e', gold: '#f5a623' },
+            skedsmo: { red: '#c6180e', dark: '#0b0b0b', light: '#e1e8f2', gray: '#444444' },
             attack: { light: '#fef9c3', border: '#fbbf24', text: '#92400e' },
             defend: { light: '#dbeafe', border: '#3b82f6', text: '#1e3a8a' },
             base:   { light: '#f0fdf4', border: '#4ade80', text: '#166534' },
@@ -21,7 +24,7 @@
   </script>
   <style>
     [x-cloak] { display: none; }
-    .tab-btn.active { border-bottom: 3px solid #003087; color: #003087; font-weight: 700; }
+    .tab-btn.active { border-bottom: 3px solid #c6180e; color: #c6180e; font-weight: 700; }
     .section { display: none; }
     .section.active { display: block; }
     .periode-card { transition: box-shadow .15s; }
@@ -33,12 +36,12 @@
 <!-- HEADER -->
 <header class="bg-white border-b border-gray-200 shadow-sm">
   <div class="max-w-6xl mx-auto px-4 py-4 flex items-center gap-4">
-    <div class="w-12 h-12 rounded-full bg-nff-blue flex items-center justify-center text-white font-black text-lg">SF</div>
+    <img src="https://skedsmofk.no/images/logo.png" alt="Skedsmo FK logo" class="w-12 h-12 object-contain" loading="lazy" />
     <div>
-      <h1 class="text-xl font-bold text-gray-900">Skedsmo Fotball</h1>
+      <h1 class="text-xl font-bold text-skedsmo-dark">Skedsmo Fotball</h1>
       <p class="text-sm text-gray-500">Treningsoversikt for trenere – basert på NFF retningslinjer</p>
     </div>
-    <a href="https://tiim.no" target="_blank" class="ml-auto text-sm bg-nff-blue text-white px-3 py-2 rounded-lg hover:bg-blue-900 transition">
+    <a href="https://tiim.no" target="_blank" class="ml-auto text-sm bg-skedsmo-red text-white px-3 py-2 rounded-lg hover:opacity-90 transition">
       Gå til tiim.no ↗
     </a>
   </div>
