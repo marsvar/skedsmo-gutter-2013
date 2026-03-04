@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skedsmo Fotball – Økter</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://skedsmofk.no/favicons/favicon-32.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { nff: { blue: '#003087', red: '#c6180e', gold: '#f5a623' }, skedsmo: { red: '#c6180e', dark: '#0b0b0b', light: '#e1e8f2', gray: '#444444' } } } }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+<header class="bg-white border-b border-gray-200 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center gap-4">
+    <img src="https://skedsmofk.no/images/logo.png" alt="Skedsmo FK logo" class="w-12 h-12 object-contain" />
+    <div>
+      <h1 class="text-xl font-bold text-skedsmo-dark">Skedsmo Fotball</h1>
+      <p class="text-sm text-gray-500">Fase 1 – Økter (strukturert inngang)</p>
+    </div>
+  </div>
+</header>
+<nav class="bg-skedsmo-light border-b border-gray-200">
+  <div class="max-w-6xl mx-auto px-4 py-2 flex gap-5 text-sm overflow-x-auto">
+    <a data-topnav href="index.html" class="top-nav-link">Oversikt (eksisterende)</a>
+    <a data-topnav href="arsplan.html" class="top-nav-link">Ny side: Årsplan</a>
+    <a data-topnav href="kalender.html" class="top-nav-link">Ny side: Kalender</a>
+    <a data-topnav href="okter.html" class="top-nav-link">Ny side: Økter</a>
+  </div>
+</nav>
+<main class="max-w-6xl mx-auto px-4 py-8">
+  <h2 class="text-2xl font-bold mb-2">Økter og tema</h2>
+  <p class="text-sm text-gray-500 mb-6">Fase 1 samler de viktigste øktlenkene i en egen side. Fase 2 blir filter/søk.</p>
+
+  <div class="bg-white border rounded-xl p-5">
+    <h3 class="font-semibold mb-3">Bekreftede øvelser (A1-A2)</h3>
+    <ul class="space-y-2 text-sm">
+      <li><a class="text-nff-blue underline" target="_blank" href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-20">A1-A2 Situasjonsøvelse nr. 20</a></li>
+      <li><a class="text-nff-blue underline" target="_blank" href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-21">A1-A2 Situasjonsøvelse nr. 21</a></li>
+      <li><a class="text-nff-blue underline" target="_blank" href="https://tiim.no/ovelse/a1-a2-situasjonsovelse-24">A1-A2 Situasjonsøvelse nr. 24</a></li>
+      <li><a class="text-nff-blue underline" target="_blank" href="https://tiim.no/ovelse/a1-a2-spill-30">A1-A2 Spill nr. 30</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

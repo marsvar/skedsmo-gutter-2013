@@ -20,7 +20,7 @@ python3 -m http.server 8080
 
 ## Architecture
 
-Single-file app: `index.html` only. Tab navigation via vanilla JS (`showSection(id)`). Tailwind CSS loaded via CDN with custom config block at top of file. No build process, no dependencies.
+Static HTML site with a phased multi-page transition. `index.html` remains the full legacy overview, while `arsplan.html`, `kalender.html`, and `okter.html` are introduced in phase 1. Shared styles/scripts live in `assets/css/styles.css` and `assets/js/main.js`. Tailwind CSS loaded via CDN. No build process, no dependencies.
 
 ## NFF domain knowledge
 

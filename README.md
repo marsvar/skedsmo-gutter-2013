@@ -22,3 +22,15 @@ npx serve .
 # eller
 python3 -m http.server 8080
 ```
+
+
+## Fase 1 (påbegynt)
+
+Siden er startet opp i en fler-siders struktur for enklere navigering:
+
+- `index.html` – eksisterende fulloversikt (legacy)
+- `arsplan.html` – egen side for årsplan
+- `kalender.html` – kalender-MVP
+- `okter.html` – økter/lenker
+- `assets/css/styles.css` – felles stil
+- `assets/js/main.js` – felles JS (tab-funksjon + aktiv toppnavigasjon)
