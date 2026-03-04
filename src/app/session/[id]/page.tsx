@@ -5,6 +5,7 @@ import {
   getSession,
   getWeekForSession,
   getBlockForSession,
+  getAdjacentSessions,
 } from '@/data/season'
 import { DAY_LABELS, NFF_DESCRIPTIONS } from '@/data/types'
 import SessionTimeline from '@/components/SessionTimeline'
@@ -38,13 +39,32 @@ export default function SessionPage({ params }: Props) {
   if (!week || !block) notFound()
 
   const accent = DAY_ACCENT[session.dayOfWeek] ?? 'bg-gray-600'
+  const { prevId, nextId } = getAdjacentSessions(session.id)
 
   return (
     <div>
-      {/* Back */}
-      <Link href={`/week/${week.id}/`} className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 mb-4">
-        ← Uke {week.number} – {week.focus}
-      </Link>
+      {/* Back + prev/next row */}
+      <div className="flex items-center justify-between mb-4">
+        <Link href={`/week/${week.id}/`} className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600">
+          ← Uke {week.number} – {week.focus}
+        </Link>
+        <div className="flex items-center gap-1">
+          {prevId ? (
+            <Link href={`/session/${prevId}/`} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors text-lg leading-none" title="Forrige økt">
+              ‹
+            </Link>
+          ) : (
+            <span className="p-1.5 text-gray-200 text-lg leading-none">‹</span>
+          )}
+          {nextId ? (
+            <Link href={`/session/${nextId}/`} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors text-lg leading-none" title="Neste økt">
+              ›
+            </Link>
+          ) : (
+            <span className="p-1.5 text-gray-200 text-lg leading-none">›</span>
+          )}
+        </div>
+      </div>
 
       {/* Session header strip */}
       <div className={`rounded-xl p-4 mb-5 text-white ${accent}`}>

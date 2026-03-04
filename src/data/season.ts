@@ -634,6 +634,17 @@ export function getBlockForSession(sessionId: string) {
   return null
 }
 
+/** Get the previous and next session ids relative to a given sessionId. */
+export function getAdjacentSessions(sessionId: string): { prevId: string | null; nextId: string | null } {
+  const all = getAllSessions()
+  const idx = all.findIndex((s) => s.id === sessionId)
+  if (idx === -1) return { prevId: null, nextId: null }
+  return {
+    prevId: idx > 0 ? all[idx - 1].id : null,
+    nextId: idx < all.length - 1 ? all[idx + 1].id : null,
+  }
+}
+
 /** All weeks in season order (across all blocks). */
 export function getAllWeeks() {
   return season2026.blocks.flatMap((b) => b.weeks)
