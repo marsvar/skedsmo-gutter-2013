@@ -17,6 +17,7 @@ export default function SwipeWeekWrapper({ prevHref, nextHref, children }: Swipe
   const startY = useRef<number | null>(null)
 
   useEffect(() => {
+    let mounted = true
     const el = document.getElementById('week-swipe-zone')
     if (!el) return
 
@@ -26,6 +27,7 @@ export default function SwipeWeekWrapper({ prevHref, nextHref, children }: Swipe
     }
 
     function onTouchEnd(e: TouchEvent) {
+      if (!mounted) return
       if (startX.current === null || startY.current === null) return
       const dx = e.changedTouches[0].clientX - startX.current
       const dy = e.changedTouches[0].clientY - startY.current
@@ -43,6 +45,9 @@ export default function SwipeWeekWrapper({ prevHref, nextHref, children }: Swipe
     el.addEventListener('touchstart', onTouchStart, { passive: true })
     el.addEventListener('touchend', onTouchEnd, { passive: true })
     return () => {
+      mounted = false
+      startX.current = null
+      startY.current = null
       el.removeEventListener('touchstart', onTouchStart)
       el.removeEventListener('touchend', onTouchEnd)
     }
@@ -50,12 +55,17 @@ export default function SwipeWeekWrapper({ prevHref, nextHref, children }: Swipe
 
   // Keyboard arrow support
   useEffect(() => {
+    let mounted = true
     function onKeyDown(e: KeyboardEvent) {
+      if (!mounted) return
       if (e.key === 'ArrowLeft' && prevHref) router.push(prevHref)
       if (e.key === 'ArrowRight' && nextHref) router.push(nextHref)
     }
     window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
+    return () => {
+      mounted = false
+      window.removeEventListener('keydown', onKeyDown)
+    }
   }, [prevHref, nextHref, router])
 
   return (
