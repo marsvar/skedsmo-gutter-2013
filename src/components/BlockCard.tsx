@@ -13,16 +13,22 @@ export default function BlockCard({ block, isCurrent }: BlockCardProps) {
   const allDates = block.weeks.flatMap((w) => w.sessions.map((s) => s.date)).sort()
   const firstDate = allDates[0]
   const lastDate = allDates[allDates.length - 1]
+  const isPlaceholder = allDates.length === 0
 
   function fmt(iso: string) {
     const d = new Date(iso + 'T00:00:00')
     return `${d.getDate()}. ${['jan','feb','mar','apr','mai','jun','jul','aug','sep','okt','nov','des'][d.getMonth()]}`
   }
 
+  // Fallback date range: use the first/last week's dateRange strings
+  const fallbackRange = block.weeks.length > 0
+    ? `${block.weeks[0].dateRange.split('–')[0].trim()} – ${block.weeks[block.weeks.length - 1].dateRange.split('–').pop()?.trim()}`
+    : ''
+
   return (
     <div
       className={`border rounded-xl p-4 bg-white transition-shadow hover:shadow-sm ${
-        isCurrent ? 'border-skedsmo-red ring-1 ring-skedsmo-red' : 'border-gray-200'
+        isCurrent ? 'border-skedsmo-red ring-1 ring-skedsmo-red' : isPlaceholder ? 'border-gray-100 opacity-70' : 'border-gray-200'
       }`}
     >
       {/* Header row */}
@@ -36,9 +42,14 @@ export default function BlockCard({ block, isCurrent }: BlockCardProps) {
               Aktiv blokk
             </span>
           )}
+          {isPlaceholder && (
+            <span className="text-xs bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full">
+              Planlegges
+            </span>
+          )}
         </div>
         <span className="text-xs text-gray-400 whitespace-nowrap">
-          {fmt(firstDate)} – {fmt(lastDate)}
+          {isPlaceholder ? fallbackRange : `${fmt(firstDate)} – ${fmt(lastDate)}`}
         </span>
       </div>
 

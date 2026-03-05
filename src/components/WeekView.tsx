@@ -57,15 +57,22 @@ export default function WeekView({ week, block, today, prevWeekId, nextWeekId }:
       </div>
 
       {/* 4-day grid */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mb-6">
-        {week.sessions.map((session) => (
-          <WeekDayCard
-            key={session.id}
-            session={session}
-            isToday={session.date === today}
-          />
-        ))}
-      </div>
+      {week.sessions.length > 0 ? (
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mb-6">
+          {week.sessions.map((session) => (
+            <WeekDayCard
+              key={session.id}
+              session={session}
+              isToday={session.date === today}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="mb-6 rounded-xl border border-dashed border-gray-200 p-8 text-center">
+          <p className="text-gray-400 text-sm mb-1">Øktene for denne uken er ikke planlagt ennå.</p>
+          <p className="text-xs text-gray-300">{block.name}</p>
+        </div>
+      )}
 
       {/* Block coaching points */}
       <div className="bg-white border border-gray-200 rounded-xl p-4">
