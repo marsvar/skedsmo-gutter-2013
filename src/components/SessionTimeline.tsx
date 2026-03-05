@@ -9,6 +9,90 @@ interface SessionTimelineProps {
   week: Week
 }
 
+// Fixed segment durations [min, max]
+const SEGMENT_SKADEFRI:    [number, number] = [10, 15]
+const SEGMENT_RONDO:       [number, number] = [10, 10]
+const SEGMENT_SJEF:        [number, number] = [10, 10]
+const SEGMENT_TEMA:        [number, number] = [25, 30]
+const SEGMENT_SPILL:       [number, number] = [30, 35]
+const SEGMENT_RRR:         [number, number] = [15, 20]
+const SEGMENT_OPPSUMMERING:[number, number] = [5,  5]
+const SESSION_TARGET = 90
+
+function calcDuration(session: Session): { min: number; max: number } {
+  const hasSjef = session.sjefOverBallenFocus !== '—'
+  const segments = [
+    SEGMENT_SKADEFRI,
+    SEGMENT_RONDO,
+    ...(hasSjef ? [SEGMENT_SJEF] : []),
+    SEGMENT_TEMA,
+    SEGMENT_SPILL,
+    ...(session.hasRRR ? [SEGMENT_RRR] : []),
+    SEGMENT_OPPSUMMERING,
+  ]
+  return {
+    min: segments.reduce((s, [mn]) => s + mn, 0),
+    max: segments.reduce((s, [, mx]) => s + mx, 0),
+  }
+}
+
+function DurationBar({ session }: { session: Session }) {
+  const { min, max } = calcDuration(session)
+  const overMax = max - SESSION_TARGET
+  const isOver = max > SESSION_TARGET
+  const isTight = !isOver && max === SESSION_TARGET
+
+  // Fill bar: clamp max at 130 for display
+  const displayMax = 130
+  const fillPct = Math.min((max / displayMax) * 100, 100)
+  const targetPct = (SESSION_TARGET / displayMax) * 100
+
+  const barColor = max > SESSION_TARGET + 15
+    ? 'bg-red-500'
+    : max > SESSION_TARGET
+    ? 'bg-amber-400'
+    : 'bg-green-500'
+
+  const labelColor = max > SESSION_TARGET + 15
+    ? 'text-red-700'
+    : max > SESSION_TARGET
+    ? 'text-amber-700'
+    : 'text-green-700'
+
+  return (
+    <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-3 mb-4 animate-fade-in-up">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-heading font-bold uppercase tracking-wide text-gray-500">Øktlengde</span>
+        <span className={`text-xs font-semibold ${labelColor}`}>
+          {min}–{max} min
+          {isOver && (
+            <span className="ml-1.5 font-normal text-gray-400">
+              (+{overMax} over {SESSION_TARGET} min)
+            </span>
+          )}
+          {isTight && (
+            <span className="ml-1.5 font-normal text-gray-400">= {SESSION_TARGET} min</span>
+          )}
+        </span>
+      </div>
+      <div className="relative h-2 bg-gray-100 rounded-full overflow-hidden">
+        <div
+          className={`absolute left-0 top-0 h-full rounded-full transition-all ${barColor}`}
+          style={{ width: `${fillPct}%` }}
+        />
+        {/* Target line */}
+        <div
+          className="absolute top-0 h-full w-0.5 bg-gray-400 z-10"
+          style={{ left: `${targetPct}%` }}
+        />
+      </div>
+      <div className="flex justify-end mt-1">
+        <span className="text-[10px] text-gray-400">Mål: {SESSION_TARGET} min</span>
+      </div>
+    </div>
+  )
+}
+
 function TimelineCard({
   duration,
   title,
@@ -44,6 +128,9 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
 
   return (
     <div className="space-y-0">
+      {/* Duration summary */}
+      <DurationBar session={session} />
+
       {/* 0. Skadefri */}
       <TimelineCard duration="10-15'" title="Skadefri" accentClass="bg-teal-600" delay={0}>
         <div className="mt-1">
