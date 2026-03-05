@@ -118,7 +118,7 @@ export default function BlockDetailPage({ params }: Props) {
           <div className="bg-white border border-gray-200 rounded-xl p-4">
             <div className="flex items-center gap-1.5 mb-2">
               <Lightbulb className="w-3.5 h-3.5 text-yellow-500" />
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Coaching-punkter</p>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Nøkkelpunkter</p>
             </div>
             <ul className="space-y-1">
               {block.coachingPoints.map((pt) => (

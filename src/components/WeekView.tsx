@@ -56,7 +56,7 @@ export default function WeekView({ week, block, today, prevWeekId, nextWeekId }:
       {/* Coaching points — above fold */}
       <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm mb-4 animate-fade-in-up">
         <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
-          Ukens coaching-punkter
+          Ukens nøkkelpunkter
         </p>
         <ul className="space-y-1">
           {block.coachingPoints.map((pt) => (

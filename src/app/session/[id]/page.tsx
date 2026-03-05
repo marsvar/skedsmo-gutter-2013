@@ -94,7 +94,7 @@ export default function SessionPage({ params }: Props) {
       {session.coachingFocus.length > 0 && (
         <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-5">
           <p className="text-xs font-semibold text-yellow-800 uppercase tracking-wide mb-1">
-            Coaching-fokus
+            Treningsfokus
           </p>
           <ul className="space-y-0.5">
             {session.coachingFocus.map((pt) => (

@@ -251,7 +251,7 @@ export default function ReferansePage() {
                 { time: '25 min', name: 'Temaøvelse', note: 'Full motstand' },
                 { time: '30 min', name: '9v9 / 11v11', note: 'Tema i fokus' },
                 { time: '5 min', name: 'Oppsummering', note: '' },
-                { time: '20 min', name: 'RRR', note: 'Dedikert trener' },
+                { time: '20 min', name: 'RRR', note: 'Ansvarlig trener' },
               ],
             },
             {
@@ -298,7 +298,7 @@ export default function ReferansePage() {
             {
               week: 'Uke 3', label: 'Integrasjon', color: 'bg-orange-50 border-orange-200 text-orange-800',
               badge: 'bg-orange-100 text-orange-700',
-              desc: 'Full motstand og konkurransepreg. Temaet dukker naturlig opp i spillfasen. Coaching-fokus flyttes til kampspillet.'
+              desc: 'Full motstand og konkurransepreg. Temaet dukker naturlig opp i spillfasen. Treningsfokus flyttes til kampspillet.'
             },
           ].map((w) => (
             <div key={w.week} className={`border rounded-xl p-3 ${w.color}`}>

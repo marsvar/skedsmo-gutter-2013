@@ -158,7 +158,7 @@ export default function MatchesPage() {
 
       {/* Import note */}
       <p className="text-xs text-gray-300 text-center mt-4">
-        Importer nye kamper med{' '}
+        Hent inn nye kamper med{' '}
         <code className="bg-gray-100 px-1 rounded text-gray-500">
           node scripts/import-matches.mjs
         </code>

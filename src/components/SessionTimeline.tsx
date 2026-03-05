@@ -200,7 +200,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
               {temaExercise.coachingPoints.length > 0 && (
                 <div className="mt-3 pt-3 border-t border-gray-100">
                   <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
-                    Coaching-punkter
+                    Nøkkelpunkter
                   </p>
                   <ul className="space-y-1">
                     {temaExercise.coachingPoints.map((pt) => (
@@ -249,7 +249,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
       {session.hasRRR && (
         <TimelineCard duration="15-20'" title="Fysisk RRR" accentClass="bg-red-600" delay={400}>
           <p className="text-sm text-gray-700 mt-1">
-            {session.rrrDescription ?? 'Fysisk trening, dedikert trener.'}
+            {session.rrrDescription ?? 'Fysisk trening – ansvarlig trener.'}
           </p>
           <p className="text-xs text-gray-400 mt-1">Plassert sist i økt</p>
         </TimelineCard>
