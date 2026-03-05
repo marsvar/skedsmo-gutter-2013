@@ -27,7 +27,7 @@ const tabs = [
   },
   {
     href: '/referanse',
-    label: 'Info',
+    label: 'Referanse',
     Icon: BookOpen,
   },
 ]
