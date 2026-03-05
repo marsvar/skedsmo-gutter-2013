@@ -108,6 +108,47 @@ export const RESISTANCE_LABELS: Record<ResistanceLevel, string> = {
   full:    'Full motstand',
 }
 
+export type MatchOutcome = 'win' | 'draw' | 'loss'
+
+export interface MatchResult {
+  homeGoals: number
+  awayGoals: number
+}
+
+export interface Match {
+  id: string             // "match-{fiksId}"
+  fiksId: string         // fotball.no ID
+  date: string           // ISO: "2026-03-15"
+  time: string           // "11:30"
+  homeTeam: string
+  awayTeam: string
+  venue: string | null
+  tournament: string
+  format: string         // "9er" | "7er" | "11er"
+  duration: string       // "70 minutter"
+  result?: MatchResult
+  notes?: string
+}
+
+// Helper: determine match outcome from Skedsmo's perspective
+export function matchOutcome(match: Match): MatchOutcome | null {
+  if (!match.result) return null
+  const { homeGoals, awayGoals } = match.result
+  const skedsmoIsHome = match.homeTeam.toLowerCase().includes('skedsmo')
+  const skedsmoGoals = skedsmoIsHome ? homeGoals : awayGoals
+  const opponentGoals = skedsmoIsHome ? awayGoals : homeGoals
+  if (skedsmoGoals > opponentGoals) return 'win'
+  if (skedsmoGoals < opponentGoals) return 'loss'
+  return 'draw'
+}
+
+// Helper: opponent name from Skedsmo's perspective
+export function matchOpponent(match: Match): string {
+  return match.homeTeam.toLowerCase().includes('skedsmo')
+    ? match.awayTeam
+    : match.homeTeam
+}
+
 // Helper: NFF code full descriptions
 export const NFF_DESCRIPTIONS: Record<NFFCode, string> = {
   A1: 'Behandle/vinne ballen og spille fremover',

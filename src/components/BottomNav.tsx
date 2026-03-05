@@ -43,6 +43,26 @@ const tabs = [
     ),
   },
   {
+    href: '/matches',
+    label: 'Kamper',
+    icon: (active: boolean) => (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        strokeWidth={active ? 2.5 : 1.5}
+        stroke="currentColor"
+        className="w-6 h-6"
+      >
+        {/* Trophy / cup icon */}
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-4.5A6 6 0 0 0 12 8.25a6 6 0 0 0-4.5 9.75v4.5M8.25 8.25H6a2.25 2.25 0 0 0 0 4.5h2.008M15.75 8.25H18a2.25 2.25 0 0 1 0 4.5h-2.008"
+        />
+      </svg>
+    ),
+  },
+  {
     href: '/season',
     label: 'Sesong',
     icon: (active: boolean) => (
