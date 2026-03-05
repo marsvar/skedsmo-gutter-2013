@@ -24,6 +24,11 @@ const config: Config = {
           light: '#e1e8f2',
           gray:  '#444444',
         },
+        hoopit: {
+          DEFAULT: '#0AAFAD',
+          dark:    '#087F7D',
+          light:   '#E4F7F7',
+        },
         day: {
           monday:   { DEFAULT: '#2563eb', light: '#eff6ff', border: '#bfdbfe', text: '#1d4ed8' },
           tuesday:  { DEFAULT: '#16a34a', light: '#f0fdf4', border: '#bbf7d0', text: '#15803d' },

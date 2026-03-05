@@ -44,8 +44,25 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
 
   return (
     <div className="space-y-0">
+      {/* 0. Skadefri */}
+      <TimelineCard duration="10-15'" title="Skadefri" accentClass="bg-teal-600" delay={0}>
+        <div className="mt-1">
+          <a
+            href="https://www.skadefri.no/idretter/fotball/skadefri-fotball/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-teal-700 underline"
+          >
+            Skadefri fotball ↗
+          </a>
+          <p className="text-xs text-gray-400 mt-1">
+            Løpeøvelser · hopp &amp; landing · styrke kjernemuskulatur
+          </p>
+        </div>
+      </TimelineCard>
+
       {/* 1. Rondo */}
-      <TimelineCard duration="10'" title="Rondo" accentClass="bg-gray-500" delay={0}>
+      <TimelineCard duration="10'" title="Rondo" accentClass="bg-gray-500" delay={80}>
         <div className="flex items-center gap-2 mt-1">
           <span className="text-sm font-medium text-gray-700">{session.rondoFormat}</span>
           <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
@@ -59,7 +76,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
 
       {/* 2. Sjef over ballen */}
       {session.sjefOverBallenFocus !== '—' && (
-        <TimelineCard duration="10'" title="Sjef over ballen" accentClass="bg-gray-500" delay={80}>
+        <TimelineCard duration="10'" title="Sjef over ballen" accentClass="bg-gray-500" delay={160}>
           <p className="text-sm text-gray-700 mt-1">{session.sjefOverBallenFocus}</p>
           <p className="text-xs text-gray-400 mt-1">
             Samme øvelse man/tirs/tors denne uken
@@ -68,7 +85,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
       )}
 
       {/* 3. Temaøvelse */}
-      <TimelineCard duration="25-30'" title="Temaøvelse" accentClass="bg-nff-blue" delay={160}>
+      <TimelineCard duration="25-30'" title="Temaøvelse" accentClass="bg-nff-blue" delay={240}>
         <div className="mt-1">
           <span className="inline-block text-xs bg-blue-50 text-nff-blue px-2 py-0.5 rounded-full mb-2">
             {RESISTANCE_LABELS[session.resistanceLevel]}
@@ -115,7 +132,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
       </TimelineCard>
 
       {/* 4. Kamptilpasset spill */}
-      <TimelineCard duration="30-35'" title="Kamptilpasset spill" accentClass="bg-nff-red" delay={240}>
+      <TimelineCard duration="30-35'" title="Kamptilpasset spill" accentClass="bg-nff-red" delay={320}>
         <div className="mt-1">
           {spillExercise?.sourceUrl ? (
             <a
@@ -143,7 +160,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
 
       {/* 5. RRR (conditional) */}
       {session.hasRRR && (
-        <TimelineCard duration="15-20'" title="Fysisk RRR" accentClass="bg-red-600" delay={320}>
+        <TimelineCard duration="15-20'" title="Fysisk RRR" accentClass="bg-red-600" delay={400}>
           <p className="text-sm text-gray-700 mt-1">
             {session.rrrDescription ?? 'Fysisk trening, dedikert trener.'}
           </p>
@@ -152,7 +169,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
       )}
 
       {/* 6. Oppsummering */}
-      <div className="flex gap-3 animate-fade-in-up" style={{ animationDelay: '320ms' }}>
+      <div className="flex gap-3 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
         <div className="flex flex-col items-center">
           <div className="w-10 h-10 rounded-full flex items-center justify-center bg-green-600 text-white text-[9px] font-bold shrink-0 whitespace-nowrap">
             5'

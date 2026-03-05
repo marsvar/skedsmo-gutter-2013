@@ -53,6 +53,20 @@ export default function WeekView({ week, block, today, prevWeekId, nextWeekId }:
         <p className="text-sm text-gray-500 mt-0.5">{block.name}</p>
       </div>
 
+      {/* Coaching points — above fold */}
+      <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm mb-4 animate-fade-in-up">
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
+          Ukens coaching-punkter
+        </p>
+        <ul className="space-y-1">
+          {block.coachingPoints.map((pt) => (
+            <li key={pt} className="text-sm text-gray-700 flex gap-1.5">
+              <span className="text-skedsmo-red">•</span> {pt}
+            </li>
+          ))}
+        </ul>
+      </div>
+
       {/* 4-day grid */}
       {week.sessions.length > 0 ? (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mb-6">
@@ -68,20 +82,6 @@ export default function WeekView({ week, block, today, prevWeekId, nextWeekId }:
           <p className="text-xs text-gray-300">{block.name}</p>
         </div>
       )}
-
-      {/* Block coaching points */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm animate-fade-in-up" style={{ animationDelay: '280ms' }}>
-        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
-          Ukens coaching-punkter
-        </p>
-        <ul className="space-y-1">
-          {block.coachingPoints.map((pt) => (
-            <li key={pt} className="text-sm text-gray-700 flex gap-1.5">
-              <span className="text-skedsmo-red">•</span> {pt}
-            </li>
-          ))}
-        </ul>
-      </div>
 
       <div className="mt-4 text-center">
         <Link href="/season" className="text-sm text-nff-blue underline">
