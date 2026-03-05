@@ -23,13 +23,13 @@ export default function WeekDayCard({ session, isToday }: WeekDayCardProps) {
   return (
     <Link href={`/session/${session.id}/`} className="block">
       <div
-        className={`border rounded-xl overflow-hidden transition-shadow hover:shadow-md ${styles.border} ${
+        className={`border rounded-xl overflow-hidden transition-all shadow-sm hover:shadow-md ${styles.border} ${
           isToday ? 'ring-2 ring-skedsmo-red ring-offset-1' : ''
         }`}
       >
         {/* Header */}
         <div className={`px-3 py-2 text-sm font-bold flex justify-between items-center ${styles.header}`}>
-          <span>{DAY_LABELS[session.dayOfWeek]}</span>
+          <span className="font-heading font-bold tracking-wide uppercase">{DAY_LABELS[session.dayOfWeek]}</span>
           <span className="font-normal text-xs opacity-80">{fmtShort(session.date)}</span>
         </div>
 

@@ -14,22 +14,24 @@ function TimelineCard({
   title,
   accentClass,
   children,
+  delay = 0,
 }: {
   duration: string
   title: string
   accentClass: string
   children?: React.ReactNode
+  delay?: number
 }) {
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-3 animate-fade-in-up" style={{ animationDelay: `${delay}ms` }}>
       <div className="flex flex-col items-center">
         <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-[9px] font-bold shrink-0 whitespace-nowrap ${accentClass}`}>
           {duration}
         </div>
         <div className="w-px flex-1 bg-gray-200 mt-1" />
       </div>
-      <div className="bg-white border border-gray-200 rounded-xl p-4 flex-1 mb-3">
-        <div className="font-semibold text-gray-800 mb-1">{title}</div>
+      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 flex-1 mb-3">
+        <div className="font-heading font-bold tracking-wide text-gray-800 mb-1">{title}</div>
         {children}
       </div>
     </div>
@@ -43,7 +45,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
   return (
     <div className="space-y-0">
       {/* 1. Rondo */}
-      <TimelineCard duration="10'" title="Rondo" accentClass="bg-gray-500">
+      <TimelineCard duration="10'" title="Rondo" accentClass="bg-gray-500" delay={0}>
         <div className="flex items-center gap-2 mt-1">
           <span className="text-sm font-medium text-gray-700">{session.rondoFormat}</span>
           <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
@@ -57,7 +59,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
 
       {/* 2. Sjef over ballen */}
       {session.sjefOverBallenFocus !== '—' && (
-        <TimelineCard duration="10'" title="Sjef over ballen" accentClass="bg-gray-500">
+        <TimelineCard duration="10'" title="Sjef over ballen" accentClass="bg-gray-500" delay={80}>
           <p className="text-sm text-gray-700 mt-1">{session.sjefOverBallenFocus}</p>
           <p className="text-xs text-gray-400 mt-1">
             Samme øvelse man/tirs/tors denne uken
@@ -66,7 +68,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
       )}
 
       {/* 3. Temaøvelse */}
-      <TimelineCard duration="25-30'" title="Temaøvelse" accentClass="bg-nff-blue">
+      <TimelineCard duration="25-30'" title="Temaøvelse" accentClass="bg-nff-blue" delay={160}>
         <div className="mt-1">
           <span className="inline-block text-xs bg-blue-50 text-nff-blue px-2 py-0.5 rounded-full mb-2">
             {RESISTANCE_LABELS[session.resistanceLevel]}
@@ -113,7 +115,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
       </TimelineCard>
 
       {/* 4. Kamptilpasset spill */}
-      <TimelineCard duration="30-35'" title="Kamptilpasset spill" accentClass="bg-nff-red">
+      <TimelineCard duration="30-35'" title="Kamptilpasset spill" accentClass="bg-nff-red" delay={240}>
         <div className="mt-1">
           {spillExercise?.sourceUrl ? (
             <a
@@ -141,7 +143,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
 
       {/* 5. RRR (conditional) */}
       {session.hasRRR && (
-        <TimelineCard duration="15-20'" title="Fysisk RRR" accentClass="bg-red-600">
+        <TimelineCard duration="15-20'" title="Fysisk RRR" accentClass="bg-red-600" delay={320}>
           <p className="text-sm text-gray-700 mt-1">
             {session.rrrDescription ?? 'Fysisk trening, dedikert trener.'}
           </p>
@@ -150,14 +152,14 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
       )}
 
       {/* 6. Oppsummering */}
-      <div className="flex gap-3">
+      <div className="flex gap-3 animate-fade-in-up" style={{ animationDelay: '320ms' }}>
         <div className="flex flex-col items-center">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center bg-green-600 text-white text-xs font-bold shrink-0">
+          <div className="w-10 h-10 rounded-full flex items-center justify-center bg-green-600 text-white text-[9px] font-bold shrink-0 whitespace-nowrap">
             5'
           </div>
         </div>
-        <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex-1 mb-3">
-          <div className="font-semibold text-green-800 mb-1">Oppsummering</div>
+        <div className="bg-green-50 border border-green-200 rounded-xl shadow-sm p-4 flex-1 mb-3">
+          <div className="font-heading font-bold tracking-wide text-green-800 mb-1">Oppsummering</div>
           <p className="text-sm text-green-700">{session.oppsummering}</p>
         </div>
       </div>

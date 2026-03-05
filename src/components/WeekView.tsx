@@ -47,7 +47,7 @@ export default function WeekView({ week, block, today, prevWeekId, nextWeekId }:
           </div>
         </div>
 
-        <h1 className="text-xl font-bold text-gray-900">
+        <h1 className="font-heading text-2xl font-bold uppercase tracking-wide text-gray-900">
           Uke {week.number} – {week.focus}
         </h1>
         <p className="text-sm text-gray-500 mt-0.5">{block.name}</p>
@@ -56,12 +56,10 @@ export default function WeekView({ week, block, today, prevWeekId, nextWeekId }:
       {/* 4-day grid */}
       {week.sessions.length > 0 ? (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mb-6">
-          {week.sessions.map((session) => (
-            <WeekDayCard
-              key={session.id}
-              session={session}
-              isToday={session.date === today}
-            />
+          {week.sessions.map((session, i) => (
+            <div key={session.id} className="animate-fade-in-up" style={{ animationDelay: `${i * 70}ms` }}>
+              <WeekDayCard session={session} isToday={session.date === today} />
+            </div>
           ))}
         </div>
       ) : (
@@ -72,7 +70,7 @@ export default function WeekView({ week, block, today, prevWeekId, nextWeekId }:
       )}
 
       {/* Block coaching points */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4">
+      <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm animate-fade-in-up" style={{ animationDelay: '280ms' }}>
         <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
           Ukens coaching-punkter
         </p>

@@ -58,12 +58,12 @@ export default function TodayPage() {
   return (
     <div>
       {/* Session header strip */}
-      <div className={`rounded-xl p-4 mb-5 text-white ${accent}`}>
+      <div className={`rounded-xl p-4 mb-5 text-white animate-fade-in-up ${accent}`}>
         <div className="text-xs font-medium opacity-80 mb-0.5">
           {block.nffCode} · Uke {week.number} – {week.focus}
         </div>
         <div className="flex items-baseline gap-2">
-          <div className="text-xl font-bold">
+          <div className="font-heading text-2xl font-bold uppercase tracking-wide">
             {DAY_LABELS[session.dayOfWeek]}
           </div>
           <div className="text-sm opacity-75">
@@ -77,7 +77,7 @@ export default function TodayPage() {
 
       {/* Session coaching focus (if any) */}
       {session.coachingFocus.length > 0 && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-5">
+        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-5 animate-fade-in-up" style={{ animationDelay: '80ms' }}>
           <p className="text-xs font-semibold text-yellow-800 uppercase tracking-wide mb-1">
             Coaching-fokus i dag
           </p>

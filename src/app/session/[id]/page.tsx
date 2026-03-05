@@ -79,7 +79,7 @@ export default function SessionPage({ params }: Props) {
         <div className="text-xs font-medium opacity-80 mb-0.5">
           {block.nffCode} · Uke {week.number} – {week.focus}
         </div>
-        <div className="text-xl font-bold">
+        <div className="font-heading text-2xl font-bold uppercase tracking-wide">
           {DAY_LABELS[session.dayOfWeek]}
         </div>
         <div className="text-sm opacity-80 mt-0.5">

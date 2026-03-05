@@ -1,13 +1,20 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Barlow_Condensed, DM_Sans } from 'next/font/google'
 import './globals.css'
 import BottomNav from '@/components/BottomNav'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-const inter = Inter({
+const barlowCondensed = Barlow_Condensed({
   subsets: ['latin'],
-  variable: '--font-inter',
+  weight: ['500', '600', '700', '800'],
+  variable: '--font-barlow',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
   display: 'swap',
 })
 
@@ -40,20 +47,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="no" className={inter.variable}>
+    <html lang="no" className={`${barlowCondensed.variable} ${dmSans.variable}`}>
       <body className="bg-gray-50 text-gray-900 font-sans antialiased">
         {/* App header */}
-        <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">
-          <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3">
+        <header className="bg-white border-b-2 border-skedsmo-red sticky top-0 z-40">
+          <div className="max-w-2xl mx-auto px-4 py-2.5 flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://skedsmofk.no/images/logo.png"
               alt="Skedsmo FK"
-              className="w-9 h-9 object-contain"
+              className="w-8 h-8 object-contain"
             />
             <div>
-              <div className="text-sm font-bold text-gray-900 leading-tight">Skedsmo Fotball</div>
-              <div className="text-xs text-gray-400">Treningsappen · 2013-laget</div>
+              <div className="font-heading text-base font-bold tracking-widest uppercase text-gray-900 leading-none">Skedsmo Fotball</div>
+              <div className="text-[10px] text-gray-400 tracking-widest uppercase mt-0.5">Treningsappen · G2013</div>
             </div>
           </div>
         </header>
