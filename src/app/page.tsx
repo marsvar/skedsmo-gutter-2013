@@ -106,8 +106,8 @@ export default function TodayPage() {
           className="w-7 h-7 rounded-md shrink-0"
         />
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-semibold text-gray-800 leading-tight">Husk å melde på spillere</p>
-          <p className="text-xs text-gray-400 mt-0.5">Sjekk påmeldinger til dagens økt i Hoopit</p>
+          <p className="text-xs font-semibold text-gray-800 leading-tight">Husk å melde deg på</p>
+          <p className="text-xs text-gray-400 mt-0.5">Påmelding til dagens økt gjøres i Hoopit</p>
         </div>
         <span className="text-gray-300 shrink-0">›</span>
       </a>
