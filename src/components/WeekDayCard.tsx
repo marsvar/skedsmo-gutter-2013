@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Session } from '@/data/types'
 import { DAY_LABELS, RESISTANCE_LABELS } from '@/data/types'
 import { getExercise } from '@/data/exercises'
+import { fmtShort } from '@/lib/dates'
 
 interface WeekDayCardProps {
   session: Session
@@ -13,11 +14,6 @@ const DAY_STYLES: Record<string, { border: string; header: string; badge: string
   tuesday:  { border: 'border-green-200',  header: 'bg-green-600 text-white',  badge: 'bg-green-100 text-green-700' },
   thursday: { border: 'border-orange-200', header: 'bg-orange-500 text-white', badge: 'bg-orange-100 text-orange-700' },
   saturday: { border: 'border-purple-200', header: 'bg-purple-600 text-white', badge: 'bg-purple-100 text-purple-700' },
-}
-
-function formatDate(iso: string): string {
-  const d = new Date(iso + 'T00:00:00')
-  return `${d.getDate()}. ${['jan','feb','mar','apr','mai','jun','jul','aug','sep','okt','nov','des'][d.getMonth()]}`
 }
 
 export default function WeekDayCard({ session, isToday }: WeekDayCardProps) {
@@ -34,7 +30,7 @@ export default function WeekDayCard({ session, isToday }: WeekDayCardProps) {
         {/* Header */}
         <div className={`px-3 py-2 text-sm font-bold flex justify-between items-center ${styles.header}`}>
           <span>{DAY_LABELS[session.dayOfWeek]}</span>
-          <span className="font-normal text-xs opacity-80">{formatDate(session.date)}</span>
+          <span className="font-normal text-xs opacity-80">{fmtShort(session.date)}</span>
         </div>
 
         {/* Body */}

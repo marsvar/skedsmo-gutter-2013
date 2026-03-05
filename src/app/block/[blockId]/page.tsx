@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, Target, Lightbulb } from 'lucide-react'
 import { getAllBlocks, getBlock } from '@/data/season'
 import { NFF_DESCRIPTIONS, DAY_LABELS, RESISTANCE_LABELS } from '@/data/types'
 import { getExercise } from '@/data/exercises'
+import { fmtShort } from '@/lib/dates'
 
 interface Props {
   params: { blockId: string }
@@ -20,7 +21,6 @@ export function generateMetadata({ params }: Props): Metadata {
   return { title: `${block.nffCode} – ${block.name} – Skedsmo` }
 }
 
-const MONTHS = ['jan','feb','mar','apr','mai','jun','jul','aug','sep','okt','nov','des']
 const WEEK_HEADER_COLORS = [
   { bg: 'bg-blue-600',   light: 'bg-blue-50 border-blue-100',   pill: 'bg-blue-100 text-blue-700' },
   { bg: 'bg-yellow-500', light: 'bg-yellow-50 border-yellow-100', pill: 'bg-yellow-100 text-yellow-700' },
@@ -28,11 +28,6 @@ const WEEK_HEADER_COLORS = [
 ]
 const DAY_DOT: Record<string, string> = {
   monday: 'bg-blue-500', tuesday: 'bg-green-500', thursday: 'bg-orange-400', saturday: 'bg-purple-500',
-}
-
-function fmt(iso: string) {
-  const d = new Date(iso + 'T00:00:00')
-  return `${d.getDate()}. ${MONTHS[d.getMonth()]}`
 }
 
 export default function BlockDetailPage({ params }: Props) {
@@ -86,7 +81,7 @@ export default function BlockDetailPage({ params }: Props) {
             </span>
             {!isPlaceholder && (
               <span className="text-xs text-gray-400">
-                {fmt(allDates[0])} – {fmt(allDates[allDates.length - 1])}
+                {fmtShort(allDates[0])} – {fmtShort(allDates[allDates.length - 1])}
               </span>
             )}
           </div>
@@ -179,7 +174,7 @@ export default function BlockDetailPage({ params }: Props) {
                           <span className="text-xs font-semibold text-gray-700">{DAY_LABELS[session.dayOfWeek]}</span>
                           {isToday && <span className="text-xs bg-skedsmo-red text-white px-1.5 py-0 rounded-full font-semibold ml-auto">I dag</span>}
                         </div>
-                        <p className="text-xs text-gray-400 mb-1">{fmt(session.date)}</p>
+                        <p className="text-xs text-gray-400 mb-1">{fmtShort(session.date)}</p>
                         {exercise && (
                           <p className="text-xs text-gray-600 leading-tight line-clamp-2">{exercise.name}</p>
                         )}

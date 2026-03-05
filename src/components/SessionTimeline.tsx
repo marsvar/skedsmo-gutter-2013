@@ -23,7 +23,7 @@ function TimelineCard({
   return (
     <div className="flex gap-3">
       <div className="flex flex-col items-center">
-        <div className={`min-w-[2rem] h-8 px-1.5 rounded-full flex items-center justify-center text-white text-[10px] font-bold shrink-0 ${accentClass}`}>
+        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-[9px] font-bold shrink-0 whitespace-nowrap ${accentClass}`}>
           {duration}
         </div>
         <div className="w-px flex-1 bg-gray-200 mt-1" />

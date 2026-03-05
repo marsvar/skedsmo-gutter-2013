@@ -10,6 +10,7 @@ import {
 } from '@/data/season'
 import { DAY_LABELS, NFF_DESCRIPTIONS } from '@/data/types'
 import SessionTimeline from '@/components/SessionTimeline'
+import { fmtLong } from '@/lib/dates'
 
 interface Props {
   params: { id: string }
@@ -35,11 +36,6 @@ const DAY_ACCENT: Record<string, string> = {
   tuesday:  'bg-green-600',
   thursday: 'bg-orange-500',
   saturday: 'bg-purple-600',
-}
-
-function formatDate(iso: string): string {
-  const d = new Date(iso + 'T00:00:00')
-  return `${d.getDate()}. ${['januar','februar','mars','april','mai','juni','juli','august','september','oktober','november','desember'][d.getMonth()]} ${d.getFullYear()}`
 }
 
 export default function SessionPage({ params }: Props) {
@@ -87,7 +83,7 @@ export default function SessionPage({ params }: Props) {
           {DAY_LABELS[session.dayOfWeek]}
         </div>
         <div className="text-sm opacity-80 mt-0.5">
-          {formatDate(session.date)}
+          {fmtLong(session.date)}
         </div>
         <div className="text-sm opacity-90 mt-1">
           {NFF_DESCRIPTIONS[block.nffCode]}

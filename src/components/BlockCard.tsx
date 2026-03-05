@@ -2,6 +2,7 @@ import type { Block } from '@/data/types'
 import { NFF_DESCRIPTIONS } from '@/data/types'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
+import { fmtShort } from '@/lib/dates'
 
 interface BlockCardProps {
   block: Block
@@ -15,11 +16,6 @@ export default function BlockCard({ block, isCurrent }: BlockCardProps) {
   const firstDate = allDates[0]
   const lastDate = allDates[allDates.length - 1]
   const isPlaceholder = allDates.length === 0
-
-  function fmt(iso: string) {
-    const d = new Date(iso + 'T00:00:00')
-    return `${d.getDate()}. ${['jan','feb','mar','apr','mai','jun','jul','aug','sep','okt','nov','des'][d.getMonth()]}`
-  }
 
   // Fallback date range: use the first/last week's dateRange strings
   const fallbackRange = block.weeks.length > 0
@@ -51,7 +47,7 @@ export default function BlockCard({ block, isCurrent }: BlockCardProps) {
           )}
         </div>
         <span className="text-xs text-gray-400 whitespace-nowrap">
-          {isPlaceholder ? fallbackRange : `${fmt(firstDate)} – ${fmt(lastDate)}`}
+          {isPlaceholder ? fallbackRange : `${fmtShort(firstDate)} – ${fmtShort(lastDate)}`}
         </span>
       </div>
 

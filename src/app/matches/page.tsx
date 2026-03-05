@@ -1,17 +1,7 @@
 import { getAllMatches, getUpcomingMatches, getPastMatches } from '@/data/matches'
 import { matchOutcome, matchOpponent } from '@/data/types'
 import type { Match } from '@/data/types'
-
-const MONTHS = ['jan','feb','mar','apr','mai','jun','jul','aug','sep','okt','nov','des']
-const DAYS_SHORT = ['søn','man','tir','ons','tor','fre','lør']
-
-function formatDate(iso: string): { day: string; short: string; full: string } {
-  const d = new Date(iso + 'T00:00:00')
-  const day = DAYS_SHORT[d.getDay()]
-  const short = `${d.getDate()}. ${MONTHS[d.getMonth()]}`
-  const full = `${day} ${d.getDate()}. ${MONTHS[d.getMonth()]} ${d.getFullYear()}`
-  return { day, short, full }
-}
+import { fmtMatchDate } from '@/lib/dates'
 
 const OUTCOME_STYLES: Record<string, string> = {
   win:  'bg-green-100 text-green-800 border-green-200',
@@ -23,7 +13,7 @@ const OUTCOME_LABELS: Record<string, string> = {
 }
 
 function MatchCard({ match, isPast }: { match: Match; isPast: boolean }) {
-  const { short, day } = formatDate(match.date)
+  const { short, day } = fmtMatchDate(match.date)
   const opponent = matchOpponent(match)
   const outcome = matchOutcome(match)
   const isHome = match.homeTeam.toLowerCase().includes('skedsmo')
