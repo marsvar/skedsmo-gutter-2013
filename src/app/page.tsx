@@ -96,18 +96,20 @@ export default function TodayPage() {
         href="https://app.hoopit.io"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-between gap-3 rounded-xl px-4 py-3 mb-5 animate-fade-in-up"
-        style={{ animationDelay: '130ms', backgroundColor: '#E4F7F7', borderLeft: '4px solid #0AAFAD' }}
+        className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3 mb-5 shadow-sm hover:shadow-md transition-shadow animate-fade-in-up"
+        style={{ animationDelay: '130ms' }}
       >
-        <div>
-          <p className="text-xs font-heading font-bold uppercase tracking-widest" style={{ color: '#087F7D' }}>
-            Husk påmelding
-          </p>
-          <p className="text-xs mt-0.5" style={{ color: '#0AAFAD' }}>
-            Åpne Hoopit og sjekk påmeldinger til økten
-          </p>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://www.hoopit.io/wp-content/uploads/cropped-Favicon-1-32x32.png"
+          alt="Hoopit"
+          className="w-7 h-7 rounded-md shrink-0"
+        />
+        <div className="flex-1 min-w-0">
+          <p className="text-xs font-semibold text-gray-800 leading-tight">Husk å melde på spillere</p>
+          <p className="text-xs text-gray-400 mt-0.5">Sjekk påmeldinger til dagens økt i Hoopit</p>
         </div>
-        <span className="text-lg font-bold shrink-0" style={{ color: '#0AAFAD' }}>→</span>
+        <span className="text-gray-300 shrink-0">›</span>
       </a>
 
       {/* Timeline */}
