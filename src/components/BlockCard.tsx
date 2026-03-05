@@ -7,7 +7,7 @@ interface BlockCardProps {
   isCurrent: boolean
 }
 
-const WEEK_COLORS = ['bg-blue-100 text-blue-700', 'bg-yellow-100 text-yellow-700', 'bg-orange-100 text-orange-700']
+const WEEK_COLORS = ['bg-blue-100 text-blue-700', 'bg-yellow-100 text-yellow-700', 'bg-orange-100 text-orange-700', 'bg-green-100 text-green-700', 'bg-purple-100 text-purple-700']
 
 export default function BlockCard({ block, isCurrent }: BlockCardProps) {
   const allDates = block.weeks.flatMap((w) => w.sessions.map((s) => s.date)).sort()

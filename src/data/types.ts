@@ -1,7 +1,7 @@
 // NFF Spillmodell phase codes
 export type NFFCode = 'A1' | 'A2' | 'A3' | 'F1' | 'F2' | 'F3'
 
-export type WeekFocus = 'Bli kjent' | 'Øk presset' | 'Integrasjon'
+export type WeekFocus = 'Bli kjent' | 'Øk presset' | 'Integrasjon' | 'Konsolidering' | 'Overgang'
 
 export type DayOfWeek = 'monday' | 'tuesday' | 'thursday' | 'saturday'
 
@@ -20,7 +20,7 @@ export interface Block {
   name: string
   nffCode: NFFCode
   ageGroup: string
-  durationWeeks: 3
+  durationWeeks: number
   learningObjectives: string[]
   coachingPoints: string[]
   coreExerciseId: string
@@ -30,7 +30,7 @@ export interface Block {
 export interface Week {
   id: string
   blockId: string
-  number: 1 | 2 | 3
+  number: number
   focus: WeekFocus
   dateRange: string        // e.g. "2–7 mars"
   sessions: Session[]
