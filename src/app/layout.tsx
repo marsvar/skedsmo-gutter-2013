@@ -1,6 +1,13 @@
 import type { Metadata, Viewport } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import BottomNav from '@/components/BottomNav'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Skedsmo Fotball – Treningsappen',
@@ -31,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="no">
+    <html lang="no" className={inter.variable}>
       <body className="bg-gray-50 text-gray-900 font-sans antialiased">
         {/* App header */}
         <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-40">

@@ -1574,6 +1574,14 @@ export function getSession(id: string) {
   return getAllSessions().find((s) => s.id === id)
 }
 
+export function getAllBlocks() {
+  return season2026.blocks
+}
+
+export function getBlock(blockId: string) {
+  return season2026.blocks.find((b) => b.id === blockId) ?? null
+}
+
 export function getWeekForSession(sessionId: string) {
   for (const block of season2026.blocks) {
     for (const week of block.weeks) {

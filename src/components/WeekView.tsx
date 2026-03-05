@@ -1,6 +1,8 @@
 import type { Week, Block } from '@/data/types'
 import Link from 'next/link'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import WeekDayCard from './WeekDayCard'
+import SwipeWeekWrapper from './SwipeWeekWrapper'
 
 interface WeekViewProps {
   week: Week
@@ -11,8 +13,11 @@ interface WeekViewProps {
 }
 
 export default function WeekView({ week, block, today, prevWeekId, nextWeekId }: WeekViewProps) {
+  const prevHref = prevWeekId ? `/week/${prevWeekId}/` : null
+  const nextHref = nextWeekId ? `/week/${nextWeekId}/` : null
+
   return (
-    <div>
+    <SwipeWeekWrapper prevHref={prevHref} nextHref={nextHref}>
       {/* Header with prev/next nav */}
       <div className="mb-5">
         <div className="flex items-center justify-between mb-1">
@@ -25,27 +30,19 @@ export default function WeekView({ week, block, today, prevWeekId, nextWeekId }:
 
           {/* Prev / Next */}
           <div className="flex items-center gap-1">
-            {prevWeekId ? (
-              <Link
-                href={`/week/${prevWeekId}/`}
-                className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-gray-800 transition-colors"
-                title="Forrige uke"
-              >
-                ‹
+            {prevHref ? (
+              <Link href={prevHref} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-gray-800 transition-colors" title="Forrige uke">
+                <ChevronLeft className="w-5 h-5" />
               </Link>
             ) : (
-              <span className="p-1.5 text-gray-200">‹</span>
+              <span className="p-1.5 text-gray-200"><ChevronLeft className="w-5 h-5" /></span>
             )}
-            {nextWeekId ? (
-              <Link
-                href={`/week/${nextWeekId}/`}
-                className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-gray-800 transition-colors"
-                title="Neste uke"
-              >
-                ›
+            {nextHref ? (
+              <Link href={nextHref} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-gray-800 transition-colors" title="Neste uke">
+                <ChevronRight className="w-5 h-5" />
               </Link>
             ) : (
-              <span className="p-1.5 text-gray-200">›</span>
+              <span className="p-1.5 text-gray-200"><ChevronRight className="w-5 h-5" /></span>
             )}
           </div>
         </div>
@@ -93,6 +90,6 @@ export default function WeekView({ week, block, today, prevWeekId, nextWeekId }:
           Se hele sesongplanen →
         </Link>
       </div>
-    </div>
+    </SwipeWeekWrapper>
   )
 }

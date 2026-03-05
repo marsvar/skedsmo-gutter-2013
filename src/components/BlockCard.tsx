@@ -1,6 +1,7 @@
 import type { Block } from '@/data/types'
 import { NFF_DESCRIPTIONS } from '@/data/types'
 import Link from 'next/link'
+import { ChevronRight } from 'lucide-react'
 
 interface BlockCardProps {
   block: Block
@@ -26,15 +27,16 @@ export default function BlockCard({ block, isCurrent }: BlockCardProps) {
     : ''
 
   return (
-    <div
-      className={`border rounded-xl p-4 bg-white transition-shadow hover:shadow-sm ${
+    <Link
+      href={`/block/${block.id}/`}
+      className={`block border rounded-xl p-4 bg-white transition-all hover:shadow-md active:scale-[0.99] ${
         isCurrent ? 'border-skedsmo-red ring-1 ring-skedsmo-red' : isPlaceholder ? 'border-gray-100 opacity-70' : 'border-gray-200'
       }`}
     >
       {/* Header row */}
       <div className="flex items-start justify-between gap-2 mb-2">
-        <div>
-          <span className="text-xs font-bold bg-blue-50 text-nff-blue px-2 py-0.5 rounded-full mr-2">
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <span className="text-xs font-bold bg-blue-50 text-nff-blue px-2 py-0.5 rounded-full">
             {block.nffCode}
           </span>
           {isCurrent && (
@@ -53,37 +55,25 @@ export default function BlockCard({ block, isCurrent }: BlockCardProps) {
         </span>
       </div>
 
-      <p className="font-semibold text-gray-800 text-sm mb-1">{block.name}</p>
-      <p className="text-xs text-gray-500 mb-3">{NFF_DESCRIPTIONS[block.nffCode]}</p>
-
-      {/* Week progression pills */}
-      <div className="flex gap-2 flex-wrap">
-        {block.weeks.map((week, i) => (
-          <Link
-            key={week.id}
-            href={`/week/${week.id}/`}
-            className={`text-xs px-2 py-0.5 rounded-full transition-opacity hover:opacity-75 ${WEEK_COLORS[i % WEEK_COLORS.length]}`}
-          >
-            Uke {week.number}: {week.focus}
-          </Link>
-        ))}
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex-1 min-w-0">
+          <p className="font-semibold text-gray-800 text-sm mb-0.5">{block.name}</p>
+          <p className="text-xs text-gray-500">{NFF_DESCRIPTIONS[block.nffCode]}</p>
+        </div>
+        <ChevronRight className="w-4 h-4 text-gray-300 flex-shrink-0 mt-0.5" />
       </div>
 
-      {/* Learning objectives */}
-      {block.learningObjectives.length > 0 && (
-        <div className="mt-3 pt-3 border-t border-gray-100">
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">
-            Læringsmål
-          </p>
-          <ul className="space-y-0.5">
-            {block.learningObjectives.map((obj) => (
-              <li key={obj} className="text-xs text-gray-600 flex gap-1">
-                <span className="text-nff-blue">–</span> {obj}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+      {/* Week progression pills */}
+      <div className="flex gap-1.5 flex-wrap mt-3">
+        {block.weeks.map((week, i) => (
+          <span
+            key={week.id}
+            className={`text-xs px-2 py-0.5 rounded-full ${WEEK_COLORS[i % WEEK_COLORS.length]}`}
+          >
+            Uke {week.number}: {week.focus}
+          </span>
+        ))}
+      </div>
+    </Link>
   )
 }
