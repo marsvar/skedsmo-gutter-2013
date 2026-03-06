@@ -1,7 +1,7 @@
 // NFF Spillmodell phase codes
 export type NFFCode = 'A1' | 'A2' | 'A3' | 'F1' | 'F2' | 'F3'
 
-export type WeekFocus = 'Bli kjent' | 'Øk presset' | 'Integrasjon' | 'Konsolidering' | 'Overgang'
+export type WeekFocus = 'Bli kjent' | 'Øk presset' | 'Integrasjon' | 'Konsolidering' | 'Overgang' | 'Påskebro'
 
 export type DayOfWeek = 'monday' | 'tuesday' | 'thursday' | 'saturday'
 

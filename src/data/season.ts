@@ -603,16 +603,16 @@ export const season2026: Season = {
     },
 
     // ═══════════════════════════════════════════════════════════════════════
-    // SESONG 1 – A1→A2: Fra ballvinst til prioritert rom (Mars–April 2026)
+    // TEMAPERIODE 1 – A1→A2: Fra ballvinst til prioritert rom (Mars–April 2026)
     // NB: Påske – ingen trening tors 2. april (Skjærtorsdag),
     //     lør 4. april (Påskelørdag) eller man 6. april (2. Påskedag)
     // ═══════════════════════════════════════════════════════════════════════
     {
       id: 'block-a1a2-2026',
-      name: 'Sesong 1: A1→A2 – Fra ballvinst til prioritert rom',
+      name: 'Temaperiode 1: A1→A2 – Fra ballvinst til prioritert rom',
       nffCode: 'A2',
       ageGroup: '2013',
-      durationWeeks: 3,
+      durationWeeks: 4,
       learningObjectives: [
         'Komme til prioritert rom etter ballvinst',
         'Timing på innløp og støttebevegelser',
@@ -627,15 +627,13 @@ export const season2026: Season = {
       ],
       coreExerciseId: 'ex-a1a2-19',
       weeks: [
-        // ===== UKE 1 "Bli kjent": 23–31 mars (inkl. påskebro) =====
-        // NB: Påske – ingen trening tors 2. april (Skjærtorsdag),
-        //     lør 4. april (Påskelørdag) eller man 6. april (2. Påskedag)
+        // ===== UKE 1 "Bli kjent": 23–28 mars =====
         {
           id: 'week-mars-4',
           blockId: 'block-a1a2-2026',
           number: 1,
           focus: 'Bli kjent',
-          dateRange: '23–31 mars',
+          dateRange: '23–28 mars',
           sessions: [
             {
               id: 'session-mars-w4-mon',
@@ -796,10 +794,20 @@ export const season2026: Season = {
               coachingFocus: ['A1→A2 i lagsamtale', 'Mye kampspill'],
               hasRRR: false,
             },
-            // Påskebro – man 30. og tirs 31. mars (tors 2. april = Skjærtorsdag = ingen trening)
+          ],
+        },
+
+        // ===== PÅSKEBRO: 30–31 mars (tors 2. april = Skjærtorsdag = ingen trening) =====
+        {
+          id: 'week-paaskebro',
+          blockId: 'block-a1a2-2026',
+          number: 2,
+          focus: 'Påskebro',
+          dateRange: '30–31 mars',
+          sessions: [
             {
               id: 'session-mars-w4-mon2',
-              weekId: 'week-mars-4',
+              weekId: 'week-paaskebro',
               date: '2026-03-30',
               dayOfWeek: 'monday',
               resistanceLevel: 'passive',
@@ -844,7 +852,7 @@ export const season2026: Season = {
             },
             {
               id: 'session-mars-w4-tue2',
-              weekId: 'week-mars-4',
+              weekId: 'week-paaskebro',
               date: '2026-03-31',
               dayOfWeek: 'tuesday',
               resistanceLevel: 'passive',
@@ -869,12 +877,12 @@ export const season2026: Season = {
           ],
         },
 
-        // ===== UKE 2 "Øk presset": 7–13 april (første uke etter påske) =====
+        // ===== UKE 3 "Øk presset": 7–13 april (første uke etter påske) =====
         // NB: 2. Påskedag 6. april – ingen trening. Første trening er tirsdag 7. april.
         {
           id: 'week-mars-5',
           blockId: 'block-a1a2-2026',
-          number: 2,
+          number: 3,
           focus: 'Øk presset',
           dateRange: '7–13 april',
           sessions: [
@@ -1040,11 +1048,11 @@ export const season2026: Season = {
           ],
         },
 
-        // ===== UKE 3 "Integrasjon": 14–20 april =====
+        // ===== UKE 4 "Integrasjon": 14–20 april =====
         {
           id: 'week-mars-6',
           blockId: 'block-a1a2-2026',
-          number: 3,
+          number: 4,
           focus: 'Integrasjon',
           dateRange: '14–20 april',
           sessions: [
@@ -1192,11 +1200,11 @@ export const season2026: Season = {
     },
 
     // ═══════════════════════════════════════════════════════════════════════
-    // SESONG 2 – A2→A3: Til prioritert rom og avslutning (Apr–Mai 2026)
+    // TEMAPERIODE 2 – A2→A3: Til prioritert rom og avslutning (Apr–Mai 2026)
     // ═══════════════════════════════════════════════════════════════════════
     {
       id: 'block-a2a3-2026',
-      name: 'Sesong 2: A2→A3 – Til prioritert rom og avslutning',
+      name: 'Temaperiode 2: A2→A3 – Til prioritert rom og avslutning',
       nffCode: 'A3',
       ageGroup: '2013',
       durationWeeks: 3,
@@ -1360,13 +1368,13 @@ export const season2026: Season = {
     },
 
     // ═══════════════════════════════════════════════════════════════════════
-    // SESONG 3 – F1: Presse, lede og kontrollere (Mai–Jun 2026)
+    // TEMAPERIODE 3 – F1: Presse, lede og kontrollere (Mai–Jun 2026)
     // NB: Kristi Himmelfartsdag tors 14. mai – ingen trening
     //     2. Pinsedag man 25. mai – ingen trening
     // ═══════════════════════════════════════════════════════════════════════
     {
       id: 'block-f1-2026',
-      name: 'Sesong 3: F1 – Presse, lede og kontrollere',
+      name: 'Temaperiode 3: F1 – Presse, lede og kontrollere',
       nffCode: 'F1',
       ageGroup: '2013',
       durationWeeks: 3,
@@ -1413,12 +1421,12 @@ export const season2026: Season = {
     },
 
     // ═══════════════════════════════════════════════════════════════════════
-    // SESONG 4 – F1→F2: Pressing og romkontroll (Jun–Aug 2026)
+    // TEMAPERIODE 4 – F1→F2: Pressing og romkontroll (Jun–Aug 2026)
     // NB: Sommerferie jul–aug – juster gruppestørrelse (~15 spillere)
     // ═══════════════════════════════════════════════════════════════════════
     {
       id: 'block-f1f2-2026',
-      name: 'Sesong 4: F1→F2 – Pressing og romkontroll',
+      name: 'Temaperiode 4: F1→F2 – Pressing og romkontroll',
       nffCode: 'F2',
       ageGroup: '2013',
       durationWeeks: 3,
@@ -1464,11 +1472,11 @@ export const season2026: Season = {
     },
 
     // ═══════════════════════════════════════════════════════════════════════
-    // SESONG 5 – F1→F2: Sperring av rom (Sep 2026)
+    // TEMAPERIODE 5 – F1→F2: Sperring av rom (Sep 2026)
     // ═══════════════════════════════════════════════════════════════════════
     {
       id: 'block-f2-2026',
-      name: 'Sesong 5: F1→F2 – Fra press til sperring',
+      name: 'Temaperiode 5: F1→F2 – Fra press til sperring',
       nffCode: 'F2',
       ageGroup: '2013',
       durationWeeks: 3,
@@ -1513,11 +1521,11 @@ export const season2026: Season = {
     },
 
     // ═══════════════════════════════════════════════════════════════════════
-    // SESONG 6 – F2→F3: Hindre avslutning og avslutning av sesong (Okt 2026)
+    // TEMAPERIODE 6 – F2→F3: Hindre avslutning og avslutning av sesong (Okt 2026)
     // ═══════════════════════════════════════════════════════════════════════
     {
       id: 'block-f3-2026',
-      name: 'Sesong 6: F2→F3 – Sperring og hindre avslutning',
+      name: 'Temaperiode 6: F2→F3 – Sperring og hindre avslutning',
       nffCode: 'F3',
       ageGroup: '2013',
       durationWeeks: 3,
