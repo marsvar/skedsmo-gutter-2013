@@ -6,6 +6,9 @@ import { getAllBlocks, getBlock } from '@/data/season'
 import { NFF_DESCRIPTIONS, DAY_LABELS, RESISTANCE_LABELS } from '@/data/types'
 import { getExercise } from '@/data/exercises'
 import { fmtShort } from '@/lib/dates'
+import { weekLoadCurve } from '@/lib/load'
+import { getAllMatches } from '@/data/matches'
+import type { IntensityLevel, GroupLabel } from '@/data/types'
 
 interface Props {
   params: { blockId: string }
@@ -30,6 +33,64 @@ const DAY_DOT: Record<string, string> = {
   monday: 'bg-blue-500', tuesday: 'bg-green-500', thursday: 'bg-orange-400', saturday: 'bg-purple-500',
 }
 
+const INTENSITY_CELL: Record<IntensityLevel, { bg: string; emoji: string; label: string }> = {
+  maks:    { bg: 'bg-red-100',    emoji: '🔴', label: 'Maks' },
+  høy:     { bg: 'bg-orange-100', emoji: '🟠', label: 'Høy' },
+  moderat: { bg: 'bg-yellow-100', emoji: '🟡', label: 'Moderat' },
+  lav:     { bg: 'bg-green-100',  emoji: '🟢', label: 'Lav' },
+  kampdag: { bg: 'bg-purple-100', emoji: '⚽', label: 'Kampdag' },
+}
+
+function LoadCurve({
+  curve,
+}: {
+  curve: { weekId: string; weekNumber: number; intensity: Record<GroupLabel, IntensityLevel> }[]
+}) {
+  const groups = ['A', 'B', 'C'] as const
+  return (
+    <div className="bg-white border border-gray-200 rounded-xl p-4 mb-6 shadow-sm">
+      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
+        Belastningskurve
+      </p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-xs">
+          <thead>
+            <tr>
+              <th className="text-left text-gray-400 font-normal pr-3 pb-2 w-16">Gruppe</th>
+              {curve.map((w) => (
+                <th key={w.weekId} className="text-center text-gray-400 font-normal pb-2 px-1 min-w-[40px]">
+                  <span className="block text-[10px]">Uke</span>
+                  <span className="block font-semibold text-gray-600">{w.weekNumber}</span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {groups.map((g) => (
+              <tr key={g}>
+                <td className="text-gray-500 font-semibold pr-3 py-1">Gr. {g}</td>
+                {curve.map((w) => {
+                  const cell = INTENSITY_CELL[w.intensity[g]]
+                  return (
+                    <td key={w.weekId} className="text-center py-1 px-1">
+                      <span
+                        className={`inline-block text-[11px] font-semibold rounded px-1.5 py-0.5 ${cell.bg}`}
+                        title={cell.label}
+                      >
+                        {cell.emoji}
+                      </span>
+                    </td>
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
 export default function BlockDetailPage({ params }: Props) {
   const today = new Date().toISOString().slice(0, 10)
   const block = getBlock(params.blockId)
@@ -43,6 +104,9 @@ export default function BlockDetailPage({ params }: Props) {
   const allDates = block.weeks.flatMap((w) => w.sessions.map((s) => s.date)).sort()
   const totalSessions = allDates.length
   const isPlaceholder = totalSessions === 0
+
+  const allMatches = getAllMatches()
+  const loadCurve = weekLoadCurve(block, allMatches)
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-4 pb-24">
@@ -131,6 +195,9 @@ export default function BlockDetailPage({ params }: Props) {
           </div>
         )}
       </div>
+
+      {/* Load curve */}
+      <LoadCurve curve={loadCurve} />
 
       {/* Weeks */}
       <div className="space-y-4">
