@@ -9,6 +9,8 @@ export type ResistanceLevel = 'none' | 'passive' | 'active' | 'full'
 
 export type GroupLabel = 'A' | 'B' | 'C'
 
+export type IntensityLevel = 'maks' | 'høy' | 'moderat' | 'lav' | 'kampdag'
+
 export interface Season {
   id: string
   year: number
@@ -128,6 +130,7 @@ export interface Match {
   duration: string       // "70 minutter"
   result?: MatchResult
   notes?: string
+  groups?: GroupLabel[]   // which groups play this match; if omitted, applies to all groups
 }
 
 // Helper: determine match outcome from Skedsmo's perspective
