@@ -2,6 +2,9 @@ import { resolveToday, getNextSession } from '@/lib/resolveToday'
 import { DAY_LABELS, NFF_DESCRIPTIONS } from '@/data/types'
 import SessionTimeline from '@/components/SessionTimeline'
 import Link from 'next/link'
+import { recommendedIntensity, intensityReason } from '@/lib/load'
+import { getAllMatches } from '@/data/matches'
+import type { IntensityLevel } from '@/data/types'
 
 const DAY_ACCENT: Record<string, string> = {
   monday:   'bg-blue-600',
@@ -15,6 +18,23 @@ const MONTHS_SHORT = ['jan','feb','mar','apr','mai','jun','jul','aug','sep','okt
 function formatShortDate(iso: string): string {
   const d = new Date(iso + 'T00:00:00')
   return `${d.getDate()}. ${MONTHS_SHORT[d.getMonth()]}`
+}
+
+const INTENSITY_STYLES: Record<IntensityLevel, { bg: string; text: string; label: string; emoji: string }> = {
+  maks:    { bg: 'bg-red-50',    text: 'text-red-700',    label: 'Maks',    emoji: '🔴' },
+  høy:     { bg: 'bg-orange-50', text: 'text-orange-700', label: 'Høy',     emoji: '🟠' },
+  moderat: { bg: 'bg-yellow-50', text: 'text-yellow-700', label: 'Moderat', emoji: '🟡' },
+  lav:     { bg: 'bg-green-50',  text: 'text-green-700',  label: 'Lav',     emoji: '🟢' },
+  kampdag: { bg: 'bg-purple-50', text: 'text-purple-700', label: 'Kampdag', emoji: '⚽' },
+}
+
+function IntensityBadge({ level }: { level: IntensityLevel }) {
+  const s = INTENSITY_STYLES[level]
+  return (
+    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${s.bg} ${s.text}`}>
+      {s.emoji} {s.label}
+    </span>
+  )
 }
 
 export default function TodayPage() {
@@ -53,6 +73,14 @@ export default function TodayPage() {
   }
 
   const { session, week, block } = ctx
+  const allMatches = getAllMatches()
+  const sessionDatesThisWeek = week.sessions.map((s) => s.date).sort()
+  const groups = ['A', 'B', 'C'] as const
+  const intensityData = groups.map((g) => ({
+    group: g,
+    level: recommendedIntensity(g, today, allMatches, sessionDatesThisWeek),
+    reason: intensityReason(g, today, allMatches),
+  }))
   const accent = DAY_ACCENT[session.dayOfWeek] ?? 'bg-gray-600'
 
   return (
@@ -111,6 +139,28 @@ export default function TodayPage() {
         </div>
         <span className="text-gray-300 shrink-0">›</span>
       </a>
+
+      {/* Intensitetsanbefaling per gruppe */}
+      <div
+        className="bg-white border border-gray-200 rounded-xl p-4 mb-5 shadow-sm animate-fade-in-up"
+        style={{ animationDelay: '160ms' }}
+      >
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
+          Anbefalt intensitet i dag
+        </p>
+        <div className="flex gap-2">
+          {intensityData.map(({ group, level, reason }) => (
+            <div
+              key={group}
+              title={reason}
+              className="flex-1 flex flex-col items-center gap-1.5 rounded-lg border border-gray-100 py-2.5 px-1"
+            >
+              <span className="text-xs font-bold text-gray-500">Gr. {group}</span>
+              <IntensityBadge level={level} />
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Timeline */}
       <SessionTimeline session={session} block={block} week={week} />
