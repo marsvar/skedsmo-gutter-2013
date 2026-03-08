@@ -4,23 +4,57 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Static HTML overview site for coaches at Skedsmo Fotball. The site structures training plans around NFF (Norges Fotballforbund) guidelines for youth football, with links to exercises on tiim.no.
+Mobile-first coaching app for Skedsmo Fotball. Helps coaches plan and execute structured training sessions aligned with NFF youth development principles. Data is driven by a Supabase PostgreSQL database.
 
-**Primary focus team**: Players born 2013 (12–13 år, transitioning from barnefotball to ungdomsfotball). The site also covers 10–12 år (7v7/9v9) and 13–16 år (11v11).
+**Primary focus team**: Players born 2013 (12–13 år, transitioning from barnefotball to ungdomsfotball).
 
 ## Running locally
 
-Open `index.html` directly in a browser — no build step needed. Tailwind CSS is loaded via CDN.
+Requires a PostgreSQL connection (Supabase). Copy `.env.local.example` or set env vars manually:
 
 ```bash
-npx serve .
-# or
-python3 -m http.server 8080
+DATABASE_URL=postgresql://...        # direct Supabase connection
+DATABASE_POOL_URL=postgresql://...   # Supabase pooler (used at runtime on Vercel)
+```
+
+```bash
+npm install
+npm run dev
+```
+
+**Database scripts:**
+```bash
+npm run db:migrate    # run Drizzle migrations against DATABASE_URL
+npm run db:seed       # seed initial season/session data
+node scripts/import-matches.mjs   # import matches from fotball.no
+node scripts/find-tournaments.mjs # discover tournament IDs
 ```
 
 ## Architecture
 
-Static HTML site with a phased multi-page transition. `index.html` remains the full legacy overview, while `arsplan.html`, `kalender.html`, and `okter.html` are introduced in phase 1. In phase 2, `kalender.html` and `okter.html` render from `data/content.json` via shared `assets/js/main.js`. Shared styles/scripts live in `assets/css/styles.css` and `assets/js/main.js`. Tailwind CSS loaded via CDN. No build process, no dependencies.
+Next.js 14 App Router with TypeScript and Tailwind CSS. Dynamic server-side rendering (`force-dynamic` on all pages — no static export). Deployed to Vercel.
+
+**Tech stack:** Next.js 14, React 18, TypeScript, Tailwind CSS, Drizzle ORM, `postgres` (Supabase PostgreSQL), Vercel Analytics + Speed Insights, Framer Motion, Radix UI Tabs, Lucide React, Google Fonts (Barlow Condensed + DM Sans).
+
+**Data flow:**
+- Database schema defined in `src/db/schema.ts` (Drizzle)
+- Async data-access functions in `src/data/db-*.ts`, wrapped in React `cache()` for per-request deduplication
+- Static fallback data in `src/data/season.ts`, `src/data/exercises.ts`, `src/data/matches.ts` (used if DB is unavailable)
+- Types in `src/data/types.ts`
+
+**Pages:**
+- `/` — Today's session with intensity recommendations
+- `/week` — Current week overview (swipe navigation)
+- `/week/[weekId]` — Specific week detail
+- `/block/[blockId]` — Block detail with load curve
+- `/season` — Full season/block list
+- `/session/[id]` — Individual session detail
+- `/matches` — Match list with results
+- `/referanse` — NFF framework and terminology reference
+
+**Key lib files:** `src/lib/load.ts` (intensity recommendations), `src/lib/resolveToday.ts` (date→session resolver), `src/lib/dates.ts`, `src/lib/utils.ts`.
+
+**Database migrations** live in `drizzle/`. Run with `npm run db:migrate`.
 
 ## NFF domain knowledge
 
@@ -135,4 +169,4 @@ Prefer exercises from tiim.no. Include: exercise name, player numbers, field siz
 - Logo URL (official site): `https://skedsmofk.no/images/logo.png`
 - Favicon URL (32px): `https://skedsmofk.no/favicons/favicon-32.png`
 
-Use these for lightweight visual branding in static pages when appropriate.
+Use these for branding in the app.

@@ -250,7 +250,7 @@ Tilsvarer NFF A2-A3-kategoriene: bevegelse inn i rom, avslutning, innlegg.
 | [Score mål med overtall, 3v2 + keeper](https://tiim.no/ovelse/score-mal-med-overtall-3v2-keeper) | 3v2 overtall |
 | [Score eller hindre mål i relevante formasjoner](https://tiim.no/ovelse/score-eller-hindre-mal-i-relevante-formasjoner) | Formasjonsspesifikk |
 | [Score/hindre mål i relevante formasjoner](https://tiim.no/ovelse/score-hindre-mal-i-relevante-formasjoner) | Formasjonsspesifikk v2 |
-| [Avslutningskonkurranse](https://tiim.no/ovelse/avslutningskonkurranse) | Avslutningskonkurranse |
+| [Avslutningskonkurranse](https://tiim.no/ovelse/avslutningskonkurranse) | Konkurranse i avslutning fra ulike posisjoner og vinkler |
 | [Frankrike-øvelsen](https://tiim.no/ovelse/frankrike-ovelsen) | Avslutning fra ulike vinkler |
 | [Caro - innlegg og avslutning i boks](https://tiim.no/ovelse/ny-caro-innlegg-og-avslutning-i-boks) | Innlegg + avslutning |
 | [Innlegg - avslutning](https://tiim.no/ovelse/innlegg-avslutning) | Innlegg + avslutning |
