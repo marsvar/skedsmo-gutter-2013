@@ -109,39 +109,60 @@ function parsePage(html) {
     }
   })
 
-  // ── Coaching points / Målsetting ──────────────────────────────────────────
-  // Structure: <h2 class="title">...Målsetting</h2><div class="content">...<ul><li>...</li></ul>...</div>
+  // ── Coaching points / Målsetting or Læringsmomenter ─────────────────────
+  // Three formats on tiim.no:
+  //   A) h2.title "Målsetting" → div.content → ul > li  — situasjonsøvelse pages
+  //   B) h2.title "Målsetting" → div.content → p        — prepp'n pages
+  //   C) h2 (no class) "Læringsmomenter" → div.content → ul > li  — spill/øvelse pages
   const coachingPoints = []
-  $('h2.title').each((_, h2) => {
-    if ($(h2).text().includes('Målsetting')) {
-      $(h2).next('div.content').find('li').each((_, li) => {
-        const pt = $(li).text().trim()
-        if (pt && pt.length > 5) coachingPoints.push(pt)
+  $('h2').each((_, h2) => {
+    const txt = $(h2).text().trim()
+    if (!txt.includes('Målsetting') && !txt.includes('ringsmomenter')) return
+    const content = $(h2).next('div.content')
+    // Try li items first
+    content.find('li').each((_, li) => {
+      const pt = $(li).text().trim()
+      if (pt && pt.length > 5) coachingPoints.push(pt)
+    })
+    // Fall back to paragraphs
+    if (coachingPoints.length === 0) {
+      content.find('p').each((_, p) => {
+        const pt = $(p).text().trim()
+        // Skip header paragraphs like "Målsetting X: label" or "Læringsmomenter ballfører:"
+        if (pt && pt.length > 5 && !pt.startsWith('Målsetting ') && !pt.includes('ringsmomenter ')) {
+          coachingPoints.push(pt)
+        }
       })
     }
   })
 
   // ── Description / Organisering ────────────────────────────────────────────
-  // Structure: <h2 class="title">...Organisering</h2><div class="content"><ul><li>...</li></ul></div>
+  // Both h2.title and plain h2 "Organisering" sections
   let description = ''
-  $('h2.title').each((_, h2) => {
-    if ($(h2).text().includes('Organisering')) {
-      const bullets = []
-      $(h2).next('div.content').find('li').each((_, li) => {
-        const t = $(li).text().trim()
-        if (t) bullets.push(t)
-      })
-      if (bullets.length > 0) description = bullets.join(' ')
+  $('h2').each((_, h2) => {
+    if (!$(h2).text().includes('Organisering')) return
+    const bullets = []
+    $(h2).next('div.content').find('li').each((_, li) => {
+      const t = $(li).text().trim()
+      if (t) bullets.push(t)
+    })
+    // Also try plain text paragraph if no list items
+    if (bullets.length === 0) {
+      const txt = $(h2).next('div.content').text().trim()
+      if (txt) bullets.push(txt)
     }
+    if (bullets.length > 0) description = bullets.join(' ')
   })
 
   return { topics, coachingPoints, description }
 }
 
 // ── Fetch exercises from DB ───────────────────────────────────────────────────
+// NOTE: coaching_points is stored as a JSONB *string* (double-encoded by the import
+// script's JSON.stringify). An empty list appears as JSONB string '"[]"' (not array '[]').
 const where = ALL
   ? sql`source_url LIKE 'https://tiim.no/ovelse/%'`
-  : sql`source_url LIKE 'https://tiim.no/ovelse/%' AND (coaching_points = '[]' OR coaching_points IS NULL)`
+  : sql`source_url LIKE 'https://tiim.no/ovelse/%' AND (coaching_points = '"[]"' OR coaching_points IS NULL)`
 
 const exercises = await sql`
   SELECT id, name, nff_code, source_url, coaching_points, description

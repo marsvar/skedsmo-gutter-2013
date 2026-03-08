@@ -1,5 +1,6 @@
 import { getSeason } from '@/data/db-season'
 import { getAllExercises } from '@/data/db-exercises'
+import { exercises as staticExercises } from '@/data/exercises'
 import { notFound } from 'next/navigation'
 import { SessionEditForm } from '@/components/admin/SessionEditForm'
 
@@ -10,7 +11,15 @@ export default async function AdminSessionEditPage({
 }: {
   params: { id: string }
 }) {
-  const [season, exercises] = await Promise.all([getSeason(), getAllExercises()])
+  const [season, dbExercises] = await Promise.all([getSeason(), getAllExercises()])
+
+  // Merge: static exercises provide the base; DB exercises override/extend by ID.
+  // This ensures the selects are always populated even before exercises are seeded.
+  const exerciseMap = new Map([
+    ...staticExercises.map((e) => [e.id, e] as const),
+    ...dbExercises.map((e) => [e.id, e] as const),
+  ])
+  const exercises = Array.from(exerciseMap.values())
 
   // Find the session in the nested tree
   let session = null

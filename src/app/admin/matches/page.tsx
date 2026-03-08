@@ -39,7 +39,7 @@ function MatchTable({ matches }: { matches: Awaited<ReturnType<typeof getAllMatc
   if (matches.length === 0) return null
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden mb-4">
+    <div className="bg-white/5 border border-white/10 rounded-xl overflow-x-auto mb-4">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-white/10 text-white/40 text-xs uppercase tracking-wider">

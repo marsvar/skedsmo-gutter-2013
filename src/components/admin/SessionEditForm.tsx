@@ -1,6 +1,6 @@
 'use client'
 
-import { useForm, useFieldArray } from 'react-hook-form'
+import { useForm, useFieldArray, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SessionUpdateSchema, type SessionUpdateInput } from '@/lib/admin/schemas'
 import type { Session } from '@/data/types'
@@ -150,14 +150,18 @@ export function SessionEditForm({
         </FormRow>
 
         <FormRow label="Coaching focus (én per linje)">
-          <Textarea
-            placeholder="Behandle ballen trygt&#10;Spill fremover raskt"
-            rows={3}
-            {...register('coachingFocus', {
-              setValueAs: (v: string | string[]) =>
-                Array.isArray(v) ? v : v.split('\n').filter(Boolean),
-            })}
-            defaultValue={session.coachingFocus.join('\n')}
+          <Controller
+            name="coachingFocus"
+            control={control}
+            render={({ field }) => (
+              <Textarea
+                placeholder="Behandle ballen trygt&#10;Spill fremover raskt"
+                rows={3}
+                value={Array.isArray(field.value) ? field.value.join('\n') : (field.value ?? '')}
+                onChange={(e) => field.onChange(e.target.value.split('\n'))}
+                onBlur={field.onBlur}
+              />
+            )}
           />
         </FormRow>
 
