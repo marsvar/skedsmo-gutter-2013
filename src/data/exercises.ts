@@ -1,0 +1,323 @@
+import type { Exercise, GroupLabel } from './types'
+
+export const exercises: Exercise[] = [
+  {
+    id: 'ex-a1a2-20',
+    name: 'A1-A2 Situasjonsøvelse nr. 20',
+    description:
+      '3 angripere skal nå paret på motsatt side. Jobb med timing og pasningsvinkel.',
+    nffCode: 'A1',
+    sourceUrl: 'https://tiim.no/ovelse/a1-a2-situasjonsovelse-20',
+    playersMin: 8,
+    playersMax: 20,
+    durationMin: 25,
+    area: '30×20m',
+    ageGroups: ['9v9', '11v11'],
+    tags: ['pasning', 'mottak', 'støtte', 'spille-ut-bakfra'],
+    coachingPoints: [
+      'Åpen kroppsstilling før mottak',
+      'Beveg deg etter pasning',
+      'Skap triangler',
+      'Første touch fremover',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: 2,    defenderCount: 2, notes: 'Smalt rom, maks 2 touch' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 1, notes: 'Standard versjon, 1 passiv forsvarer' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 0, notes: 'Bredt rom, ingen motstand' },
+    },
+  },
+  {
+    id: 'ex-a1a2-21',
+    name: 'A1-A2 Situasjonsøvelse nr. 21',
+    description:
+      'Keeper + 3 forsvarere + 3 angripere vs pressende. Rød dribler over sidelinje for poeng. Blå scorer ved ballvinst.',
+    nffCode: 'A1',
+    sourceUrl: 'https://tiim.no/ovelse/a1-a2-situasjonsovelse-21',
+    playersMin: 10,
+    playersMax: 20,
+    durationMin: 25,
+    area: '40×30m',
+    ageGroups: ['9v9', '11v11'],
+    tags: ['pressing', 'spille-ut-bakfra', 'besittelse'],
+    coachingPoints: [
+      'Bruk keeper aktivt i oppbygning',
+      'Finn den frie mannen etter pressing',
+      'Spillretning: alltid fremover om mulig',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: 2,    defenderCount: 3, notes: '3 pressende + tidspress, smal bane' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 2, notes: 'Standard: 2 pressende' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 2, notes: '2 pressende, mer rom på sidene' },
+    },
+  },
+  {
+    id: 'ex-a1a2-24',
+    name: 'A1-A2 Situasjonsøvelse nr. 24',
+    description:
+      'Keeper + 4-back + 2 CM (7 spillere) bryter mot 4 pressende. Mål = komme til prioritert rom.',
+    nffCode: 'A1',
+    sourceUrl: 'https://tiim.no/ovelse/a1-a2-situasjonsovelse-24',
+    playersMin: 11,
+    playersMax: 22,
+    durationMin: 25,
+    area: '50×40m',
+    ageGroups: ['11v11'],
+    tags: ['spille-ut-bakfra', 'støtte', 'besittelse'],
+    coachingPoints: [
+      'Backar kan overlappe fremover',
+      'CM tilbyr seg mellom linjene',
+      'Bredde og dybde samtidig',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: 2,    defenderCount: 5, notes: '5 pressende, backar kan overlappe' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 4, notes: 'Standard: 4 pressende' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 3, notes: '3 pressende, mer rom på sidene' },
+    },
+  },
+  {
+    id: 'ex-a1a2-spill-30',
+    name: 'A1-A2 Spill nr. 30',
+    description:
+      '11v11 på 70×50m. Alltid 3 linjer. Poeng for gjennomspilling av midtbanelinja.',
+    nffCode: 'A1',
+    sourceUrl: 'https://tiim.no/ovelse/a1-a2-spill-30',
+    playersMin: 14,
+    playersMax: 22,
+    durationMin: 30,
+    area: '70×50m',
+    ageGroups: ['9v9', '11v11'],
+    tags: ['kamptilpasset', 'besittelse', 'spille-ut-bakfra'],
+    coachingPoints: [
+      'Hold 3 linjer til enhver tid',
+      'Poeng for å bryte midtbanelinja',
+      'Trykk fremover etter ballvinst',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: 2,    defenderCount: 0, notes: 'Maks 2 touch i eget felt' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 0, notes: 'Standard' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 0, notes: 'Joker for angripende lag' },
+    },
+  },
+  {
+    id: 'ex-a2a3-35',
+    name: 'A2-A3 Situasjonsøvelse nr. 35',
+    description: 'To soner + permanent angriper i midten, 25×50m.',
+    nffCode: 'A2',
+    sourceUrl: 'https://tiim.no/ovelse/a2-a3-situasjonsovelse-35',
+    playersMin: 10,
+    playersMax: 18,
+    durationMin: 25,
+    area: '25×50m',
+    ageGroups: ['9v9', '11v11'],
+    tags: ['avslutning', 'rom', 'støtte'],
+    coachingPoints: [
+      'Timing på innløp',
+      'Permanent angriper binder forsvar',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: 2,    defenderCount: 2, notes: 'Redusert sone' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 1, notes: 'Standard' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 1, notes: 'Stor sone, passiv forsvarer' },
+    },
+  },
+  // ── A1-A2 nr. 19 ─────────────────────────────────────────────────────────
+  {
+    id: 'ex-a1a2-19',
+    name: 'A1-A2 Situasjonsøvelse nr. 19',
+    description: 'Situasjonsøvelse A1-A2 – gjennomspilling og støttebevegelse bakfra.',
+    nffCode: 'A1',
+    sourceUrl: 'https://tiim.no/ovelse/a1-a2-situasjonsovelse-19',
+    playersMin: 8,
+    playersMax: 18,
+    durationMin: 25,
+    area: '30×20m',
+    ageGroups: ['9v9', '11v11'],
+    tags: ['pasning', 'mottak', 'gjennomspilling', 'støtte'],
+    coachingPoints: [
+      'Åpen kroppsstilling før mottak',
+      'Beveg deg etter pasning – ikke stå stille',
+      'Skap pasningsvinkel på riktig side',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: 2,    defenderCount: 2, notes: 'Smalt rom, 2 touch, 2 forsvarere' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 1, notes: 'Standard versjon, 1 passiv forsvarer' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 0, notes: 'Bredt rom, ingen motstand – fokus på mønster' },
+    },
+  },
+  // ── A2-A3 spill ──────────────────────────────────────────────────────────
+  {
+    id: 'ex-a2a3-spill',
+    name: 'A2-A3 Spill – Til prioritert rom og avslutning',
+    description: 'Spill med fokus på å komme til prioritert rom og avslutte. Dobbelpoeng for mål innen 4 sekunder etter å ha nådd prioritert rom.',
+    nffCode: 'A3',
+    sourceUrl: null,
+    playersMin: 12,
+    playersMax: 22,
+    durationMin: 30,
+    area: '60×45m',
+    ageGroups: ['9v9', '11v11'],
+    tags: ['kamptilpasset', 'avslutning', 'rom', 'a3'],
+    coachingPoints: [
+      'Kom til prioritert rom med fart',
+      'Avslutt tidlig – ikke vent på perfekt posisjon',
+      'Timing på støttespillet rundt avslutteren',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: 2,    defenderCount: 0, notes: 'Maks 2 touch i avslutningssone' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 0, notes: 'Standard' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 0, notes: 'Ekstra angriper (joker) i avslutningssonen' },
+    },
+  },
+  // ── F1 situasjon ─────────────────────────────────────────────────────────
+  {
+    id: 'ex-f1-situasjon',
+    name: 'F1 Situasjonsøvelse – Organisert pressing',
+    description: 'Triggerpressing: rød prøver å vinne ballen ved koordinert pressing. Trigger = bakpass til keeper. Blå scorer ved ballvinst i sonen.',
+    nffCode: 'F1',
+    sourceUrl: null,
+    playersMin: 10,
+    playersMax: 20,
+    durationMin: 25,
+    area: '40×35m',
+    ageGroups: ['9v9', '11v11'],
+    tags: ['pressing', 'ballvinst', 'f1', 'koordinering'],
+    coachingPoints: [
+      'Trigger for press: bakpass til keeper eller tilbake',
+      'Kurve i pressing – steng innsida, press mot sidelinje',
+      'Kommunisér «press!» – hele laget følger',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: 2,    defenderCount: 0, notes: 'Trigger på 1-touch bakpass, smal bane' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 0, notes: 'Standard – trigger på sakte tilbakespill' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 0, notes: 'Bredt rom, 2 triggere – ekstra tid til å reagere' },
+    },
+  },
+  // ── F1 spill ─────────────────────────────────────────────────────────────
+  {
+    id: 'ex-f1-spill',
+    name: 'F1 Spill – Press og kontringsangrep',
+    description: 'Spill med pressingsregler. Dobbelpoeng for mål innen 6 sekunder etter ballvinst via organisert press.',
+    nffCode: 'F1',
+    sourceUrl: null,
+    playersMin: 14,
+    playersMax: 22,
+    durationMin: 30,
+    area: '60×45m',
+    ageGroups: ['9v9', '11v11'],
+    tags: ['kamptilpasset', 'pressing', 'kontringsangrep', 'f1'],
+    coachingPoints: [
+      'Press som lag – ikke individ',
+      'Vinne ballen høyt gir dobbeltpoeng',
+      'Rask overgang etter ballvinst – ikke stopp',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: 2,    defenderCount: 0, notes: 'Smal bane, maks 2 touch' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 0, notes: 'Standard' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 0, notes: 'Joker for pressende lag' },
+    },
+  },
+  // ── F1-F2 situasjon ───────────────────────────────────────────────────────
+  {
+    id: 'ex-f1f2-situasjon',
+    name: 'F1-F2 Situasjonsøvelse – Fra press til sperring av rom',
+    description: 'Etter ballvinst via press organiserer laget seg for å sperre prioriterte rom. Motstanderne prøver å spille seg ut.',
+    nffCode: 'F2',
+    sourceUrl: null,
+    playersMin: 12,
+    playersMax: 22,
+    durationMin: 25,
+    area: '45×40m',
+    ageGroups: ['11v11'],
+    tags: ['pressing', 'romkontroll', 'f2', 'defensiv-organisering'],
+    coachingPoints: [
+      'Press → senk tyngdepunktet og sperre rom',
+      'Blokkér pasningslinjene bakover',
+      'Horisontal kompakthet – hold linjene tette',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: 2,    defenderCount: 0, notes: 'Smal bane, hurtig reorganisering etter press' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 0, notes: 'Standard' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 0, notes: 'Bredt rom, ekstra tid til å reorganisere' },
+    },
+  },
+  // ── F1-F2 spill ───────────────────────────────────────────────────────────
+  {
+    id: 'ex-f1f2-spill',
+    name: 'F1-F2 Spill – Romkontroll',
+    description: 'Spill med fokus på romkontroll. Poeng for å hindre motstander å nå halvrommet tre påfølgende ganger.',
+    nffCode: 'F2',
+    sourceUrl: null,
+    playersMin: 14,
+    playersMax: 22,
+    durationMin: 30,
+    area: '65×50m',
+    ageGroups: ['9v9', '11v11'],
+    tags: ['kamptilpasset', 'romkontroll', 'defensiv', 'f2'],
+    coachingPoints: [
+      'Hold linjene lave og kompakte',
+      'Lukk halvrommet – ingen fri mellom linjene',
+      'Ikke la motstander snu med ball i rom',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: null, defenderCount: 0, notes: 'Smal bane, tett organisering' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 0, notes: 'Standard' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 0, notes: 'Joker for forsvarende lag' },
+    },
+  },
+  // ── F2-F3 situasjon ───────────────────────────────────────────────────────
+  {
+    id: 'ex-f2f3-situasjon',
+    name: 'F2-F3 Situasjonsøvelse – Sperre skuddrom og hindre avslutning',
+    description: 'Forsvarerne sperrer skuddbaner og hindrer avslutning. Angriperne kombinerer for å åpne skuddrom. Øv i 6-boks og 16-meter.',
+    nffCode: 'F3',
+    sourceUrl: null,
+    playersMin: 10,
+    playersMax: 20,
+    durationMin: 25,
+    area: '35×30m',
+    ageGroups: ['9v9', '11v11'],
+    tags: ['avslutning', 'blokkering', 'f3', 'keeper'],
+    coachingPoints: [
+      'Blokker skuddlinja – ikke ballen',
+      'Press avslutteren tidlig, gi ikke rom',
+      'Keeper: dominer boksen, kommunisér',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: 2,    defenderCount: 3, notes: '3 kombinerende angripere, smal boks' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 2, notes: 'Standard – 2 forsvarere + keeper' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 2, notes: 'Stor boks, passiv keeper – fokus på blokkeringsteknikk' },
+    },
+  },
+  // ── F2-F3 spill ───────────────────────────────────────────────────────────
+  {
+    id: 'ex-f2f3-spill',
+    name: 'F2-F3 Spill – Defensiv organisering og blokkering',
+    description: 'Spill med defensivt fokus. Defensivt lag scorer poeng for å hindre avslutning i tre påfølgende angrep. Angripende lag scorer normalt.',
+    nffCode: 'F3',
+    sourceUrl: null,
+    playersMin: 14,
+    playersMax: 22,
+    durationMin: 30,
+    area: '65×50m',
+    ageGroups: ['9v9', '11v11'],
+    tags: ['kamptilpasset', 'defensiv', 'f3', 'blokkering'],
+    coachingPoints: [
+      'Lav blokk, kompakt defensiv form',
+      'Kommuniser blokkering tidlig',
+      'Vinn andreduellen – ikke gi opp etter første redning',
+    ],
+    groupVariants: {
+      A: { spaceModifier: 'small',    touchLimit: null, defenderCount: 0, notes: 'Smal bane, tett forsvar' },
+      B: { spaceModifier: 'standard', touchLimit: null, defenderCount: 0, notes: 'Standard' },
+      C: { spaceModifier: 'large',    touchLimit: null, defenderCount: 0, notes: 'Joker for forsvarende lag ved cornersituasjoner' },
+    },
+  },
+]
+
+export function getExercise(id: string): Exercise | undefined {
+  return exercises.find((e) => e.id === id)
+}
+
+export function getExercisesByCode(code: string): Exercise[] {
+  return exercises.filter((e) => e.nffCode === code)
+}

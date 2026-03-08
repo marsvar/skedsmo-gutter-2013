@@ -1,0 +1,1649 @@
+import type { Season } from './types'
+
+export const season2026: Season = {
+  id: 'season-2026',
+  year: 2026,
+  blocks: [
+    {
+      id: 'block-mars-2026',
+      name: 'Forsesong: Vinne ball og spille fremover',
+      nffCode: 'A1',
+      ageGroup: '2013',
+      durationWeeks: 3,
+      learningObjectives: [
+        'Spille forbi pressing bakfra',
+        'Skape pasningsvinkler og støttespill',
+        'Bruke keeper aktivt i oppbygning',
+        'Komme til prioritert rom etter ballvinst',
+      ],
+      coachingPoints: [
+        'Åpen kroppsstilling',
+        'Beveg deg etter pasning',
+        'Skap triangler',
+        'Første touch fremover',
+      ],
+      coreExerciseId: 'ex-a1a2-20',
+      weeks: [
+        // ===== UKE 1: 2–7 mars =====
+        {
+          id: 'week-mars-1',
+          blockId: 'block-mars-2026',
+          number: 1,
+          focus: 'Bli kjent',
+          dateRange: '2–7 mars',
+          sessions: [
+            {
+              id: 'session-mars-w1-mon',
+              weekId: 'week-mars-1',
+              date: '2026-03-02',
+              dayOfWeek: 'monday',
+              resistanceLevel: 'none',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: 'Pasning & mottak',
+              temaExerciseId: 'ex-a1a2-20',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Smalt rom, uten motstand',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 0,
+                  notes: 'Smalt rom, jobb med timing og vinkel',
+                },
+                {
+                  group: 'B',
+                  description: 'Standard, uten motstand',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 0,
+                  notes: 'Standard versjon uten motstand',
+                },
+                {
+                  group: 'C',
+                  description: 'Bredt rom, god tid',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 0,
+                  notes: 'Bredt rom, ekstra tid til repetisjon',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '7v7',
+                constraint: 'Poeng for gjennomspilling av midtbanelinja',
+                notes: 'Forenklet versjon. Alltid 3 linjer.',
+              },
+              oppsummering: 'Hva hjelper oss å nå de på andre siden?',
+              coachingFocus: ['Timing', 'Pasningsvinkel', 'Beveg deg etter pasning'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-mars-w1-tue',
+              weekId: 'week-mars-1',
+              date: '2026-03-03',
+              dayOfWeek: 'tuesday',
+              resistanceLevel: 'passive',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: 'Pasning & mottak',
+              temaExerciseId: 'ex-a1a2-20',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: '+1 passiv forsvarer, smalt',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 1,
+                  notes: 'Velg pasningslinje forbi forsvareren, 2 touch',
+                },
+                {
+                  group: 'B',
+                  description: '+1 passiv forsvarer',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Angriperne må velge pasningslinje forbi forsvareren',
+                },
+                {
+                  group: 'C',
+                  description: 'Passiv forsvarer, mye rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Gi mer tid til gr. C',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '9v9',
+                constraint: 'Dobbeltpoeng for mål etter gjennomspilling av midtbanelinja i én touch',
+                notes: '9v9 med fokus på 3 linjer',
+              },
+              oppsummering: 'Nevn en god pasningslinje vi skapte.',
+              coachingFocus: ['Velg riktig pasningslinje', 'Første touch fremover'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-mars-w1-thu',
+              weekId: 'week-mars-1',
+              date: '2026-03-05',
+              dayOfWeek: 'thursday',
+              resistanceLevel: 'active',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: 'Pasning & mottak',
+              temaExerciseId: 'ex-a1a2-20',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Aktiv forsvarer × 2',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 2,
+                  notes: '2 aktive forsvarere, 2 touch max',
+                },
+                {
+                  group: 'B',
+                  description: 'Aktiv forsvarer',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Aktiv forsvarer. Suksess = 5 vellykkede gjennomspillinger',
+                },
+                {
+                  group: 'C',
+                  description: 'Semi-aktiv forsvarer',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Semi-aktiv forsvarer, bred bane',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '9v9',
+                constraint: 'Full spillform med 3 linjer. Gjennomgå A1-tema i halvtidspause.',
+                notes: '9v9 / 11v11 avhengig av oppmøte',
+              },
+              oppsummering: 'Hva hjelper pasningslinjen å åpne seg?',
+              coachingFocus: ['Skap pasningslinjer under press', 'Holder 3 linjer'],
+              hasRRR: true,
+              rrrDescription: 'Hurtighet og eksplosivitet, 20 min. Dedikert trener.',
+            },
+            {
+              id: 'session-mars-w1-sat',
+              weekId: 'week-mars-1',
+              date: '2026-03-07',
+              dayOfWeek: 'saturday',
+              resistanceLevel: 'full',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: '—',
+              temaExerciseId: 'ex-a1a2-20',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Hurtigrunde, høy intensitet',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 1,
+                  notes: 'Korte serier, høy intensitet',
+                },
+                {
+                  group: 'B',
+                  description: 'Hurtigrunde standard',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Hurtigrunde',
+                },
+                {
+                  group: 'C',
+                  description: 'Hurtigrunde, brede',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Hurtigrunde, bredt rom',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '5v5 / 7v7',
+                constraint: 'Mini-turnering. Mange kamper, lite venting.',
+                notes: 'A1-tema i lagsamtale',
+              },
+              oppsummering: 'Hva tok vi med oss fra uke 1?',
+              coachingFocus: ['A1-tema i lagsamtale', 'Mye kampspill'],
+              hasRRR: false,
+            },
+          ],
+        },
+
+        // ===== UKE 2: 9–14 mars =====
+        {
+          id: 'week-mars-2',
+          blockId: 'block-mars-2026',
+          number: 2,
+          focus: 'Øk presset',
+          dateRange: '9–14 mars',
+          sessions: [
+            {
+              id: 'session-mars-w2-mon',
+              weekId: 'week-mars-2',
+              date: '2026-03-09',
+              dayOfWeek: 'monday',
+              resistanceLevel: 'passive',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: 'Dribbling & vendinger',
+              temaExerciseId: 'ex-a1a2-21',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: '2 pressende, smal bane',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 2,
+                  notes: 'Smal bane, 2 pressende fra start',
+                },
+                {
+                  group: 'B',
+                  description: 'Start med 2 pressende',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 2,
+                  notes: 'Rød scorer ved å drible over sidelinje. Blå scorer ved ballvinst.',
+                },
+                {
+                  group: 'C',
+                  description: '2 pressende, bredt rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 2,
+                  notes: 'Bredt rom, 2 pressende',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '9v9',
+                constraint: 'Poeng for å bryte midtbanelinja under motstanderpress',
+                notes: '3 linjer obligatorisk',
+              },
+              oppsummering: 'Når fungerte det å spille forbi presset?',
+              coachingFocus: ['Bruk keeper aktivt', 'Finn fri mann etter press'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-mars-w2-tue',
+              weekId: 'week-mars-2',
+              date: '2026-03-10',
+              dayOfWeek: 'tuesday',
+              resistanceLevel: 'active',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: 'Dribbling & vendinger',
+              temaExerciseId: 'ex-a1a2-21',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: '3 pressende + tidspress',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 3,
+                  notes: '3 pressende + tidspress, smal bane',
+                },
+                {
+                  group: 'B',
+                  description: 'Øk til 3 pressende',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 3,
+                  notes: 'Rød må bruke keeper mer aktivt',
+                },
+                {
+                  group: 'C',
+                  description: '2 pressende, mer rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 2,
+                  notes: '2 pressende, ekstra rom',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '9v9',
+                constraint: 'Joker for angripende lag – ekstra mann i midtbanen',
+                notes: '9v9 med joker',
+              },
+              oppsummering: 'Hva skjedde etter vi spilte forbi presset?',
+              coachingFocus: ['Tempo etter ballvinst', 'Keeper som ekstra mann'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-mars-w2-thu',
+              weekId: 'week-mars-2',
+              date: '2026-03-12',
+              dayOfWeek: 'thursday',
+              resistanceLevel: 'full',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: 'Dribbling & vendinger',
+              temaExerciseId: 'ex-a1a2-21',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Full versjon, 3 press + smal bane',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 3,
+                  notes: '30 sek serier, høy intensitet, smal bane',
+                },
+                {
+                  group: 'B',
+                  description: 'Full versjon, høy intensitet',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 3,
+                  notes: '30 sek serier',
+                },
+                {
+                  group: 'C',
+                  description: 'Full versjon, noe rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 2,
+                  notes: '2 pressende, mer rom',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '11v11',
+                constraint: 'A1-tema nevnes i halvpausestopp',
+                notes: '11v11 der mulig',
+              },
+              oppsummering: 'Én konkret A1-situasjon vi klarte i dag.',
+              coachingFocus: ['Hurtighet i pressing', 'Utholdenhet'],
+              hasRRR: true,
+              rrrDescription: 'Utholdenhet + agilitet, 20 min. Dedikert trener.',
+            },
+            {
+              id: 'session-mars-w2-sat',
+              weekId: 'week-mars-2',
+              date: '2026-03-14',
+              dayOfWeek: 'saturday',
+              resistanceLevel: 'full',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: '—',
+              temaExerciseId: 'ex-a1a2-21',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Reprise hurtigrunde',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 2,
+                  notes: 'Reprise på ukens øvelse, korte serier',
+                },
+                {
+                  group: 'B',
+                  description: 'Reprise hurtigrunde',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 2,
+                  notes: 'Reprise – hurtigrunde på ukens øvelse',
+                },
+                {
+                  group: 'C',
+                  description: 'Reprise hurtigrunde',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 2,
+                  notes: 'Reprise, bredt rom',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '7v7 / 9v9',
+                constraint: 'Mini-turnering. Fokus på kampspill.',
+                notes: 'A1 i lagsamtale',
+              },
+              oppsummering: 'Hva er blitt bedre fra uke 1?',
+              coachingFocus: ['A1-tema i lagsamtale', 'Mye kampspill'],
+              hasRRR: false,
+            },
+          ],
+        },
+
+        // ===== UKE 3: 16–21 mars =====
+        {
+          id: 'week-mars-3',
+          blockId: 'block-mars-2026',
+          number: 3,
+          focus: 'Integrasjon',
+          dateRange: '16–21 mars',
+          sessions: [
+            {
+              id: 'session-mars-w3-mon',
+              weekId: 'week-mars-3',
+              date: '2026-03-16',
+              dayOfWeek: 'monday',
+              resistanceLevel: 'active',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: '1v1 dueller',
+              temaExerciseId: 'ex-a1a2-24',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Intro uten pressing, smal',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 0,
+                  notes: 'Lær formasjon. Backar kan overlappe fremover.',
+                },
+                {
+                  group: 'B',
+                  description: 'Intro uten pressing',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 0,
+                  notes: 'Jobb med formasjon og bevegelsesmønster',
+                },
+                {
+                  group: 'C',
+                  description: 'Intro, bredt rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 0,
+                  notes: 'Bredt rom, ingen pressing',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '7v7',
+                constraint: 'Poeng for å nå siderom eller bakrom etter oppbygning bakfra',
+                notes: 'Fokus på A1→A2',
+              },
+              oppsummering: 'Hvem frigjorde seg for å motta?',
+              coachingFocus: ['Keeper+4-back+2CM som system', 'CM tilbyr seg mellom linjene'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-mars-w3-tue',
+              weekId: 'week-mars-3',
+              date: '2026-03-17',
+              dayOfWeek: 'tuesday',
+              resistanceLevel: 'active',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: '1v1 dueller',
+              temaExerciseId: 'ex-a1a2-24',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: '5 pressende, backar overlapper',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 5,
+                  notes: '5 pressende, backar kan overlappe fremover',
+                },
+                {
+                  group: 'B',
+                  description: 'Aktive 4 pressende',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 4,
+                  notes: 'Aktive 4 pressende',
+                },
+                {
+                  group: 'C',
+                  description: '3 pressende + mer rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 3,
+                  notes: '3 pressende, mer rom på sidene',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '9v9',
+                constraint: 'Backlinjene har lov til å gå fremover. Bryt opp med 3 linjer.',
+                notes: '9v9',
+              },
+              oppsummering: 'Hvilken pasning skapte rom?',
+              coachingFocus: ['Bredde og dybde samtidig', 'Backar fremover på riktig tidspunkt'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-mars-w3-thu',
+              weekId: 'week-mars-3',
+              date: '2026-03-19',
+              dayOfWeek: 'thursday',
+              resistanceLevel: 'full',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: '1v1 dueller',
+              temaExerciseId: 'ex-a1a2-24',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Full versjon, backar overlapper',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 5,
+                  notes: 'Backar kan overlappe fremover',
+                },
+                {
+                  group: 'B',
+                  description: 'Full versjon',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 4,
+                  notes: 'Full versjon',
+                },
+                {
+                  group: 'C',
+                  description: 'Full versjon, litt mer rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 3,
+                  notes: '3 pressende, mer rom',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '11v11',
+                constraint: 'Halvpause: gjennomgå én konkret A1→A2-situasjon fra kampen',
+                notes: '11v11',
+              },
+              oppsummering: 'Én konkret A1→A2-situasjon vi klarte i dag.',
+              coachingFocus: ['A1→A2 integrasjon', 'Retningsskifte og akselerasjon'],
+              hasRRR: true,
+              rrrDescription: 'Siste torsdag med RRR. Fokus: retningsskifte og akselerasjon. 15 min.',
+            },
+            {
+              id: 'session-mars-w3-sat',
+              weekId: 'week-mars-3',
+              date: '2026-03-21',
+              dayOfWeek: 'saturday',
+              resistanceLevel: 'full',
+              rondoFormat: '4v2',
+              sjefOverBallenFocus: '—',
+              temaExerciseId: 'ex-a1a2-24',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Hurtigrunde uke 3',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 4,
+                  notes: 'Hurtigrunde uke 3',
+                },
+                {
+                  group: 'B',
+                  description: 'Hurtigrunde uke 3',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 4,
+                  notes: 'Hurtigrunde',
+                },
+                {
+                  group: 'C',
+                  description: 'Hurtigrunde uke 3',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 3,
+                  notes: 'Hurtigrunde, bredt rom',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '7v7 / 9v9',
+                constraint: 'Mini-turnering eller treningskamp',
+                notes: 'A1-tema i lagsamtale. Sesongklar uke 4.',
+              },
+              oppsummering: 'Hva har vi lært om A1 denne blokken?',
+              coachingFocus: ['Oppsummer blokken', 'A1-tema i lagsamtale'],
+              hasRRR: false,
+            },
+          ],
+        },
+      ],
+    },
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // TEMAPERIODE 1 – A1→A2: Fra ballvinst til prioritert rom (Mars–April 2026)
+    // NB: Påske – ingen trening tors 2. april (Skjærtorsdag),
+    //     lør 4. april (Påskelørdag) eller man 6. april (2. Påskedag)
+    // ═══════════════════════════════════════════════════════════════════════
+    {
+      id: 'block-a1a2-2026',
+      name: 'Temaperiode 1: A1→A2 – Fra ballvinst til prioritert rom',
+      nffCode: 'A2',
+      ageGroup: '2013',
+      durationWeeks: 4,
+      learningObjectives: [
+        'Komme til prioritert rom etter ballvinst',
+        'Timing på innløp og støttebevegelser',
+        'Skape bredde og dybde etter pressing',
+        'Koblingen A1→A2 i eget og halvt rom',
+      ],
+      coachingPoints: [
+        'Beveg deg mot rom – ikke mot ballen',
+        'Innløp bak forsvarslinja ved ballvinst',
+        'Bredde + dybde samtidig',
+        'Kvikk tanke: fikk vi ball? Gå fremover!',
+      ],
+      coreExerciseId: 'ex-a1a2-19',
+      weeks: [
+        // ===== UKE 1 "Bli kjent": 23–28 mars =====
+        {
+          id: 'week-mars-4',
+          blockId: 'block-a1a2-2026',
+          number: 1,
+          focus: 'Bli kjent',
+          dateRange: '23–28 mars',
+          sessions: [
+            {
+              id: 'session-mars-w4-mon',
+              weekId: 'week-mars-4',
+              date: '2026-03-23',
+              dayOfWeek: 'monday',
+              resistanceLevel: 'none',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Fri ballmestring',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Intro A1→A2 – friløp uten motstand, smal',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 0,
+                  notes: 'Start A1→A2. Lær bevegelsesmønster – friløp uten motstand.',
+                },
+                {
+                  group: 'B',
+                  description: 'Intro A1→A2 – mønster',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 0,
+                  notes: 'Lær bevegelsesmønsteret. Ingen motstand.',
+                },
+                {
+                  group: 'C',
+                  description: 'Intro A1→A2 – bredt rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 0,
+                  notes: 'Rolig intro, bredt rom, ekstra tid.',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '7v7',
+                constraint: 'Poeng for pasning til friløpende spiller',
+                notes: 'Start på A1→A2-tema',
+              },
+              oppsummering: 'Hva er nytt med A1→A2 sammenlignet med A1?',
+              coachingFocus: ['Friløp etter pasning', 'Kom til rom – ikke til ballen'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-mars-w4-tue',
+              weekId: 'week-mars-4',
+              date: '2026-03-24',
+              dayOfWeek: 'tuesday',
+              resistanceLevel: 'passive',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Fri ballmestring',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Passiv forsvarer, smal',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 1,
+                  notes: 'Passiv forsvarer. Finn rom forbi ham.',
+                },
+                {
+                  group: 'B',
+                  description: 'Passiv forsvarer',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Velg pasningslinje rundt passiv forsvarer.',
+                },
+                {
+                  group: 'C',
+                  description: 'Passiv forsvarer, mye rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Bredt rom, gi tid til å forstå rommet.',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '9v9',
+                constraint: 'Dobbeltpoeng for mål etter pasning til friløper',
+                notes: '3 linjer',
+              },
+              oppsummering: 'Nevn én konkret A1→A2-kobling vi klarte.',
+              coachingFocus: ['Koble A1→A2', 'Timing og pasningsvinkel'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-mars-w4-thu',
+              weekId: 'week-mars-4',
+              date: '2026-03-26',
+              dayOfWeek: 'thursday',
+              resistanceLevel: 'passive',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Fri ballmestring',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Passiv forsvarer + tidspress, smal',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 1,
+                  notes: 'Passiv forsvarer med tidspress.',
+                },
+                {
+                  group: 'B',
+                  description: 'Passiv forsvarer',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Passiv forsvarer, øk tempo.',
+                },
+                {
+                  group: 'C',
+                  description: 'Passiv forsvarer, bredt',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Passiv forsvarer, bredt rom.',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '9v9',
+                constraint: 'Full spillform. Halvpause: A1→A2-tema.',
+                notes: '9v9',
+              },
+              oppsummering: 'Hva hjelper oss å finne rom?',
+              coachingFocus: ['Friløp under press', 'Tempo etter ballvinst'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-mars-w4-sat',
+              weekId: 'week-mars-4',
+              date: '2026-03-28',
+              dayOfWeek: 'saturday',
+              resistanceLevel: 'full',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: '—',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                { group: 'A', description: 'Hurtigrunde', spaceModifier: 'small',    touchLimit: 2,    defenderCount: 1, notes: 'Hurtigrunde' },
+                { group: 'B', description: 'Hurtigrunde', spaceModifier: 'standard', touchLimit: null, defenderCount: 1, notes: 'Hurtigrunde' },
+                { group: 'C', description: 'Hurtigrunde', spaceModifier: 'large',    touchLimit: null, defenderCount: 1, notes: 'Hurtigrunde, bredt rom' },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '5v5 / 7v7',
+                constraint: 'Mini-turnering. A1→A2 i lagsamtale.',
+                notes: 'Mange kamper',
+              },
+              oppsummering: 'Hva tar vi med til etter påske?',
+              coachingFocus: ['A1→A2 i lagsamtale', 'Mye kampspill'],
+              hasRRR: false,
+            },
+          ],
+        },
+
+        // ===== PÅSKEBRO: 30–31 mars (tors 2. april = Skjærtorsdag = ingen trening) =====
+        {
+          id: 'week-paaskebro',
+          blockId: 'block-a1a2-2026',
+          number: 2,
+          focus: 'Påskebro',
+          dateRange: '30–31 mars',
+          sessions: [
+            {
+              id: 'session-mars-w4-mon2',
+              weekId: 'week-paaskebro',
+              date: '2026-03-30',
+              dayOfWeek: 'monday',
+              resistanceLevel: 'passive',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Fri ballmestring',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Aktiv forsvarer, smal – før påske',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 1,
+                  notes: 'Siste økt før påske. Aktiv forsvarer.',
+                },
+                {
+                  group: 'B',
+                  description: 'Aktiv forsvarer',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Siste økt før påske.',
+                },
+                {
+                  group: 'C',
+                  description: 'Halvpassiv forsvarer',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Halvpassiv forsvarer, bredt rom.',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '7v7',
+                constraint: 'Poeng for pasning til friløper bak forsvarslinja',
+                notes: 'Siste trening før påskeferie',
+              },
+              oppsummering: 'God påske – hva husker vi til etter ferien?',
+              coachingFocus: ['A1→A2 friskt i minnet', 'God påske!'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-mars-w4-tue2',
+              weekId: 'week-paaskebro',
+              date: '2026-03-31',
+              dayOfWeek: 'tuesday',
+              resistanceLevel: 'passive',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Fri ballmestring',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                { group: 'A', description: 'Konsolidering før påske', spaceModifier: 'small',    touchLimit: 2,    defenderCount: 1, notes: 'Konsolider A1→A2 før ferie' },
+                { group: 'B', description: 'Konsolidering før påske', spaceModifier: 'standard', touchLimit: null, defenderCount: 1, notes: 'Konsolider A1→A2' },
+                { group: 'C', description: 'Konsolidering før påske', spaceModifier: 'large',    touchLimit: null, defenderCount: 1, notes: 'Bredt rom, rolig tempo' },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '9v9',
+                constraint: 'Fri spillform – legg merke til A1→A2-koblingene',
+                notes: 'Onsdag 1. april: ingen trening. Skjærtorsdag 2. april: ingen trening.',
+              },
+              oppsummering: 'Én ting vi vil øve mer på etter påske.',
+              coachingFocus: ['Hva vil vi jobbe med etter påske?'],
+              hasRRR: false,
+            },
+          ],
+        },
+
+        // ===== UKE 3 "Øk presset": 7–13 april (første uke etter påske) =====
+        // NB: 2. Påskedag 6. april – ingen trening. Første trening er tirsdag 7. april.
+        {
+          id: 'week-mars-5',
+          blockId: 'block-a1a2-2026',
+          number: 3,
+          focus: 'Øk presset',
+          dateRange: '7–13 april',
+          sessions: [
+            {
+              id: 'session-s1-w2-tue',
+              weekId: 'week-mars-5',
+              date: '2026-04-07',
+              dayOfWeek: 'tuesday',
+              resistanceLevel: 'active',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Pasning & mottak',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Aktiv forsvarer, smal – tilbake etter påske',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 1,
+                  notes: 'Tilbake etter påske. Aktiv forsvarer, øk intensitet gradvis.',
+                },
+                {
+                  group: 'B',
+                  description: 'Aktiv forsvarer',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Aktiv forsvarer. Friløp og timing.',
+                },
+                {
+                  group: 'C',
+                  description: 'Halvpassiv forsvarer',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: 'Halvpassiv, bredt rom. Rolig oppstart igjen.',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '7v7',
+                constraint: 'Poeng for pasning til friløpende spiller',
+                notes: 'Første økt etter påskeferie',
+              },
+              oppsummering: 'Hva husket vi fra før påske?',
+              coachingFocus: ['Aktivér A1→A2 igjen', 'Friløp og timing'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-s1-w2-thu',
+              weekId: 'week-mars-5',
+              date: '2026-04-09',
+              dayOfWeek: 'thursday',
+              resistanceLevel: 'active',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Pasning & mottak',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: '2 aktive forsvarere, smal',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 2,
+                  notes: '2 aktive forsvarere. Skap rom raskt.',
+                },
+                {
+                  group: 'B',
+                  description: '2 aktive forsvarere',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 2,
+                  notes: '2 aktive forsvarere. Høyt tempo.',
+                },
+                {
+                  group: 'C',
+                  description: '1 aktiv forsvarer',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: '1 aktiv forsvarer, mer rom.',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '9v9',
+                constraint: 'Dobbeltpoeng for mål etter direktegjennomspilling',
+                notes: '9v9 med joker',
+              },
+              oppsummering: 'Hva skjedde de 2 første sekundene etter ballvinst?',
+              coachingFocus: ['Rask tanke ved ballvinst', 'Finn rom uten ball'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-s1-w2-sat',
+              weekId: 'week-mars-5',
+              date: '2026-04-11',
+              dayOfWeek: 'saturday',
+              resistanceLevel: 'full',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: '—',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                { group: 'A', description: 'Hurtigrunde, smal', spaceModifier: 'small',    touchLimit: 2,    defenderCount: 2, notes: 'Hurtigrunde' },
+                { group: 'B', description: 'Hurtigrunde',       spaceModifier: 'standard', touchLimit: null, defenderCount: 2, notes: 'Hurtigrunde' },
+                { group: 'C', description: 'Hurtigrunde, bredt', spaceModifier: 'large',   touchLimit: null, defenderCount: 1, notes: 'Hurtigrunde, bredt rom' },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '7v7 / 9v9',
+                constraint: 'Mini-turnering. A1→A2 i lagsamtale.',
+                notes: 'Mange kamper, lite venting',
+              },
+              oppsummering: 'Hva er blitt bedre etter påske?',
+              coachingFocus: ['A1→A2 i kampsituasjon', 'Mye kampspill'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-s1-w2-mon',
+              weekId: 'week-mars-5',
+              date: '2026-04-13',
+              dayOfWeek: 'monday',
+              resistanceLevel: 'full',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Pasning & mottak',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: '2 aktive + tidspress',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 2,
+                  notes: '2 aktive + tidspress. Skap rom raskt.',
+                },
+                {
+                  group: 'B',
+                  description: '2 aktive forsvarere',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 2,
+                  notes: '2 aktive. Høyt tempo.',
+                },
+                {
+                  group: 'C',
+                  description: '1 aktiv forsvarer',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: '1 aktiv, mer rom.',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '9v9',
+                constraint: 'Joker i midtbanen for angripende lag',
+                notes: 'Press på A1→A2',
+              },
+              oppsummering: 'Névn én situasjon der vi vant rom.',
+              coachingFocus: ['A1→A2 under press', 'Bredde og dybde'],
+              hasRRR: false,
+            },
+          ],
+        },
+
+        // ===== UKE 4 "Integrasjon": 14–20 april =====
+        {
+          id: 'week-mars-6',
+          blockId: 'block-a1a2-2026',
+          number: 4,
+          focus: 'Integrasjon',
+          dateRange: '14–20 april',
+          sessions: [
+            {
+              id: 'session-s1-w3-tue',
+              weekId: 'week-mars-6',
+              date: '2026-04-14',
+              dayOfWeek: 'tuesday',
+              resistanceLevel: 'full',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: '1v1 dueller',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Full versjon, smal',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 2,
+                  notes: '30 sek serier, høy intensitet',
+                },
+                {
+                  group: 'B',
+                  description: 'Full versjon',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 2,
+                  notes: '30 sek serier',
+                },
+                {
+                  group: 'C',
+                  description: 'Full versjon, noe rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 1,
+                  notes: '1 aktiv forsvarer, mer rom',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '9v9',
+                constraint: 'A1→A2-kobling nevnes i halvpausestopp',
+                notes: '9v9',
+              },
+              oppsummering: 'Én konkret A1→A2-kobling vi klarte i dag.',
+              coachingFocus: ['A1→A2 under trykk', 'Bredde og dybde etter press'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-s1-w3-thu',
+              weekId: 'week-mars-6',
+              date: '2026-04-16',
+              dayOfWeek: 'thursday',
+              resistanceLevel: 'full',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: '1v1 dueller',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                { group: 'A', description: 'Full versjon, smal',  spaceModifier: 'small',    touchLimit: 2,    defenderCount: 2, notes: 'Full versjon' },
+                { group: 'B', description: 'Full versjon',        spaceModifier: 'standard', touchLimit: null, defenderCount: 2, notes: 'Full versjon' },
+                { group: 'C', description: 'Full versjon, bredt', spaceModifier: 'large',    touchLimit: null, defenderCount: 1, notes: 'Full versjon, noe rom' },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '11v11',
+                constraint: 'Halvpause: gjennomgå A1→A2 fra kampen',
+                notes: '11v11',
+              },
+              oppsummering: 'Hva gjør vi bedre nå enn i mars?',
+              coachingFocus: ['Integrasjon av A1→A2', 'Retningsskifte og akselerasjon'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-s1-w3-sat',
+              weekId: 'week-mars-6',
+              date: '2026-04-18',
+              dayOfWeek: 'saturday',
+              resistanceLevel: 'full',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: '—',
+              temaExerciseId: 'ex-a1a2-19',
+              groupVariants: [
+                { group: 'A', description: 'Hurtigrunde uke 3', spaceModifier: 'small',    touchLimit: 2,    defenderCount: 2, notes: 'Hurtigrunde' },
+                { group: 'B', description: 'Hurtigrunde uke 3', spaceModifier: 'standard', touchLimit: null, defenderCount: 2, notes: 'Hurtigrunde' },
+                { group: 'C', description: 'Hurtigrunde uke 3', spaceModifier: 'large',    touchLimit: null, defenderCount: 1, notes: 'Hurtigrunde, bredt rom' },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a1a2-spill-30',
+                format: '7v7 / 9v9',
+                constraint: 'Mini-turnering eller treningskamp',
+                notes: 'A1→A2 i lagsamtale',
+              },
+              oppsummering: 'Hva har vi lært om A1→A2 denne blokken?',
+              coachingFocus: ['Oppsummer A1→A2-blokken'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-s1-w3-mon',
+              weekId: 'week-mars-6',
+              date: '2026-04-20',
+              dayOfWeek: 'monday',
+              resistanceLevel: 'full',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Dribbling & vendinger',
+              temaExerciseId: 'ex-a2a3-35',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Smakebit A2→A3: intro uten motstand',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 0,
+                  notes: 'Sniktitt på neste tema. Permanent angriper i midten – ingen motstand.',
+                },
+                {
+                  group: 'B',
+                  description: 'Smakebit A2→A3',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 0,
+                  notes: 'Intro til A2→A3-øvelse.',
+                },
+                {
+                  group: 'C',
+                  description: 'Smakebit A2→A3 – bredt rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 0,
+                  notes: 'Bredt rom, ingen motstand.',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a2a3-spill',
+                format: '7v7',
+                constraint: 'Poeng for avslutning innen 4 sek etter å ha nådd prioritert rom',
+                notes: 'Klar for neste tema',
+              },
+              oppsummering: 'Klar for A2→A3-blokken!',
+              coachingFocus: ['Se fremover mot avslutning', 'Prioritert rom → rask avslutning'],
+              hasRRR: false,
+            },
+          ],
+        },
+      ],
+    },
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // TEMAPERIODE 2 – A2→A3: Til prioritert rom og avslutning (Apr–Mai 2026)
+    // ═══════════════════════════════════════════════════════════════════════
+    {
+      id: 'block-a2a3-2026',
+      name: 'Temaperiode 2: A2→A3 – Til prioritert rom og avslutning',
+      nffCode: 'A3',
+      ageGroup: '2013',
+      durationWeeks: 3,
+      learningObjectives: [
+        'Bevege seg til og avslutte fra prioritert rom',
+        'Timing og innløp bak forsvarslinja',
+        'Kombinasjonsspill inn mot mål',
+        'Raskt avslutningsforsøk etter rom er nådd',
+      ],
+      coachingPoints: [
+        'Kom til rom med fart',
+        'Avslutt – ikke vent',
+        'Støttespill rundt avslutteren',
+      ],
+      coreExerciseId: 'ex-a2a3-35',
+      weeks: [
+        {
+          id: 'week-a2a3-1',
+          blockId: 'block-a2a3-2026',
+          number: 1,
+          focus: 'Bli kjent',
+          dateRange: '21–27 april',
+          sessions: [
+            {
+              id: 'session-a2a3-w1-tue',
+              weekId: 'week-a2a3-1',
+              date: '2026-04-21',
+              dayOfWeek: 'tuesday',
+              resistanceLevel: 'none',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Dribbling & vendinger',
+              temaExerciseId: 'ex-a2a3-35',
+              groupVariants: [
+                {
+                  group: 'A',
+                  description: 'Mønster uten motstand, smal',
+                  spaceModifier: 'small',
+                  touchLimit: 2,
+                  defenderCount: 0,
+                  notes: 'Lær A2→A3-mønsteret. Permanent angriper i midten.',
+                },
+                {
+                  group: 'B',
+                  description: 'Mønster uten motstand',
+                  spaceModifier: 'standard',
+                  touchLimit: null,
+                  defenderCount: 0,
+                  notes: 'Permanent angriper binder forsvar.',
+                },
+                {
+                  group: 'C',
+                  description: 'Mønster, bredt rom',
+                  spaceModifier: 'large',
+                  touchLimit: null,
+                  defenderCount: 0,
+                  notes: 'Bredt rom, ekstra tid.',
+                },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a2a3-spill',
+                format: '7v7',
+                constraint: 'Poeng for avslutning innen 4 sek etter prioritert rom',
+                notes: 'A2→A3-intro',
+              },
+              oppsummering: 'Hvem nådde prioritert rom og avsluttet raskt?',
+              coachingFocus: ['Timing mellom linjene', 'Prioritert rom → rask avslutning'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-a2a3-w1-thu',
+              weekId: 'week-a2a3-1',
+              date: '2026-04-23',
+              dayOfWeek: 'thursday',
+              resistanceLevel: 'passive',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Dribbling & vendinger',
+              temaExerciseId: 'ex-a2a3-35',
+              groupVariants: [
+                { group: 'A', description: 'Passiv forsvarer, smal',    spaceModifier: 'small',    touchLimit: 2,    defenderCount: 1, notes: 'Passiv forsvarer' },
+                { group: 'B', description: 'Passiv forsvarer',          spaceModifier: 'standard', touchLimit: null, defenderCount: 1, notes: 'Passiv forsvarer' },
+                { group: 'C', description: 'Passiv forsvarer, stor sone', spaceModifier: 'large',  touchLimit: null, defenderCount: 1, notes: 'Passiv forsvarer, stor sone' },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a2a3-spill',
+                format: '9v9',
+                constraint: 'Dobbelpoeng via midtangriper + avslutning',
+                notes: 'A2→A3-kobling',
+              },
+              oppsummering: 'Hva koblet A2 til A3?',
+              coachingFocus: ['Bruk midtangriper', 'Rask avslutning'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-a2a3-w1-sat',
+              weekId: 'week-a2a3-1',
+              date: '2026-04-25',
+              dayOfWeek: 'saturday',
+              resistanceLevel: 'full',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: '—',
+              temaExerciseId: 'ex-a2a3-35',
+              groupVariants: [
+                { group: 'A', description: 'Hurtigrunde', spaceModifier: 'small',    touchLimit: 2,    defenderCount: 1, notes: 'Hurtigrunde' },
+                { group: 'B', description: 'Hurtigrunde', spaceModifier: 'standard', touchLimit: null, defenderCount: 1, notes: 'Hurtigrunde' },
+                { group: 'C', description: 'Hurtigrunde', spaceModifier: 'large',    touchLimit: null, defenderCount: 1, notes: 'Hurtigrunde, bredt rom' },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a2a3-spill',
+                format: '7v7 / 9v9',
+                constraint: 'Mini-turnering',
+                notes: 'A2→A3 i lagsamtale',
+              },
+              oppsummering: 'Hva tar vi med til uke 2?',
+              coachingFocus: ['A2→A3 i lagsamtale'],
+              hasRRR: false,
+            },
+            {
+              id: 'session-a2a3-w1-mon',
+              weekId: 'week-a2a3-1',
+              date: '2026-04-27',
+              dayOfWeek: 'monday',
+              resistanceLevel: 'passive',
+              rondoFormat: '5v2',
+              sjefOverBallenFocus: 'Dribbling & vendinger',
+              temaExerciseId: 'ex-a2a3-35',
+              groupVariants: [
+                { group: 'A', description: '2 passive forsvarere, smal', spaceModifier: 'small',    touchLimit: 2,    defenderCount: 2, notes: '2 passive' },
+                { group: 'B', description: '1 aktiv + 1 passiv',         spaceModifier: 'standard', touchLimit: null, defenderCount: 2, notes: 'Kombiner for å finne rom' },
+                { group: 'C', description: '2 passive, stor sone',        spaceModifier: 'large',   touchLimit: null, defenderCount: 2, notes: 'To passive, mye rom' },
+              ],
+              kamptilpassetSpill: {
+                exerciseId: 'ex-a2a3-spill',
+                format: '9v9',
+                constraint: 'Poeng for innlag bak forsvarslinja',
+                notes: 'Press på A2→A3',
+              },
+              oppsummering: 'Når lyktes innløpet?',
+              coachingFocus: ['Timing mellom passer og løper'],
+              hasRRR: false,
+            },
+          ],
+        },
+        {
+          id: 'week-a2a3-2',
+          blockId: 'block-a2a3-2026',
+          number: 2,
+          focus: 'Øk presset',
+          dateRange: '28 april – 4 mai',
+          // NB: Arbeidernes dag 1. mai (fredag) – ikke en treningsdag
+          sessions: [],
+        },
+        {
+          id: 'week-a2a3-3',
+          blockId: 'block-a2a3-2026',
+          number: 3,
+          focus: 'Integrasjon',
+          dateRange: '5–11 mai',
+          sessions: [],
+        },
+      ],
+    },
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // TEMAPERIODE 3 – F1: Presse, lede og kontrollere (Mai–Jun 2026)
+    // NB: Kristi Himmelfartsdag tors 14. mai – ingen trening
+    //     2. Pinsedag man 25. mai – ingen trening
+    // ═══════════════════════════════════════════════════════════════════════
+    {
+      id: 'block-f1-2026',
+      name: 'Temaperiode 3: F1 – Presse, lede og kontrollere',
+      nffCode: 'F1',
+      ageGroup: '2013',
+      durationWeeks: 3,
+      learningObjectives: [
+        'Organisert pressing med trigger',
+        'Lede og kontrollere motstander med ball',
+        'Vinne ballen høyt med lag',
+        'Rask overgang i angrep etter pressing',
+      ],
+      coachingPoints: [
+        'Trigger: bakpass til keeper',
+        'Kurve i pressing – steng innsida',
+        'Hele laget presser – kommunisér «press!»',
+      ],
+      coreExerciseId: 'ex-f1-situasjon',
+      weeks: [
+        {
+          id: 'week-f1-1',
+          blockId: 'block-f1-2026',
+          number: 1,
+          focus: 'Bli kjent',
+          // NB: Kristi Himmelfartsdag tors 14. mai – ingen trening denne dagen
+          dateRange: '12–18 mai',
+          sessions: [],
+        },
+        {
+          id: 'week-f1-2',
+          blockId: 'block-f1-2026',
+          number: 2,
+          focus: 'Øk presset',
+          // NB: 2. Pinsedag man 25. mai – ingen trening
+          dateRange: '19–26 mai',
+          sessions: [],
+        },
+        {
+          id: 'week-f1-3',
+          blockId: 'block-f1-2026',
+          number: 3,
+          focus: 'Integrasjon',
+          dateRange: '26 mai – 1 jun',
+          sessions: [],
+        },
+      ],
+    },
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // TEMAPERIODE 4 – F1→F2: Pressing og romkontroll (Jun–Aug 2026)
+    // NB: Sommerferie jul–aug – juster gruppestørrelse (~15 spillere)
+    // ═══════════════════════════════════════════════════════════════════════
+    {
+      id: 'block-f1f2-2026',
+      name: 'Temaperiode 4: F1→F2 – Pressing og romkontroll',
+      nffCode: 'F2',
+      ageGroup: '2013',
+      durationWeeks: 3,
+      learningObjectives: [
+        'Fra pressing til sperring av prioriterte rom',
+        'Blokkere pasningslinjene',
+        'Horisontal kompakthet – hold linjene tette',
+        'Tilpass format ved lavt ferieoppmøte (~15 spillere)',
+      ],
+      coachingPoints: [
+        'Press → senk tyngdepunktet og sperre rom',
+        'Blokkér pasningslinjene bakover',
+        'Kompakt – ikke spre deg',
+      ],
+      coreExerciseId: 'ex-f1f2-situasjon',
+      weeks: [
+        {
+          id: 'week-f1f2-1',
+          blockId: 'block-f1f2-2026',
+          number: 1,
+          focus: 'Bli kjent',
+          dateRange: '2–8 jun',
+          sessions: [],
+        },
+        {
+          id: 'week-f1f2-2',
+          blockId: 'block-f1f2-2026',
+          number: 2,
+          focus: 'Øk presset',
+          // NB: Sommerferie – oppmøte kan variere. Bruk 2 grupper (A+B) ved < 20 spillere.
+          dateRange: '3–9 aug',
+          sessions: [],
+        },
+        {
+          id: 'week-f1f2-3',
+          blockId: 'block-f1f2-2026',
+          number: 3,
+          focus: 'Integrasjon',
+          dateRange: '10–16 aug',
+          sessions: [],
+        },
+      ],
+    },
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // TEMAPERIODE 5 – F1→F2: Sperring av rom (Sep 2026)
+    // ═══════════════════════════════════════════════════════════════════════
+    {
+      id: 'block-f2-2026',
+      name: 'Temaperiode 5: F1→F2 – Fra press til sperring',
+      nffCode: 'F2',
+      ageGroup: '2013',
+      durationWeeks: 3,
+      learningObjectives: [
+        'Koble pressing til romkontroll',
+        'Lukke halvrommet',
+        'Blokkere motstander fra å snu med ball',
+        'Defensiv organisering i lav blokk',
+      ],
+      coachingPoints: [
+        'Hold linjene lave og kompakte',
+        'Lukk halvrommet',
+        'Ikke la motstander snu med ballen i rom',
+      ],
+      coreExerciseId: 'ex-f1f2-situasjon',
+      weeks: [
+        {
+          id: 'week-f2-1',
+          blockId: 'block-f2-2026',
+          number: 1,
+          focus: 'Bli kjent',
+          dateRange: '31 aug – 5 sep',
+          sessions: [],
+        },
+        {
+          id: 'week-f2-2',
+          blockId: 'block-f2-2026',
+          number: 2,
+          focus: 'Øk presset',
+          dateRange: '7–12 sep',
+          sessions: [],
+        },
+        {
+          id: 'week-f2-3',
+          blockId: 'block-f2-2026',
+          number: 3,
+          focus: 'Integrasjon',
+          dateRange: '14–19 sep',
+          sessions: [],
+        },
+      ],
+    },
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // TEMAPERIODE 6 – F2→F3: Hindre avslutning og avslutning av sesong (Okt 2026)
+    // ═══════════════════════════════════════════════════════════════════════
+    {
+      id: 'block-f3-2026',
+      name: 'Temaperiode 6: F2→F3 – Sperring og hindre avslutning',
+      nffCode: 'F3',
+      ageGroup: '2013',
+      durationWeeks: 3,
+      learningObjectives: [
+        'Blokkere skudd og headingforsøk',
+        'Sperring i og rundt 16-meteren',
+        'Keeper dominerer boksen',
+        'Sesongens avslutning med oppsummering',
+      ],
+      coachingPoints: [
+        'Blokker skuddlinja – ikke ballen',
+        'Press avslutteren tidlig',
+        'Keeper: dominer boksen, kommunisér',
+      ],
+      coreExerciseId: 'ex-f2f3-situasjon',
+      weeks: [
+        {
+          id: 'week-f3-1',
+          blockId: 'block-f3-2026',
+          number: 1,
+          focus: 'Bli kjent',
+          dateRange: '28 sep – 3 okt',
+          sessions: [],
+        },
+        {
+          id: 'week-f3-2',
+          blockId: 'block-f3-2026',
+          number: 2,
+          focus: 'Øk presset',
+          dateRange: '5–10 okt',
+          sessions: [],
+        },
+        {
+          id: 'week-f3-3',
+          blockId: 'block-f3-2026',
+          number: 3,
+          focus: 'Integrasjon',
+          dateRange: '12–17 okt',
+          sessions: [],
+        },
+      ],
+    },
+  ],
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+export function getAllSessions() {
+  return season2026.blocks.flatMap((b) =>
+    b.weeks.flatMap((w) => w.sessions)
+  )
+}
+
+export function getSession(id: string) {
+  return getAllSessions().find((s) => s.id === id)
+}
+
+export function getAllBlocks() {
+  return season2026.blocks
+}
+
+export function getBlock(blockId: string) {
+  return season2026.blocks.find((b) => b.id === blockId) ?? null
+}
+
+export function getWeekForSession(sessionId: string) {
+  for (const block of season2026.blocks) {
+    for (const week of block.weeks) {
+      if (week.sessions.some((s) => s.id === sessionId)) return week
+    }
+  }
+  return null
+}
+
+export function getBlockForSession(sessionId: string) {
+  for (const block of season2026.blocks) {
+    for (const week of block.weeks) {
+      if (week.sessions.some((s) => s.id === sessionId)) return block
+    }
+  }
+  return null
+}
+
+/** Get the previous and next session ids relative to a given sessionId. */
+export function getAdjacentSessions(sessionId: string): { prevId: string | null; nextId: string | null } {
+  const all = getAllSessions()
+  const idx = all.findIndex((s) => s.id === sessionId)
+  if (idx === -1) return { prevId: null, nextId: null }
+  return {
+    prevId: idx > 0 ? all[idx - 1].id : null,
+    nextId: idx < all.length - 1 ? all[idx + 1].id : null,
+  }
+}
+
+/** All weeks in season order (across all blocks). */
+export function getAllWeeks() {
+  return season2026.blocks.flatMap((b) => b.weeks)
+}
+
+/** Get a specific week by id. */
+export function getWeek(weekId: string) {
+  return getAllWeeks().find((w) => w.id === weekId) ?? null
+}
+
+/** Get the block that owns a specific week. */
+export function getBlockForWeek(weekId: string) {
+  for (const block of season2026.blocks) {
+    if (block.weeks.some((w) => w.id === weekId)) return block
+  }
+  return null
+}
+
+/** Get the previous and next week ids relative to a given weekId. */
+export function getAdjacentWeeks(weekId: string): { prevId: string | null; nextId: string | null } {
+  const all = getAllWeeks()
+  const idx = all.findIndex((w) => w.id === weekId)
+  if (idx === -1) return { prevId: null, nextId: null }
+  return {
+    prevId: idx > 0 ? all[idx - 1].id : null,
+    nextId: idx < all.length - 1 ? all[idx + 1].id : null,
+  }
+}
