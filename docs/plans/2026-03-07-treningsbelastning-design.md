@@ -1,7 +1,7 @@
 # Design: Treningsbelastning og intensitetsanbefaling
 
 **Dato:** 7. mars 2026  
-**Status:** Godkjent
+**Status:** Implementert ✅
 
 ## Problemstilling
 

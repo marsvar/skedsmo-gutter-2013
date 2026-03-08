@@ -2,6 +2,8 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
+> **Status (8. mars 2026): Fully implemented.** `src/lib/load.ts` is live. Intensity card on Today page and load-curve on Block detail page are both working. `IntensityLevel` type and `Match.groups` field are in `src/data/types.ts`.
+
 **Goal:** Add a match-proximity-based intensity recommendation per group (A/B/C) on the Today page, and a weekly load curve on the block detail page.
 
 **Architecture:** Pure computation in `src/lib/load.ts` over existing types — no new dependencies, no API routes, no database. Match type gains an optional `groups` field. Two UI additions: an intensity card on `src/app/page.tsx` and a load curve table on `src/app/block/[blockId]/page.tsx`.

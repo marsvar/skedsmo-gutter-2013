@@ -2,15 +2,17 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
+> **Status (8. mars 2026):** Tasks 1–12 are fully implemented. The app is live as a dynamic Next.js + Supabase app. Phase A (database backend) is complete. Phase B (admin UI) is the next milestone.
+
 **Goal:** Build a mobile-first Next.js coaching app for 10 coaches at Skedsmo Fotball that shows today's training session, week overview, and season plan — all driven by NFF's A1–F3 framework.
 
-**Architecture:** Next.js 14 App Router with TypeScript and Tailwind CSS, static export (`output: 'export'`), deployed to Vercel from the `next` branch. Data lives in `src/data/*.ts` files edited by the developer and compiled at build time — no database, no API routes, no auth.
+**Architecture (implemented):** Next.js 14 App Router with TypeScript and Tailwind CSS, dynamic server-side rendering, Supabase PostgreSQL via Drizzle ORM. Data accessed through `src/data/db-*.ts` with static fallbacks. Deployed to Vercel.
 
-**Tech Stack:** Next.js 14, React 18, TypeScript, Tailwind CSS, Vercel (static export)
+**Tech Stack:** Next.js 14, React 18, TypeScript, Tailwind CSS, Drizzle ORM, `postgres`, Vercel Analytics + Speed Insights, Framer Motion, Radix UI Tabs, Lucide React
 
 ---
 
-## Task 1: Initialize Next.js app
+## Task 1: Initialize Next.js app ✅
 
 **Files:**
 - Create: `package.json`, `next.config.ts`, `tsconfig.json`, `tailwind.config.ts`, `postcss.config.mjs`
@@ -51,7 +53,7 @@ git commit -m "feat: initialize Next.js app with static export"
 
 ---
 
-## Task 2: Configure Tailwind with club color tokens
+## Task 2: Configure Tailwind with club color tokens ✅
 
 **Files:**
 - Modify: `tailwind.config.ts`
@@ -82,7 +84,7 @@ git commit -m "feat: add Skedsmo/NFF color tokens to Tailwind"
 
 ---
 
-## Task 3: Define TypeScript types
+## Task 3: Define TypeScript types ✅
 
 **Files:**
 - Create: `src/data/types.ts`
@@ -195,7 +197,7 @@ git commit -m "feat: add TypeScript types from APP-PLAN"
 
 ---
 
-## Task 4: Seed exercise library
+## Task 4: Seed exercise library ✅
 
 **Files:**
 - Create: `src/data/exercises.ts`
@@ -321,7 +323,7 @@ git commit -m "feat: seed exercise library with March 2026 exercises"
 
 ---
 
-## Task 5: Seed season data (March 2026 block)
+## Task 5: Seed season data (March 2026 block) ✅
 
 **Files:**
 - Create: `src/data/season.ts`
@@ -371,7 +373,7 @@ git commit -m "feat: seed March 2026 season block with 12 sessions"
 
 ---
 
-## Task 6: Build app layout and mobile bottom nav
+## Task 6: Build app layout and mobile bottom nav ✅
 
 **Files:**
 - Modify: `src/app/layout.tsx`
@@ -391,7 +393,7 @@ git commit -m "feat: add mobile layout with bottom tab navigation"
 
 ---
 
-## Task 7: Build Today's Session page
+## Task 7: Build Today's Session page ✅
 
 **Files:**
 - Modify: `src/app/page.tsx`
@@ -424,7 +426,7 @@ git commit -m "feat: build Today's Session page with group variant tabs"
 
 ---
 
-## Task 8: Build Week overview page
+## Task 8: Build Week overview page ✅
 
 **Files:**
 - Create: `src/app/week/page.tsx`
@@ -446,7 +448,7 @@ git commit -m "feat: build week overview page"
 
 ---
 
-## Task 9: Build Season overview page
+## Task 9: Build Season overview page ✅
 
 **Files:**
 - Create: `src/app/season/page.tsx`
@@ -463,7 +465,7 @@ git commit -m "feat: build season overview page"
 
 ---
 
-## Task 10: Build Session detail page
+## Task 10: Build Session detail page ✅
 
 **Files:**
 - Create: `src/app/session/[id]/page.tsx`
@@ -486,7 +488,7 @@ git commit -m "feat: build session detail page with static params"
 
 ---
 
-## Task 11: Clean up old static files
+## Task 11: Clean up old static files ✅
 
 **Files:**
 - Delete: `arsplan.html`, `kalender.html`, `okter.html`
@@ -501,7 +503,7 @@ git commit -m "chore: remove old static files superseded by Next.js app"
 
 ---
 
-## Task 12: Verify build and push
+## Task 12: Verify build and push ✅
 
 **Step 1: Build locally**
 
@@ -543,33 +545,11 @@ No automated tests in this MVP (no testing framework set up). Manual verificatio
 
 ---
 
-## Future: Database + admin tool
+## Future: Admin tool (Phase B — next milestone)
 
-The current architecture uses hardcoded TypeScript data files (`src/data/season.ts`, `src/data/exercises.ts`, `src/data/matches.ts`). This works for a single developer but doesn't scale to multiple coaches editing content. The next major evolution is to move data to a database and build a web-based admin interface.
+Phase A (database backend with Supabase + Drizzle ORM) is complete. The app reads all session, block, week, exercise, and match data from PostgreSQL via Drizzle. Static fallbacks remain in `src/data/season.ts`, `src/data/exercises.ts`, and `src/data/matches.ts`.
 
-### Phase A – Database backend
-
-**Goal:** Replace static `.ts` data files with a persistent store that can be read and written at runtime.
-
-**Recommended stack:**
-- **Database:** [Supabase](https://supabase.com) (Postgres, hosted, free tier generous). Alternatively PlanetScale (MySQL) or Railway + Postgres.
-- **ORM / query layer:** [Drizzle ORM](https://orm.drizzle.team) for type-safe queries that mirror the existing TypeScript types closely.
-- **API:** Next.js Route Handlers (`app/api/...`) — drop the `output: 'export'` constraint and switch to a Node.js runtime on Vercel.
-
-**Schema (mirrors current types):**
-```
-seasons → blocks → weeks → sessions → group_variants
-exercises → coaching_points (1:many)
-matches
-```
-
-**Migration path:**
-1. Scaffold Supabase project, define schema with Drizzle migrations.
-2. Write a one-time seed script that reads the current `season.ts` and `exercises.ts` and inserts all rows.
-3. Replace data-access functions in `src/data/season.ts` with async Drizzle queries wrapped in Next.js `cache()`.
-4. Remove `output: 'export'` from `next.config.ts`; switch to SSR/ISR.
-
-### Phase B – Web-based admin tool
+Phase B is a web-based admin UI so coaches can create and edit sessions, blocks, exercises, and match results without code changes.
 
 **Goal:** Let coaches (non-developers) create and edit sessions, blocks, exercises, and match results through a browser UI — no code changes needed.
 

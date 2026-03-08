@@ -2,6 +2,8 @@
 
 Architecture & Data Model
 
+> **Status (mars 2026):** App is live. Dynamic Next.js with Supabase/Drizzle backend. Pages: `/`, `/week`, `/week/[weekId]`, `/block/[blockId]`, `/season`, `/session/[id]`, `/matches`, `/referanse`. See CLAUDE.md for running instructions.
+
 ## Purpose
 
 The purpose of this application is to help youth football coaches plan and execute structured training sessions aligned with modern player development principles.
@@ -61,15 +63,20 @@ These ideas translate into coaching points and learning objectives inside NFF-st
 
 ---
 
-# Application Structure
+## Application Structure
 
 The training structure follows a hierarchical model.
 
-Season
+```
+Season (Supabase DB)
 └── Block
-└── Week
-└── Session
-└── Exercise
+    └── Week
+        └── Session
+            ├── GroupVariant (A/B/C)
+            └── KamptilpassetSpill
+```
+
+Data is stored in PostgreSQL (Supabase) and accessed via Drizzle ORM in `src/data/db-*.ts`. Static fallbacks in `src/data/season.ts`, `src/data/exercises.ts`, and `src/data/matches.ts` are used if the DB is unavailable.
 
 ## Overview
 
@@ -121,10 +128,11 @@ type Block = {
   name: string
   nffCode: 'A1' | 'A2' | 'A3' | 'F1' | 'F2' | 'F3'
   ageGroup: string
-  durationWeeks: 3
-  learningObjectives: string[]   // what players should learn
-  coachingPoints: string[]       // what coaches should emphasize (may include Dutch concepts)
-  coreExerciseId: string         // the single temaøvelse repeated all week, progression applied
+  durationWeeks: number           // typically 3, but flexible
+  learningObjectives: string[]
+  coachingPoints: string[]
+  coreExerciseId: string
+  weeks: Week[]
 }
 ```
 
@@ -169,6 +177,8 @@ Each block contains exactly **3 weeks** with a fixed progression:
 | Week 1 | Bli kjent       | No resistance — learn movement patterns                  |
 | Week 2 | Øk presset      | Active resistance, smaller space, higher tempo           |
 | Week 3 | Integrasjon     | Full resistance, competitive element, theme emerges naturally |
+
+Additional `WeekFocus` variants used in practice: `'Konsolidering'`, `'Overgang'`, `'Påskebro'`.
 
 Within each week, the 4 training days also have defined roles:
 
@@ -343,11 +353,11 @@ Variations help adapt difficulty.
 
 ---
 
-# Smart Features
+## Smart Features
 
 The architecture supports future automation.
 
-## Session Generator
+### Session Generator (planned)
 
 Input:
 
@@ -397,9 +407,9 @@ This keeps coaching aligned with the theme.
 
 Potential expansions:
 
+* Admin UI for editing sessions and exercises in-browser
 * Match analysis linked to training themes
 * Player development tracking
-* Team-specific session templates
 * AI-generated session plans
 * Drill recommendation engine
 
