@@ -90,8 +90,8 @@ export type ExerciseUpdateInput = z.infer<typeof ExerciseUpdateSchema>
 // ── Matches ───────────────────────────────────────────────────────────────────
 
 const MatchResultSchema = z.object({
-  goalsFor:     z.number().int().min(0),
-  goalsAgainst: z.number().int().min(0),
+  homeGoals: z.number().int().min(0),
+  awayGoals: z.number().int().min(0),
 })
 
 export const MatchCreateSchema = z.object({
