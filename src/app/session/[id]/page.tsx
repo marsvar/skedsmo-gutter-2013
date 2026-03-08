@@ -125,7 +125,6 @@ export default function SessionPage({ params }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="shrink-0 text-xs text-purple-600 underline hover:text-purple-800"
-                    onClick={(e) => e.stopPropagation()}
                   >
                     fotball.no →
                   </a>
