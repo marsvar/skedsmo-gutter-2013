@@ -1,12 +1,13 @@
 import Link from 'next/link'
-import type { Session } from '@/data/types'
-import { DAY_LABELS, RESISTANCE_LABELS } from '@/data/types'
+import type { Session, Match } from '@/data/types'
+import { DAY_LABELS, RESISTANCE_LABELS, matchOpponent } from '@/data/types'
 import { getExercise } from '@/data/exercises'
 import { fmtShort } from '@/lib/dates'
 
 interface WeekDayCardProps {
   session: Session
   isToday: boolean
+  matches?: Match[]
 }
 
 const DAY_STYLES: Record<string, { border: string; header: string; badge: string }> = {
@@ -16,7 +17,7 @@ const DAY_STYLES: Record<string, { border: string; header: string; badge: string
   saturday: { border: 'border-purple-200', header: 'bg-purple-600 text-white', badge: 'bg-purple-100 text-purple-700' },
 }
 
-export default function WeekDayCard({ session, isToday }: WeekDayCardProps) {
+export default function WeekDayCard({ session, isToday, matches }: WeekDayCardProps) {
   const styles = DAY_STYLES[session.dayOfWeek] ?? DAY_STYLES.monday
   const temaExercise = getExercise(session.temaExerciseId)
 
@@ -60,6 +61,32 @@ export default function WeekDayCard({ session, isToday }: WeekDayCardProps) {
             <span className="inline-block text-xs bg-skedsmo-red text-white px-2 py-0.5 rounded-full font-semibold">
               I dag
             </span>
+          )}
+
+          {matches && matches.length > 0 && (
+            <div className="pt-2 mt-1 border-t border-gray-100 space-y-1">
+              {matches.length === 1 ? (
+                <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                  <span>⚽</span>
+                  <span className="font-medium">{matchOpponent(matches[0])}</span>
+                  {matches[0].time && <span className="text-gray-400">kl. {matches[0].time}</span>}
+                  {matches[0].groups && matches[0].groups.length > 0 && (
+                    <span className="ml-auto text-gray-400">Gr. {matches[0].groups.join('/')}</span>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <div className="text-xs text-gray-500 font-medium">⚽ {matches.length} kamper</div>
+                  <div className="flex flex-wrap gap-1">
+                    {matches.map((m) => (
+                      <span key={m.id} className="text-xs bg-purple-50 text-purple-700 border border-purple-100 px-1.5 py-0.5 rounded">
+                        {m.groups?.join('/') ?? '—'} · {m.time ?? ''}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           )}
         </div>
       </div>

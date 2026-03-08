@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import WeekDayCard from './WeekDayCard'
 import SwipeWeekWrapper from './SwipeWeekWrapper'
+import { getMatchesForDate } from '@/data/matches'
 
 interface WeekViewProps {
   week: Week
@@ -72,7 +73,11 @@ export default function WeekView({ week, block, today, prevWeekId, nextWeekId }:
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mb-6">
           {week.sessions.map((session, i) => (
             <div key={session.id} className="animate-fade-in-up" style={{ animationDelay: `${i * 70}ms` }}>
-              <WeekDayCard session={session} isToday={session.date === today} />
+              <WeekDayCard
+                session={session}
+                isToday={session.date === today}
+                matches={getMatchesForDate(session.date)}
+              />
             </div>
           ))}
         </div>
