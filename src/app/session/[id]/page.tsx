@@ -7,9 +7,11 @@ import {
   getWeekForSession,
   getBlockForSession,
   getAdjacentSessions,
-} from '@/data/season'
+} from '@/data/db-season'
+
+export const dynamic = 'force-dynamic'
 import { DAY_LABELS, NFF_DESCRIPTIONS, matchOpponent } from '@/data/types'
-import { getMatchesForDate } from '@/data/matches'
+import { getMatchesForDate } from '@/data/db-matches'
 import SessionTimeline from '@/components/SessionTimeline'
 import { fmtLong } from '@/lib/dates'
 
@@ -17,15 +19,15 @@ interface Props {
   params: { id: string }
 }
 
-export function generateStaticParams() {
-  return getAllSessions().map((s) => ({ id: s.id }))
+export async function generateStaticParams() {
+  return (await getAllSessions()).map((s) => ({ id: s.id }))
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const session = getSession(params.id)
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const session = await getSession(params.id)
   if (!session) return { title: 'Økt ikke funnet' }
-  const week = getWeekForSession(session.id)
-  const block = getBlockForSession(session.id)
+  const week = await getWeekForSession(session.id)
+  const block = await getBlockForSession(session.id)
   const title = week && block
     ? `${DAY_LABELS[session.dayOfWeek]} · ${block.nffCode} Uke ${week.number}`
     : DAY_LABELS[session.dayOfWeek]
@@ -39,17 +41,17 @@ const DAY_ACCENT: Record<string, string> = {
   saturday: 'bg-purple-600',
 }
 
-export default function SessionPage({ params }: Props) {
-  const session = getSession(params.id)
+export default async function SessionPage({ params }: Props) {
+  const session = await getSession(params.id)
   if (!session) notFound()
 
-  const week = getWeekForSession(session.id)
-  const block = getBlockForSession(session.id)
+  const week = await getWeekForSession(session.id)
+  const block = await getBlockForSession(session.id)
   if (!week || !block) notFound()
 
   const accent = DAY_ACCENT[session.dayOfWeek] ?? 'bg-gray-600'
-  const { prevId, nextId } = getAdjacentSessions(session.id)
-  const dayMatches = getMatchesForDate(session.date)
+  const { prevId, nextId } = await getAdjacentSessions(session.id)
+  const dayMatches = await getMatchesForDate(session.date)
 
   return (
     <div>

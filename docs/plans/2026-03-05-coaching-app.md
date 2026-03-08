@@ -540,3 +540,78 @@ No automated tests in this MVP (no testing framework set up). Manual verificatio
 - Open `/week` on day within block → correct week shown, today highlighted
 - Open `/season` → March 2026 block visible, current week progress shown
 - Build produces zero TS errors: `npm run build`
+
+---
+
+## Future: Database + admin tool
+
+The current architecture uses hardcoded TypeScript data files (`src/data/season.ts`, `src/data/exercises.ts`, `src/data/matches.ts`). This works for a single developer but doesn't scale to multiple coaches editing content. The next major evolution is to move data to a database and build a web-based admin interface.
+
+### Phase A – Database backend
+
+**Goal:** Replace static `.ts` data files with a persistent store that can be read and written at runtime.
+
+**Recommended stack:**
+- **Database:** [Supabase](https://supabase.com) (Postgres, hosted, free tier generous). Alternatively PlanetScale (MySQL) or Railway + Postgres.
+- **ORM / query layer:** [Drizzle ORM](https://orm.drizzle.team) for type-safe queries that mirror the existing TypeScript types closely.
+- **API:** Next.js Route Handlers (`app/api/...`) — drop the `output: 'export'` constraint and switch to a Node.js runtime on Vercel.
+
+**Schema (mirrors current types):**
+```
+seasons → blocks → weeks → sessions → group_variants
+exercises → coaching_points (1:many)
+matches
+```
+
+**Migration path:**
+1. Scaffold Supabase project, define schema with Drizzle migrations.
+2. Write a one-time seed script that reads the current `season.ts` and `exercises.ts` and inserts all rows.
+3. Replace data-access functions in `src/data/season.ts` with async Drizzle queries wrapped in Next.js `cache()`.
+4. Remove `output: 'export'` from `next.config.ts`; switch to SSR/ISR.
+
+### Phase B – Web-based admin tool
+
+**Goal:** Let coaches (non-developers) create and edit sessions, blocks, exercises, and match results through a browser UI — no code changes needed.
+
+**Architecture options:**
+
+| Option | Pros | Cons |
+|---|---|---|
+| Separate Next.js app (`/admin`) in same repo | Shared types, one deploy | Auth complexity |
+| Password-protected `/admin` route in same app | Simple, one URL | Needs middleware auth |
+| [Directus](https://directus.io) as headless CMS over Supabase | No custom UI needed | Another service to run |
+
+**Recommended:** password-protected `/admin` route within the same Next.js app, using [NextAuth.js](https://next-auth.js.org) (or Supabase Auth) with a single shared coach password or Google sign-in restricted to club email addresses.
+
+**Core admin screens:**
+- **Sesongplan** – create/edit/reorder blocks and weeks
+- **Økt** – edit any session (resistance, rondo, sjef, RRR, coaching focus)
+- **Øvelser** – edit exercise descriptions, coaching points, group variants
+- **Kamper** – manual match entry + result editing (supplement the import script)
+
+**Implementation notes:**
+- Use [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev) for form validation — Zod schemas can be derived from the existing TypeScript types.
+- Protect all `/admin` routes with a Next.js middleware that checks session cookie.
+- Keep the public-facing app read-only; admin mutations go through `app/api/admin/...` route handlers with server-side auth checks.
+- Audit log (updated_at + updated_by) on all mutable tables from day one.
+
+### Phase C – Forms-based temaperiode planning
+
+**Goal:** Let a coach plan an entire training period (temaperiode) through a guided, step-by-step form — without needing to understand the underlying data structure.
+
+**Flow:**
+
+1. **NFF-tema** – pick the primary NFF code (A1–F3) and optional secondary code (e.g. A1→A2).
+2. **Periode** – set start date and number of weeks (typically 3–4). The form auto-calculates all training days (Mon/Tue/Thu/Sat) and skips known holidays.
+3. **Kjerneøvelse** – search/select from the exercise bank (tiim.no import or manual entry). The form previews the exercise card.
+4. **Læringsmål og nøkkelpunkter** – free-text fields pre-populated with defaults for the chosen NFF code; coach edits to fit the squad.
+5. **Uke-for-uke progresjon** – for each week the form suggests the standard progression (Bli kjent → Øk presset → Integrasjon) with resistance level pre-filled; coach can override.
+6. **Økt-for-økt detaljer** – collapsed by default; coach can expand any single session to adjust rondo format, sjef over ballen, RRR, and coaching focus.
+7. **Forhåndsvisning** – read-only summary of the full period before saving, identical to the public-facing block detail page.
+8. **Lagre** – writes the new block + weeks + sessions to the database in one transaction.
+
+**Implementation notes:**
+- Multi-step form with URL-based step state (e.g. `/admin/ny-periode?step=3`) so the browser back button works.
+- Each step validates with Zod before advancing; no data is written until the final confirmation.
+- "Smart defaults" engine: given an NFF code and start date, pre-fill resistance levels, sjef-over-ballen rotation, and rondo format progression based on CLAUDE.md coaching philosophy.
+- Existing periods can be cloned as a starting point: "Bruk forrige periode som mal".

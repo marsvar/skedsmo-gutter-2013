@@ -177,34 +177,34 @@ export default function ReferansePage() {
           </div>
 
           {/* Sjef over ballen */}
-          <div className="bg-white border border-gray-200 rounded-xl p-4">
-            <p className="font-bold text-gray-800 mb-0.5">
+          <div className="rounded-xl p-4" style={{ background: '#111111', border: '1px solid #1f2937' }}>
+            <p className="font-bold mb-0.5" style={{ color: '#f3f4f6' }}>
               2. Sjef over ballen{' '}
-              <span className="text-gray-400 text-xs font-normal">10 min alltid</span>
+              <span className="text-xs font-normal" style={{ color: '#6b7280' }}>10 min alltid</span>
             </p>
-            <p className="text-gray-500 text-xs mb-3">
+            <p className="text-xs mb-3" style={{ color: '#9ca3af' }}>
               Individuell ballmestring. <strong>Samme øvelse hele uka</strong> (man/tirs/tors), roterer på 4-ukers syklus.
             </p>
             <div className="overflow-x-auto -mx-1">
               <table className="w-full text-xs">
                 <thead>
-                  <tr className="text-gray-400 border-b border-gray-100">
+                  <tr style={{ color: '#6b7280', borderBottom: '1px solid #1f2937' }}>
                     <th className="text-left pb-1 px-1">Uke</th>
                     <th className="text-left pb-1 px-1">Øvelse</th>
                     <th className="text-left pb-1 px-1">Eksempel</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50 text-gray-700">
+                <tbody style={{ color: '#d1d5db' }}>
                   {[
                     { week: 'Uke 1', drill: 'Pasning & mottak', ex: 'Par, 1–2 berøringer, veksle fot' },
                     { week: 'Uke 2', drill: 'Dribbling & vendinger', ex: 'Cruyff, rolling, cuts – kurs' },
                     { week: 'Uke 3', drill: '1v1 dueller', ex: 'Par: en fører, en presser passivt → aktivt' },
                     { week: 'Uke 4', drill: 'Fri ballmestring', ex: 'Spillerne velger selv' },
                   ].map((r) => (
-                    <tr key={r.week}>
+                    <tr key={r.week} style={{ borderBottom: '1px solid #1f2937' }}>
                       <td className="py-1.5 px-1 font-medium">{r.week}</td>
                       <td className="py-1.5 px-1">{r.drill}</td>
-                      <td className="py-1.5 px-1 text-gray-400">{r.ex}</td>
+                      <td className="py-1.5 px-1" style={{ color: '#6b7280' }}>{r.ex}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -2,24 +2,26 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight, Target, Lightbulb } from 'lucide-react'
-import { getAllBlocks, getBlock } from '@/data/season'
+import { getAllBlocks, getBlock } from '@/data/db-season'
 import { NFF_DESCRIPTIONS, DAY_LABELS, RESISTANCE_LABELS } from '@/data/types'
-import { getExercise } from '@/data/exercises'
+import { getAllExercises } from '@/data/db-exercises'
 import { fmtShort } from '@/lib/dates'
 import { weekLoadCurve } from '@/lib/load'
-import { getAllMatches } from '@/data/matches'
+import { getAllMatches } from '@/data/db-matches'
 import type { IntensityLevel, GroupLabel } from '@/data/types'
+
+export const dynamic = 'force-dynamic'
 
 interface Props {
   params: { blockId: string }
 }
 
-export function generateStaticParams() {
-  return getAllBlocks().map((b) => ({ blockId: b.id }))
+export async function generateStaticParams() {
+  return (await getAllBlocks()).map((b) => ({ blockId: b.id }))
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const block = getBlock(params.blockId)
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const block = await getBlock(params.blockId)
   if (!block) return { title: 'Blokk ikke funnet' }
   return { title: `${block.nffCode} – ${block.name} – Skedsmo` }
 }
@@ -92,12 +94,17 @@ function LoadCurve({
   )
 }
 
-export default function BlockDetailPage({ params }: Props) {
+export default async function BlockDetailPage({ params }: Props) {
   const today = new Date().toISOString().slice(0, 10)
-  const block = getBlock(params.blockId)
+  const [block, allBlocks, allMatches, allExercises] = await Promise.all([
+    getBlock(params.blockId),
+    getAllBlocks(),
+    getAllMatches(),
+    getAllExercises(),
+  ])
   if (!block) notFound()
 
-  const allBlocks = getAllBlocks()
+  const exerciseById = new Map(allExercises.map((e) => [e.id, e]))
   const blockIndex = allBlocks.findIndex((b) => b.id === block.id)
   const prevBlock = blockIndex > 0 ? allBlocks[blockIndex - 1] : null
   const nextBlock = blockIndex < allBlocks.length - 1 ? allBlocks[blockIndex + 1] : null
@@ -106,7 +113,6 @@ export default function BlockDetailPage({ params }: Props) {
   const totalSessions = allDates.length
   const isPlaceholder = totalSessions === 0
 
-  const allMatches = getAllMatches()
   const loadCurve = weekLoadCurve(block, allMatches)
 
   return (
@@ -230,7 +236,7 @@ export default function BlockDetailPage({ params }: Props) {
               {hasSessions ? (
                 <div className="p-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
                   {week.sessions.map((session) => {
-                    const exercise = getExercise(session.temaExerciseId)
+                    const exercise = exerciseById.get(session.temaExerciseId)
                     const isToday = session.date === today
                     return (
                       <Link

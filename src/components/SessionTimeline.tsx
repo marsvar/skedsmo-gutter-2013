@@ -54,40 +54,40 @@ function DurationBar({ session }: { session: Session }) {
     : 'bg-green-500'
 
   const labelColor = max > SESSION_TARGET + 15
-    ? 'text-red-700'
+    ? 'text-red-400'
     : max > SESSION_TARGET
-    ? 'text-amber-700'
-    : 'text-green-700'
+    ? 'text-amber-400'
+    : 'text-green-400'
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-3 mb-4 animate-fade-in-up">
+    <div className="rounded-xl p-3 mb-4 animate-fade-in-up" style={{ background: '#111111', border: '1px solid #1f2937' }}>
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs font-heading font-bold uppercase tracking-wide text-gray-500">Øktlengde</span>
+        <span className="text-xs font-heading font-bold uppercase tracking-wide" style={{ color: '#6b7280' }}>Øktlengde</span>
         <span className={`text-xs font-semibold ${labelColor}`}>
           {min}–{max} min
           {isOver && (
-            <span className="ml-1.5 font-normal text-gray-400">
+            <span className="ml-1.5 font-normal" style={{ color: '#6b7280' }}>
               (+{overMax} over {SESSION_TARGET} min)
             </span>
           )}
           {isTight && (
-            <span className="ml-1.5 font-normal text-gray-400">= {SESSION_TARGET} min</span>
+            <span className="ml-1.5 font-normal" style={{ color: '#6b7280' }}>= {SESSION_TARGET} min</span>
           )}
         </span>
       </div>
-      <div className="relative h-2 bg-gray-100 rounded-full overflow-hidden">
+      <div className="relative h-2 rounded-full overflow-hidden" style={{ background: '#1f2937' }}>
         <div
           className={`absolute left-0 top-0 h-full rounded-full transition-all ${barColor}`}
           style={{ width: `${fillPct}%` }}
         />
         {/* Target line */}
         <div
-          className="absolute top-0 h-full w-0.5 bg-gray-400 z-10"
-          style={{ left: `${targetPct}%` }}
+          className="absolute top-0 h-full w-0.5 z-10"
+          style={{ left: `${targetPct}%`, background: '#6b7280' }}
         />
       </div>
       <div className="flex justify-end mt-1">
-        <span className="text-[10px] text-gray-400">Mål: {SESSION_TARGET} min</span>
+        <span className="text-[10px]" style={{ color: '#6b7280' }}>Mål: {SESSION_TARGET} min</span>
       </div>
     </div>
   )
@@ -112,10 +112,10 @@ function TimelineCard({
         <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-[9px] font-bold shrink-0 whitespace-nowrap ${accentClass}`}>
           {duration}
         </div>
-        <div className="w-px flex-1 bg-gray-200 mt-1" />
+        <div className="w-px flex-1 mt-1" style={{ background: '#1f2937' }} />
       </div>
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 flex-1 mb-3">
-        <div className="font-heading font-bold tracking-wide text-gray-800 mb-1">{title}</div>
+      <div className="rounded-xl p-4 flex-1 mb-3" style={{ background: '#111111', border: '1px solid #1f2937' }}>
+        <div className="font-heading font-bold tracking-wide mb-1" style={{ color: '#f3f4f6' }}>{title}</div>
         {children}
       </div>
     </div>
@@ -138,11 +138,12 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
             href="https://www.skadefri.no/idretter/fotball/skadefri-fotball/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-teal-700 underline"
+            className="text-sm font-medium underline"
+            style={{ color: '#2dd4bf' }}
           >
             Skadefri fotball ↗
           </a>
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-xs mt-1" style={{ color: '#6b7280' }}>
             Løpeøvelser · hopp &amp; landing · styrke kjernemuskulatur
           </p>
         </div>
@@ -151,12 +152,12 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
       {/* 1. Rondo */}
       <TimelineCard duration="10'" title="Rondo" accentClass="bg-gray-500" delay={80}>
         <div className="flex items-center gap-2 mt-1">
-          <span className="text-sm font-medium text-gray-700">{session.rondoFormat}</span>
-          <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
+          <span className="text-sm font-medium" style={{ color: '#d1d5db' }}>{session.rondoFormat}</span>
+          <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: '#1f2937', color: '#9ca3af' }}>
             Hele laget
           </span>
         </div>
-        <p className="text-xs text-gray-400 mt-1">
+        <p className="text-xs mt-1" style={{ color: '#6b7280' }}>
           Fast åpning – endres ikke med tema
         </p>
       </TimelineCard>
@@ -164,8 +165,8 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
       {/* 2. Sjef over ballen */}
       {session.sjefOverBallenFocus !== '—' && (
         <TimelineCard duration="10'" title="Sjef over ballen" accentClass="bg-gray-500" delay={160}>
-          <p className="text-sm text-gray-700 mt-1">{session.sjefOverBallenFocus}</p>
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-sm mt-1" style={{ color: '#d1d5db' }}>{session.sjefOverBallenFocus}</p>
+          <p className="text-xs mt-1" style={{ color: '#6b7280' }}>
             Samme øvelse man/tirs/tors denne uken
           </p>
         </TimelineCard>
@@ -174,7 +175,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
       {/* 3. Temaøvelse */}
       <TimelineCard duration="25-30'" title="Temaøvelse" accentClass="bg-nff-blue" delay={240}>
         <div className="mt-1">
-          <span className="inline-block text-xs bg-blue-50 text-nff-blue px-2 py-0.5 rounded-full mb-2">
+          <span className="inline-block text-xs px-2 py-0.5 rounded-full mb-2" style={{ background: '#0c1a3a', color: '#93c5fd' }}>
             {RESISTANCE_LABELS[session.resistanceLevel]}
           </span>
           {temaExercise ? (
@@ -184,28 +185,29 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
                   href={temaExercise.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block font-medium text-nff-blue underline text-sm mb-1"
-                >
-                  {temaExercise.name} ↗
-                </a>
+className="block font-medium underline text-sm mb-1"
+                style={{ color: '#93c5fd' }}
+              >
+                {temaExercise.name} ↗
+              </a>
               ) : (
-                <p className="font-medium text-gray-800 text-sm mb-1">{temaExercise.name}</p>
+                <p className="font-medium text-sm mb-1" style={{ color: '#f3f4f6' }}>{temaExercise.name}</p>
               )}
-              <p className="text-xs text-gray-500 mb-3">{temaExercise.description}</p>
+              <p className="text-xs mb-3" style={{ color: '#9ca3af' }}>{temaExercise.description}</p>
 
               {/* Group A/B/C tabs */}
               <GroupVariantTabs variants={session.groupVariants} />
 
               {/* Coaching points */}
               {temaExercise.coachingPoints.length > 0 && (
-                <div className="mt-3 pt-3 border-t border-gray-100">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
+                <div className="mt-3 pt-3" style={{ borderTop: '1px solid #1f2937' }}>
+                  <p className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: '#6b7280' }}>
                     Nøkkelpunkter
                   </p>
                   <ul className="space-y-1">
                     {temaExercise.coachingPoints.map((pt) => (
-                      <li key={pt} className="text-xs text-gray-600 flex gap-1">
-                        <span className="text-nff-red">•</span> {pt}
+                      <li key={pt} className="text-xs flex gap-1" style={{ color: '#d1d5db' }}>
+                        <span style={{ color: '#c6180e' }}>•</span> {pt}
                       </li>
                     ))}
                   </ul>
@@ -213,7 +215,7 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
               )}
             </>
           ) : (
-            <p className="text-sm text-gray-500">Øvelse ikke funnet: {session.temaExerciseId}</p>
+            <p className="text-sm" style={{ color: '#9ca3af' }}>Øvelse ikke funnet: {session.temaExerciseId}</p>
           )}
         </div>
       </TimelineCard>
@@ -226,21 +228,22 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
               href={spillExercise.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="block font-medium text-nff-blue underline text-sm mb-1"
+              className="block font-medium underline text-sm mb-1"
+              style={{ color: '#93c5fd' }}
             >
               {spillExercise.name} ↗
             </a>
           ) : (
-            <p className="font-medium text-gray-800 text-sm mb-1">
+            <p className="font-medium text-sm mb-1" style={{ color: '#f3f4f6' }}>
               {spillExercise?.name ?? session.kamptilpassetSpill.exerciseId}
             </p>
           )}
-          <span className="inline-block text-xs bg-red-50 text-red-700 px-2 py-0.5 rounded-full mb-2">
+          <span className="inline-block text-xs px-2 py-0.5 rounded-full mb-2" style={{ background: '#2d0000', color: '#fca5a5' }}>
             {session.kamptilpassetSpill.format}
           </span>
-          <p className="text-sm text-gray-700">{session.kamptilpassetSpill.constraint}</p>
+          <p className="text-sm" style={{ color: '#d1d5db' }}>{session.kamptilpassetSpill.constraint}</p>
           {session.kamptilpassetSpill.notes && (
-            <p className="text-xs text-gray-400 mt-1 italic">{session.kamptilpassetSpill.notes}</p>
+            <p className="text-xs mt-1 italic" style={{ color: '#6b7280' }}>{session.kamptilpassetSpill.notes}</p>
           )}
         </div>
       </TimelineCard>
@@ -248,10 +251,10 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
       {/* 5. RRR (conditional) */}
       {session.hasRRR && (
         <TimelineCard duration="15-20'" title="Fysisk RRR" accentClass="bg-red-600" delay={400}>
-          <p className="text-sm text-gray-700 mt-1">
+          <p className="text-sm mt-1" style={{ color: '#d1d5db' }}>
             {session.rrrDescription ?? 'Fysisk trening – ansvarlig trener.'}
           </p>
-          <p className="text-xs text-gray-400 mt-1">Plassert sist i økt</p>
+          <p className="text-xs mt-1" style={{ color: '#6b7280' }}>Plassert sist i økt</p>
         </TimelineCard>
       )}
 
@@ -262,9 +265,9 @@ export default function SessionTimeline({ session, block, week }: SessionTimelin
             5'
           </div>
         </div>
-        <div className="bg-green-50 border border-green-200 rounded-xl shadow-sm p-4 flex-1 mb-3">
-          <div className="font-heading font-bold tracking-wide text-green-800 mb-1">Oppsummering</div>
-          <p className="text-sm text-green-700">{session.oppsummering}</p>
+        <div className="rounded-xl p-4 flex-1 mb-3" style={{ background: '#001208', border: '1px solid #166534' }}>
+          <div className="font-heading font-bold tracking-wide mb-1" style={{ color: '#86efac' }}>Oppsummering</div>
+          <p className="text-sm" style={{ color: '#4ade80' }}>{session.oppsummering}</p>
         </div>
       </div>
     </div>

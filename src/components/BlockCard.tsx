@@ -9,7 +9,13 @@ interface BlockCardProps {
   isCurrent: boolean
 }
 
-const WEEK_COLORS = ['bg-blue-100 text-blue-700', 'bg-yellow-100 text-yellow-700', 'bg-orange-100 text-orange-700', 'bg-green-100 text-green-700', 'bg-purple-100 text-purple-700']
+const WEEK_COLORS = [
+  'text-blue-400',
+  'text-yellow-400',
+  'text-orange-400',
+  'text-green-400',
+  'text-purple-400',
+]
 
 export default function BlockCard({ block, isCurrent }: BlockCardProps) {
   const allDates = block.weeks.flatMap((w) => w.sessions.map((s) => s.date)).sort()
@@ -25,14 +31,19 @@ export default function BlockCard({ block, isCurrent }: BlockCardProps) {
   return (
     <Link
       href={`/block/${block.id}/`}
-      className={`block border rounded-xl p-4 bg-white transition-all hover:shadow-md active:scale-[0.99] ${
-        isCurrent ? 'border-skedsmo-red ring-1 ring-skedsmo-red' : isPlaceholder ? 'border-gray-100 opacity-70' : 'border-gray-200'
+      className={`block border rounded-xl p-4 transition-all hover:opacity-90 active:scale-[0.99] ${
+        isCurrent
+          ? 'border-skedsmo-red ring-1 ring-skedsmo-red'
+          : isPlaceholder
+          ? 'border-[#111827] opacity-70'
+          : 'border-[#1f2937]'
       }`}
+      style={{ background: '#111111' }}
     >
       {/* Header row */}
       <div className="flex items-start justify-between gap-2 mb-2">
         <div className="flex items-center gap-1.5 flex-wrap">
-          <span className="text-xs font-bold bg-blue-50 text-nff-blue px-2 py-0.5 rounded-full">
+          <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: '#0c1a3a', color: '#93c5fd' }}>
             {block.nffCode}
           </span>
           {isCurrent && (
@@ -41,30 +52,28 @@ export default function BlockCard({ block, isCurrent }: BlockCardProps) {
             </span>
           )}
           {isPlaceholder && (
-            <span className="text-xs bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full">
-              Planlegges
-            </span>
+            <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: '#1f2937', color: '#6b7280' }}>Planlegges</span>
           )}
         </div>
-        <span className="text-xs text-gray-400 whitespace-nowrap">
+        <span className="text-xs whitespace-nowrap" style={{ color: '#6b7280' }}>
           {isPlaceholder ? fallbackRange : `${fmtShort(firstDate)} – ${fmtShort(lastDate)}`}
         </span>
       </div>
 
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
-          <p className="font-semibold text-gray-800 text-sm mb-0.5">{block.name}</p>
-          <p className="text-xs text-gray-500">{NFF_DESCRIPTIONS[block.nffCode]}</p>
+          <p className="font-heading font-bold text-sm mb-0.5" style={{ color: '#f3f4f6' }}>{block.name}</p>
+          <p className="text-xs" style={{ color: '#9ca3af' }}>{NFF_DESCRIPTIONS[block.nffCode]}</p>
         </div>
-        <ChevronRight className="w-4 h-4 text-gray-300 flex-shrink-0 mt-0.5" />
+        <ChevronRight className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#374151' }} />
       </div>
 
-      {/* Week progression pills */}
-      <div className="flex gap-1.5 flex-wrap mt-3">
+      {/* Week progression */}
+      <div className="flex gap-2 flex-wrap mt-3">
         {block.weeks.map((week, i) => (
           <span
             key={week.id}
-            className={`text-xs px-2 py-0.5 rounded-full ${WEEK_COLORS[i % WEEK_COLORS.length]}`}
+            className={`font-heading font-semibold text-xs ${WEEK_COLORS[i % WEEK_COLORS.length]}`}
           >
             Uke {week.number}: {week.focus}
           </span>

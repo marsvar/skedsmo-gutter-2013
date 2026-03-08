@@ -48,10 +48,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="no" className={`${barlowCondensed.variable} ${dmSans.variable}`}>
-      <body className="bg-gray-50 text-gray-900 font-sans antialiased">
+      <body className="bg-[#0b0b0b] text-[#f3f4f6] font-sans antialiased">
         {/* App header */}
-        <header className="bg-white border-b-2 border-skedsmo-red sticky top-0 z-40">
-          <div className="max-w-2xl mx-auto px-4 py-2.5 flex items-center gap-3">
+        <header className="bg-[#0b0b0b] border-b border-skedsmo-red sticky top-0 z-40">
+          <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://skedsmofk.no/images/logo.png"
@@ -59,9 +59,10 @@ export default function RootLayout({
               className="w-8 h-8 object-contain"
             />
             <div>
-              <div className="font-heading text-base font-bold tracking-widest uppercase text-gray-900 leading-none">Skedsmo Fotball</div>
-              <div className="text-[10px] text-gray-400 tracking-widest uppercase mt-0.5">Treningsappen · G2013</div>
+              <div className="font-heading text-xl font-extrabold tracking-widest uppercase text-white leading-none">Skedsmo</div>
+              <div className="font-heading text-[10px] tracking-widest uppercase mt-0.5" style={{ color: '#6b7280' }}>G2013 · Treningsapp</div>
             </div>
+            <div className="ml-auto w-1.5 h-5 rounded-full" style={{ background: '#c6180e' }} />
           </div>
         </header>
 

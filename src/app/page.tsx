@@ -1,9 +1,11 @@
 import { resolveToday, getNextSession } from '@/lib/resolveToday'
 import { DAY_LABELS, NFF_DESCRIPTIONS } from '@/data/types'
+
+export const dynamic = 'force-dynamic'
 import SessionTimeline from '@/components/SessionTimeline'
 import Link from 'next/link'
 import { recommendedIntensity, intensityReason } from '@/lib/load'
-import { getAllMatches } from '@/data/matches'
+import { getAllMatches } from '@/data/db-matches'
 import type { IntensityLevel } from '@/data/types'
 
 const DAY_ACCENT: Record<string, string> = {
@@ -38,12 +40,12 @@ function IntensityBadge({ level }: { level: IntensityLevel }) {
   )
 }
 
-export default function TodayPage() {
+export default async function TodayPage() {
   const today = new Date().toISOString().slice(0, 10)
-  const ctx = resolveToday(today)
+  const ctx = await resolveToday(today)
 
   if (!ctx) {
-    const next = getNextSession(today)
+    const next = await getNextSession(today)
     return (
       <div className="text-center py-12">
         <div className="text-5xl mb-4">☕</div>
@@ -75,7 +77,7 @@ export default function TodayPage() {
   }
 
   const { session, week, block } = ctx
-  const allMatches = getAllMatches()
+  const allMatches = await getAllMatches()
   const sessionDatesThisWeek = week.sessions.map((s) => s.date).sort()
   const groups = ['A', 'B', 'C'] as const
   const intensityData = groups.map((g) => ({
