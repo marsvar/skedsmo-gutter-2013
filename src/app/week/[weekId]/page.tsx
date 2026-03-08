@@ -1,31 +1,33 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { getAllWeeks, getWeek, getBlockForWeek, getAdjacentWeeks } from '@/data/season'
+import { getAllWeeks, getWeek, getBlockForWeek, getAdjacentWeeks } from '@/data/db-season'
 import WeekView from '@/components/WeekView'
+
+export const dynamic = 'force-dynamic'
 
 interface Props {
   params: { weekId: string }
 }
 
-export function generateStaticParams() {
-  return getAllWeeks().map((w) => ({ weekId: w.id }))
+export async function generateStaticParams() {
+  return (await getAllWeeks()).map((w) => ({ weekId: w.id }))
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const week = getWeek(params.weekId)
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const week = await getWeek(params.weekId)
   if (!week) return { title: 'Uke ikke funnet' }
   return { title: `Uke ${week.number} – ${week.focus} – Skedsmo` }
 }
 
-export default function WeekByIdPage({ params }: Props) {
+export default async function WeekByIdPage({ params }: Props) {
   const today = new Date().toISOString().slice(0, 10)
-  const week = getWeek(params.weekId)
+  const week = await getWeek(params.weekId)
   if (!week) notFound()
 
-  const block = getBlockForWeek(params.weekId)
+  const block = await getBlockForWeek(params.weekId)
   if (!block) notFound()
 
-  const { prevId, nextId } = getAdjacentWeeks(week.id)
+  const { prevId, nextId } = await getAdjacentWeeks(week.id)
 
   return (
     <WeekView
