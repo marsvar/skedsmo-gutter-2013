@@ -1,11 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 
 export default function AdminLoginPage() {
-  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -25,7 +23,8 @@ export default function AdminLoginPage() {
       return
     }
 
-    router.replace('/admin')
+    // Hard redirect forces a full page reload so the server picks up the new session cookie
+    window.location.href = '/admin'
   }
 
   return (
