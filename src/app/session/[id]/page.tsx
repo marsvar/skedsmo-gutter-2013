@@ -55,23 +55,23 @@ export default function SessionPage({ params }: Props) {
     <div>
       {/* Back + prev/next row */}
       <div className="flex items-center justify-between mb-4">
-        <Link href={`/week/${week.id}/`} className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600">
+        <Link href={`/week/${week.id}/`} className="inline-flex items-center gap-1 text-sm hover:opacity-80 transition-opacity" style={{ color: '#6b7280' }}>
           ← Uke {week.number} – {week.focus}
         </Link>
         <div className="flex items-center gap-1">
           {prevId ? (
-            <Link href={`/session/${prevId}/`} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors text-lg leading-none" title="Forrige økt">
+            <Link href={`/session/${prevId}/`} className="p-1.5 rounded-lg text-lg leading-none transition-colors hover:bg-[#1f2937]" style={{ color: '#6b7280' }} title="Forrige økt">
               ‹
             </Link>
           ) : (
-            <span className="p-1.5 text-gray-200 text-lg leading-none">‹</span>
+            <span className="p-1.5 text-lg leading-none" style={{ color: '#374151' }}>‹</span>
           )}
           {nextId ? (
-            <Link href={`/session/${nextId}/`} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors text-lg leading-none" title="Neste økt">
+            <Link href={`/session/${nextId}/`} className="p-1.5 rounded-lg text-lg leading-none transition-colors hover:bg-[#1f2937]" style={{ color: '#6b7280' }} title="Neste økt">
               ›
             </Link>
           ) : (
-            <span className="p-1.5 text-gray-200 text-lg leading-none">›</span>
+            <span className="p-1.5 text-lg leading-none" style={{ color: '#374151' }}>›</span>
           )}
         </div>
       </div>
@@ -94,8 +94,8 @@ export default function SessionPage({ params }: Props) {
 
       {/* Match(es) on this day */}
       {dayMatches.length > 0 && (
-        <div className="bg-purple-50 border border-purple-200 rounded-xl p-3 mb-5">
-          <p className="text-xs font-semibold text-purple-700 uppercase tracking-wide mb-2">
+        <div className="rounded-xl p-3 mb-5" style={{ background: '#120020', border: '1px solid #4c1d95' }}>
+          <p className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: '#c084fc' }}>
             ⚽ Kamp{dayMatches.length > 1 ? 'er' : ''} i dag
           </p>
           <div className="space-y-3">
@@ -103,18 +103,18 @@ export default function SessionPage({ params }: Props) {
               <div key={m.id}>
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <div className="text-sm font-semibold text-gray-800">
+                    <div className="text-sm font-semibold" style={{ color: '#f3f4f6' }}>
                       {matchOpponent(m)}
                     </div>
-                    <div className="text-xs text-gray-500 mt-0.5">
+                    <div className="text-xs mt-0.5" style={{ color: '#9ca3af' }}>
                       {m.tournament}
                       {m.groups && m.groups.length > 0 && (
-                        <span className="ml-1.5 px-1.5 py-0.5 bg-purple-100 text-purple-700 rounded text-xs">
+                        <span className="ml-1.5 px-1.5 py-0.5 rounded text-xs" style={{ background: '#2e1065', color: '#d8b4fe' }}>
                           Gruppe {m.groups.join(' / ')}
                         </span>
                       )}
                     </div>
-                    <div className="text-xs text-gray-500 mt-0.5">
+                    <div className="text-xs mt-0.5" style={{ color: '#9ca3af' }}>
                       {m.time && <span>kl. {m.time}</span>}
                       {m.venue && <span className="ml-1.5">· {m.venue}</span>}
                       {m.duration && <span className="ml-1.5">· {m.duration}</span>}
@@ -124,7 +124,8 @@ export default function SessionPage({ params }: Props) {
                     href={`https://www.fotball.no/fotballdata/kamp/?fiksId=${m.fiksId}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="shrink-0 text-xs text-purple-600 underline hover:text-purple-800"
+                    className="shrink-0 text-xs underline hover:opacity-80"
+                    style={{ color: '#c084fc' }}
                   >
                     fotball.no →
                   </a>
@@ -137,13 +138,13 @@ export default function SessionPage({ params }: Props) {
 
       {/* Coaching focus */}
       {session.coachingFocus.length > 0 && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 mb-5">
-          <p className="text-xs font-semibold text-yellow-800 uppercase tracking-wide mb-1">
+        <div className="rounded-xl p-3 mb-5" style={{ background: '#1a1000', border: '1px solid #78350f' }}>
+          <p className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: '#fde68a' }}>
             Treningsfokus
           </p>
           <ul className="space-y-0.5">
             {session.coachingFocus.map((pt) => (
-              <li key={pt} className="text-sm text-yellow-900 flex gap-1.5">
+              <li key={pt} className="text-sm flex gap-1.5" style={{ color: '#fef3c7' }}>
                 <span>•</span> {pt}
               </li>
             ))}

@@ -32,14 +32,14 @@ export default function WeekView({ week, block, today, prevWeekId, nextWeekId }:
           {/* Prev / Next */}
           <div className="flex items-center gap-1">
             {prevHref ? (
-              <Link href={prevHref} className="p-1.5 rounded-lg transition-colors" style={{ color: '#9ca3af' }} onMouseOver={(e) => (e.currentTarget.style.background='#1f2937')} onMouseOut={(e) => (e.currentTarget.style.background='')} title="Forrige uke">
+              <Link href={prevHref} className="p-1.5 rounded-lg transition-colors hover:bg-[#1f2937]" style={{ color: '#9ca3af' }} title="Forrige uke">
                 <ChevronLeft className="w-5 h-5" />
               </Link>
             ) : (
               <span className="p-1.5" style={{ color: '#374151' }}><ChevronLeft className="w-5 h-5" /></span>
             )}
             {nextHref ? (
-              <Link href={nextHref} className="p-1.5 rounded-lg transition-colors" style={{ color: '#9ca3af' }} onMouseOver={(e) => (e.currentTarget.style.background='#1f2937')} onMouseOut={(e) => (e.currentTarget.style.background='')} title="Neste uke">
+              <Link href={nextHref} className="p-1.5 rounded-lg transition-colors hover:bg-[#1f2937]" style={{ color: '#9ca3af' }} title="Neste uke">
                 <ChevronRight className="w-5 h-5" />
               </Link>
             ) : (
