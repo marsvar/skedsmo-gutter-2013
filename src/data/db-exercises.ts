@@ -2,6 +2,18 @@ import { cache } from 'react'
 import { db } from '@/db/client'
 import type { Exercise, NFFCode, GroupLabel, ExerciseVariant } from './types'
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+/** JSONB columns may be stored as double-encoded strings (e.g. '"[]"') by the
+ *  import scripts. Parse them back to arrays regardless of storage format. */
+function parseJsonbArray(val: unknown): string[] {
+  if (Array.isArray(val)) return val as string[]
+  if (typeof val === 'string') {
+    try { const parsed = JSON.parse(val); if (Array.isArray(parsed)) return parsed } catch { /* fall through */ }
+  }
+  return []
+}
+
 // ── Mapper ────────────────────────────────────────────────────────────────────
 
 function mapExercise(row: {
@@ -44,9 +56,9 @@ function mapExercise(row: {
     playersMax: row.playersMax,
     durationMin: row.durationMin,
     area: row.area,
-    ageGroups: (row.ageGroups ?? []) as string[],
-    tags: (row.tags ?? []) as string[],
-    coachingPoints: (row.coachingPoints ?? []) as string[],
+    ageGroups: parseJsonbArray(row.ageGroups),
+    tags: parseJsonbArray(row.tags),
+    coachingPoints: parseJsonbArray(row.coachingPoints),
     groupVariants: groupVariants as Record<GroupLabel, ExerciseVariant>,
   }
 }

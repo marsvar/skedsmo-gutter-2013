@@ -11,6 +11,7 @@ import { cache } from 'react'
 import { asc } from 'drizzle-orm'
 import { db } from '@/db/client'
 import { blocks, weeks, sessions } from '@/db/schema'
+import { season2026 } from './season'
 import type {
   Season,
   Block,
@@ -142,30 +143,37 @@ function mapBlock(row: RawBlock): Block {
  * Cached per server request via React `cache()`.
  */
 export const getSeason = cache(async (): Promise<Season> => {
-  const row = await db.query.seasons.findFirst({
-    with: {
-      blocks: {
-        orderBy: [asc(blocks.sortOrder)],
-        with: {
-          weeks: {
-            orderBy: [asc(weeks.number)],
-            with: {
-              sessions: {
-                orderBy: [asc(sessions.date)],
-                with: { groupVariants: true },
+  try {
+    const row = await db.query.seasons.findFirst({
+      with: {
+        blocks: {
+          orderBy: [asc(blocks.sortOrder)],
+          with: {
+            weeks: {
+              orderBy: [asc(weeks.number)],
+              with: {
+                sessions: {
+                  orderBy: [asc(sessions.date)],
+                  with: { groupVariants: true },
+                },
               },
             },
           },
         },
       },
-    },
-  })
-  if (!row) throw new Error('Season 2026 not found in database')
-  return {
-    id: row.id,
-    year: row.year,
-    blocks: (row.blocks as RawBlock[]).map(mapBlock),
+    })
+    if (row) {
+      return {
+        id: row.id,
+        year: row.year,
+        blocks: (row.blocks as RawBlock[]).map(mapBlock),
+      }
+    }
+  } catch {
+    // DB unavailable — fall through to static data
   }
+  // Fall back to static season data when DB is unreachable or empty
+  return season2026
 })
 
 // ── Derived accessors ─────────────────────────────────────────────────────────

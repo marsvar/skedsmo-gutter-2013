@@ -6,13 +6,13 @@ import * as schema from './schema'
 // Locally (and for migrations), the direct URL is used via drizzle.config.ts.
 const connectionString = process.env.DATABASE_POOL_URL ?? process.env.DATABASE_URL
 
-if (!connectionString) {
-  throw new Error('DATABASE_POOL_URL or DATABASE_URL environment variable is required')
-}
-
-// Disable prefetch for serverless — postgres.js opens a new connection per request
-// when max is 1. Using the pooler (DATABASE_POOL_URL) handles the actual pooling.
-const client = postgres(connectionString, { prepare: false })
+// Provide a dummy connection string during build so the module loads without crashing.
+// Any DB calls made at build time against this will fail gracefully in the try/catch
+// wrappers in db-season.ts and db-matches.ts.
+const client = postgres(connectionString ?? 'postgresql://localhost/placeholder', {
+  prepare: false,
+  ...(connectionString ? {} : { max: 0 }),
+})
 
 export const db = drizzle(client, { schema })
 
