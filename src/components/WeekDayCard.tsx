@@ -11,10 +11,10 @@ interface WeekDayCardProps {
 }
 
 const DAY_STYLES: Record<string, { border: string; header: string; badge: string }> = {
-  monday:   { border: 'border-blue-200',   header: 'bg-blue-600 text-white',   badge: 'bg-blue-100 text-blue-700' },
-  tuesday:  { border: 'border-green-200',  header: 'bg-green-600 text-white',  badge: 'bg-green-100 text-green-700' },
-  thursday: { border: 'border-orange-200', header: 'bg-orange-500 text-white', badge: 'bg-orange-100 text-orange-700' },
-  saturday: { border: 'border-purple-200', header: 'bg-purple-600 text-white', badge: 'bg-purple-100 text-purple-700' },
+  monday:   { border: 'border-[#1e2d3d]',  header: 'bg-blue-600 text-white',   badge: 'bg-blue-900/50 text-blue-300' },
+  tuesday:  { border: 'border-[#1a2e1e]',  header: 'bg-green-600 text-white',  badge: 'bg-green-900/50 text-green-300' },
+  thursday: { border: 'border-[#2e1e0a]',  header: 'bg-orange-500 text-white', badge: 'bg-orange-900/50 text-orange-300' },
+  saturday: { border: 'border-[#1e1330]',  header: 'bg-purple-600 text-white', badge: 'bg-purple-900/50 text-purple-300' },
 }
 
 export default function WeekDayCard({ session, isToday, matches }: WeekDayCardProps) {
@@ -25,7 +25,7 @@ export default function WeekDayCard({ session, isToday, matches }: WeekDayCardPr
     <Link href={`/session/${session.id}/`} className="block">
       <div
         className={`border rounded-xl overflow-hidden transition-all shadow-sm hover:shadow-md ${styles.border} ${
-          isToday ? 'ring-2 ring-skedsmo-red ring-offset-1' : ''
+          isToday ? 'ring-2 ring-skedsmo-red ring-offset-2 ring-offset-[#0b0b0b]' : ''
         }`}
       >
         {/* Header */}
@@ -35,8 +35,8 @@ export default function WeekDayCard({ session, isToday, matches }: WeekDayCardPr
         </div>
 
         {/* Body */}
-        <div className="p-3 space-y-2 text-xs bg-white">
-          <div className="flex gap-2 items-center text-gray-500">
+        <div className="p-3 space-y-2 text-xs" style={{ background: '#111111' }}>
+          <div className="flex gap-2 items-center" style={{ color: '#9ca3af' }}>
             <span className="italic">{session.rondoFormat} rondo</span>
             <span>·</span>
             <span className="italic">{session.sjefOverBallenFocus !== '—' ? session.sjefOverBallenFocus : 'Kampdag'}</span>
@@ -44,7 +44,7 @@ export default function WeekDayCard({ session, isToday, matches }: WeekDayCardPr
 
           {temaExercise && (
             <div>
-              <span className="font-medium text-gray-700">{temaExercise.name}</span>
+              <span className="font-medium" style={{ color: '#d1d5db' }}>{temaExercise.name}</span>
               <span className={`ml-2 text-xs px-1.5 py-0.5 rounded-full ${styles.badge}`}>
                 {RESISTANCE_LABELS[session.resistanceLevel]}
               </span>
@@ -52,7 +52,7 @@ export default function WeekDayCard({ session, isToday, matches }: WeekDayCardPr
           )}
 
           {session.hasRRR && (
-            <span className="inline-block text-xs bg-red-50 border border-red-200 text-red-700 px-2 py-0.5 rounded">
+            <span className="inline-block text-xs border px-2 py-0.5 rounded" style={{ background: '#1a0000', borderColor: '#991b1b', color: '#fca5a5' }}>
               + RRR
             </span>
           )}
@@ -64,22 +64,22 @@ export default function WeekDayCard({ session, isToday, matches }: WeekDayCardPr
           )}
 
           {matches && matches.length > 0 && (
-            <div className="pt-2 mt-1 border-t border-gray-100 space-y-1">
+            <div className="pt-2 mt-1 space-y-1" style={{ borderTop: '1px solid #1f2937' }}>
               {matches.length === 1 ? (
-                <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                <div className="flex items-center gap-1.5 text-xs" style={{ color: '#d1d5db' }}>
                   <span>⚽</span>
                   <span className="font-medium">{matchOpponent(matches[0])}</span>
-                  {matches[0].time && <span className="text-gray-400">kl. {matches[0].time}</span>}
+                  {matches[0].time && <span style={{ color: '#6b7280' }}>kl. {matches[0].time}</span>}
                   {matches[0].groups && matches[0].groups.length > 0 && (
-                    <span className="ml-auto text-gray-400">Gr. {matches[0].groups.join('/')}</span>
+                    <span className="ml-auto" style={{ color: '#6b7280' }}>Gr. {matches[0].groups.join('/')}</span>
                   )}
                 </div>
               ) : (
                 <>
-                  <div className="text-xs text-gray-500 font-medium">⚽ {matches.length} kamper</div>
+                  <div className="text-xs font-medium" style={{ color: '#9ca3af' }}>⚽ {matches.length} kamper</div>
                   <div className="flex flex-wrap gap-1">
                     {matches.map((m) => (
-                      <span key={m.id} className="text-xs bg-purple-50 text-purple-700 border border-purple-100 px-1.5 py-0.5 rounded">
+                      <span key={m.id} className="text-xs border px-1.5 py-0.5 rounded" style={{ background: '#0d001a', borderColor: '#4c1d95', color: '#d8b4fe' }}>
                         {m.groups?.join('/') ?? '—'} · {m.time ?? ''}
                       </span>
                     ))}
