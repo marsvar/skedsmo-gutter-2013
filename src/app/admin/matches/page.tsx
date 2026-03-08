@@ -13,9 +13,17 @@ export default async function AdminMatchesPage() {
 
   return (
     <div className="p-8 max-w-4xl">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white">Kamper</h1>
-        <p className="text-white/40 text-sm mt-1">{allMatches.length} kamper totalt</p>
+      <div className="mb-8 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Kamper</h1>
+          <p className="text-white/40 text-sm mt-1">{allMatches.length} kamper totalt</p>
+        </div>
+        <Link
+          href="/admin/matches/new"
+          className="shrink-0 bg-[#c6180e] hover:bg-[#a8140c] text-white text-sm font-medium rounded-xl px-4 py-2.5 transition-colors"
+        >
+          + Ny kamp
+        </Link>
       </div>
 
       {/* Upcoming */}
