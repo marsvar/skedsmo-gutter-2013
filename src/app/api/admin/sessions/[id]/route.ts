@@ -65,3 +65,18 @@ export async function PUT(
 
   return NextResponse.json({ ok: true })
 }
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { id: string } },
+) {
+  const auth = await requireAdminAuth(req)
+  if (isAuthError(auth)) return auth
+
+  await db.transaction(async (tx) => {
+    await tx.delete(sessionGroupVariants).where(eq(sessionGroupVariants.sessionId, params.id))
+    await tx.delete(sessions).where(eq(sessions.id, params.id))
+  })
+
+  return NextResponse.json({ deleted: true })
+}

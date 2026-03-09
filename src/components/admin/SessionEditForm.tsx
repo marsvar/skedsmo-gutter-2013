@@ -49,13 +49,20 @@ function Textarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
 export function SessionEditForm({
   session,
   exercises,
+  blockNffCode,
 }: {
   session: Session
   exercises: ExerciseOption[]
+  blockNffCode?: string
 }) {
   const router = useRouter()
   const [serverError, setServerError] = useState<string | null>(null)
   const [saved, setSaved] = useState(false)
+
+  // Filter exercises by block NFF code if provided
+  const filteredExercises = blockNffCode
+    ? exercises.filter((e) => e.nffCode === blockNffCode)
+    : exercises
 
   const { register, control, handleSubmit, formState: { errors, isSubmitting } } =
     useForm<SessionUpdateInput>({
@@ -137,11 +144,25 @@ export function SessionEditForm({
 
         <FormRow label="Temaøvelse">
           <Select {...register('temaExerciseId')}>
-            {exercises.map((e) => (
+            {blockNffCode && filteredExercises.length === 0 && (
+              <option value="">Ingen øvelser for {blockNffCode}</option>
+            )}
+            {filteredExercises.map((e) => (
               <option key={e.id} value={e.id}>
                 [{e.nffCode}] {e.name}
               </option>
             ))}
+            {blockNffCode && filteredExercises.length < exercises.length && (
+              <optgroup label="Andre NFF-koder">
+                {exercises
+                  .filter((e) => e.nffCode !== blockNffCode)
+                  .map((e) => (
+                    <option key={e.id} value={e.id}>
+                      [{e.nffCode}] {e.name}
+                    </option>
+                  ))}
+              </optgroup>
+            )}
           </Select>
         </FormRow>
 

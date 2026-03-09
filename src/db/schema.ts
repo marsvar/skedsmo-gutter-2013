@@ -7,13 +7,15 @@ import {
   primaryKey,
 } from 'drizzle-orm/pg-core'
 import { relations } from 'drizzle-orm'
-import type { KamptilpassetSpill, MatchResult } from '@/data/types'
+import type { KamptilpassetSpill, MatchResult, SkipPeriod } from '@/data/types'
 
 // ── Seasons ───────────────────────────────────────────────────────────────────
 
 export const seasons = pgTable('seasons', {
-  id:   text('id').primaryKey(),
-  year: integer('year').notNull(),
+  id:          text('id').primaryKey(),
+  year:        integer('year').notNull(),
+  isActive:    boolean('is_active').notNull().default(false),
+  skipPeriods: jsonb('skip_periods').$type<SkipPeriod[]>().notNull().default([]),
 })
 
 // ── Blocks ────────────────────────────────────────────────────────────────────
@@ -29,6 +31,8 @@ export const blocks = pgTable('blocks', {
   coachingPoints:     jsonb('coaching_points').notNull().$type<string[]>().default([]),
   coreExerciseId:     text('core_exercise_id').notNull(),
   sortOrder:          integer('sort_order').notNull().default(0),
+  startDate:          text('start_date'),
+  endDate:            text('end_date'),
 })
 
 // ── Weeks ─────────────────────────────────────────────────────────────────────

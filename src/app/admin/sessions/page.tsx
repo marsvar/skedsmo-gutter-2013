@@ -1,6 +1,7 @@
 import { getSeason } from '@/data/db-season'
 import Link from 'next/link'
 import { DAY_LABELS, RESISTANCE_LABELS } from '@/data/types'
+import { DeleteSessionButton, DeleteWeekButton, AddSessionButton, MoveSessionButton, type MoveWeekOption } from '@/components/admin/SessionAdminActions'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,6 +15,15 @@ export default async function AdminSessionsPage() {
       </div>
     )
   }
+
+  // Flat list of all weeks for the Move dropdown
+  const allWeeks: MoveWeekOption[] = season.blocks.flatMap((block) =>
+    block.weeks.map((week) => ({
+      id: week.id,
+      label: `Uke ${week.number} · ${week.focus}  (${week.dateRange})`,
+      blockLabel: `${block.nffCode} – ${block.name}`,
+    }))
+  )
 
   return (
     <div className="p-8 max-w-4xl">
@@ -42,6 +52,7 @@ export default async function AdminSessionsPage() {
                       Uke {week.number} — {week.focus}
                     </span>
                     <span className="text-xs text-white/20">{week.dateRange}</span>
+                    <DeleteWeekButton weekId={week.id} weekLabel={`${week.number} – ${week.focus}`} />
                   </div>
 
                   {/* Sessions table */}
@@ -67,17 +78,29 @@ export default async function AdminSessionsPage() {
                             <td className="px-4 py-3 text-white/70">{RESISTANCE_LABELS[session.resistanceLevel]}</td>
                             <td className="px-4 py-3 text-white/50 font-mono">{session.rondoFormat}</td>
                             <td className="px-4 py-3 text-right">
-                              <Link
-                                href={`/admin/sessions/${session.id}`}
-                                className="text-xs bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-3 py-1.5 rounded-lg transition-colors"
-                              >
-                                Rediger
-                              </Link>
+                              <div className="flex items-center justify-end gap-2">
+                                <Link
+                                  href={`/admin/sessions/${session.id}`}
+                                  className="text-xs bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-3 py-1.5 rounded-lg transition-colors"
+                                >
+                                  Rediger
+                                </Link>
+                                <MoveSessionButton
+                                  sessionId={session.id}
+                                  currentDate={session.date}
+                                  weeks={allWeeks}
+                                />
+                                <DeleteSessionButton sessionId={session.id} />
+                              </div>
                             </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
+                  </div>
+
+                  <div className="mt-2">
+                    <AddSessionButton weekId={week.id} />
                   </div>
                 </div>
               ))}

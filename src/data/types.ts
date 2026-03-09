@@ -11,9 +11,17 @@ export type GroupLabel = 'A' | 'B' | 'C'
 
 export type IntensityLevel = 'maks' | 'høy' | 'moderat' | 'lav' | 'kampdag'
 
+export type SkipPeriod = {
+  name: string        // e.g. "Sommerferie", "Vinterferie", "Påske"
+  startDate: string   // ISO "2027-06-23"
+  endDate: string     // ISO "2027-08-10"
+}
+
 export interface Season {
   id: string
   year: number
+  isActive: boolean
+  skipPeriods: SkipPeriod[]
   blocks: Block[]
 }
 
@@ -26,6 +34,8 @@ export interface Block {
   learningObjectives: string[]
   coachingPoints: string[]
   coreExerciseId: string
+  startDate?: string
+  endDate?: string
   weeks: Week[]
 }
 

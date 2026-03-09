@@ -1,4 +1,6 @@
 import { getSeason } from '@/data/db-season'
+import { getAllExercises } from '@/data/db-exercises'
+import { exercises as staticExercises } from '@/data/exercises'
 import { notFound } from 'next/navigation'
 import { BlockEditForm } from '@/components/admin/BlockEditForm'
 
@@ -9,10 +11,16 @@ export default async function AdminBlockEditPage({
 }: {
   params: { id: string }
 }) {
-  const season = await getSeason()
+  const [season, dbExercises] = await Promise.all([getSeason(), getAllExercises()])
   const block = season?.blocks.find((b) => b.id === params.id)
 
   if (!block) notFound()
+
+  const exerciseMap = new Map([
+    ...staticExercises.map((e) => [e.id, e] as const),
+    ...dbExercises.map((e) => [e.id, e] as const),
+  ])
+  const exercises = Array.from(exerciseMap.values())
 
   return (
     <div className="p-8 max-w-3xl">
@@ -25,7 +33,11 @@ export default async function AdminBlockEditPage({
         </h1>
       </div>
 
-      <BlockEditForm block={block} />
+      <BlockEditForm
+        block={block}
+        exercises={exercises.map((e) => ({ id: e.id, name: e.name, nffCode: e.nffCode }))}
+      />
     </div>
   )
 }
+

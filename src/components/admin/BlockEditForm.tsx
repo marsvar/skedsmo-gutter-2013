@@ -7,7 +7,15 @@ import type { Block, Week } from '@/data/types'
 const NFF_CODES = ['A1', 'A2', 'A3', 'F1', 'F2', 'F3'] as const
 const WEEK_FOCUS_OPTIONS = ['Bli kjent', 'Øk presset', 'Integrasjon', 'Konsolidering', 'Overgang', 'Påskebro'] as const
 
-export function BlockEditForm({ block }: { block: Block & { weeks: Week[] } }) {
+type ExerciseOption = { id: string; name: string; nffCode: string }
+
+export function BlockEditForm({
+  block,
+  exercises = [],
+}: {
+  block: Block & { weeks: Week[] }
+  exercises?: ExerciseOption[]
+}) {
   const router = useRouter()
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -19,7 +27,11 @@ export function BlockEditForm({ block }: { block: Block & { weeks: Week[] } }) {
     ageGroup: block.ageGroup,
     durationWeeks: block.durationWeeks,
     coreExerciseId: block.coreExerciseId,
+    startDate: block.startDate ?? '',
+    endDate: block.endDate ?? '',
   })
+
+  const filteredExercises = exercises.filter((e) => e.nffCode === fields.nffCode)
 
   function setField<K extends keyof typeof fields>(key: K, value: (typeof fields)[K]) {
     setFields((prev) => ({ ...prev, [key]: value }))
@@ -32,7 +44,11 @@ export function BlockEditForm({ block }: { block: Block & { weeks: Week[] } }) {
     const res = await fetch(`/api/admin/blocks/${block.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(fields),
+      body: JSON.stringify({
+        ...fields,
+        startDate: fields.startDate || null,
+        endDate: fields.endDate || null,
+      }),
     })
     if (!res.ok) {
       const body = await res.json().catch(() => null)
@@ -99,11 +115,43 @@ export function BlockEditForm({ block }: { block: Block & { weeks: Week[] } }) {
             />
           </div>
           <div>
-            <label className="text-xs text-white/40 mb-1 block">Kjerneøvelse ID</label>
+            <label className="text-xs text-white/40 mb-1 block">Kjerneøvelse</label>
+            {filteredExercises.length > 0 ? (
+              <select
+                className="w-full bg-[#1a1a1a] border border-white/15 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#c6180e]"
+                value={fields.coreExerciseId}
+                onChange={(e) => setField('coreExerciseId', e.target.value)}
+              >
+                <option value="">— Velg øvelse —</option>
+                {filteredExercises.map((e) => (
+                  <option key={e.id} value={e.id}>{e.name}</option>
+                ))}
+              </select>
+            ) : (
+              <input
+                className="w-full bg-white/10 border border-white/15 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#c6180e]"
+                value={fields.coreExerciseId}
+                onChange={(e) => setField('coreExerciseId', e.target.value)}
+                placeholder="Øvelse-ID"
+              />
+            )}
+          </div>
+          <div>
+            <label className="text-xs text-white/40 mb-1 block">Fra dato (builder)</label>
             <input
+              type="date"
               className="w-full bg-white/10 border border-white/15 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#c6180e]"
-              value={fields.coreExerciseId}
-              onChange={(e) => setField('coreExerciseId', e.target.value)}
+              value={fields.startDate}
+              onChange={(e) => setField('startDate', e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="text-xs text-white/40 mb-1 block">Til dato (builder)</label>
+            <input
+              type="date"
+              className="w-full bg-white/10 border border-white/15 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#c6180e]"
+              value={fields.endDate}
+              onChange={(e) => setField('endDate', e.target.value)}
             />
           </div>
         </div>

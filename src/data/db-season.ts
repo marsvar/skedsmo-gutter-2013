@@ -8,9 +8,9 @@
  */
 
 import { cache } from 'react'
-import { asc } from 'drizzle-orm'
+import { asc, eq, desc } from 'drizzle-orm'
 import { db } from '@/db/client'
-import { blocks, weeks, sessions } from '@/db/schema'
+import { seasons, blocks, weeks, sessions } from '@/db/schema'
 import { season2026 } from './season'
 import type {
   Season,
@@ -24,6 +24,7 @@ import type {
   ResistanceLevel,
   GroupLabel,
   KamptilpassetSpill,
+  SkipPeriod,
 } from './types'
 
 // ── Internal row shapes (Drizzle returns `any` for jsonb, text for enums) ────
@@ -72,6 +73,8 @@ type RawBlock = {
   learningObjectives: unknown
   coachingPoints: unknown
   coreExerciseId: string
+  startDate: string | null
+  endDate: string | null
   weeks?: RawWeek[]
 }
 
@@ -130,6 +133,8 @@ function mapBlock(row: RawBlock): Block {
     learningObjectives: (row.learningObjectives ?? []) as string[],
     coachingPoints: (row.coachingPoints ?? []) as string[],
     coreExerciseId: row.coreExerciseId,
+    startDate: row.startDate ?? undefined,
+    endDate: row.endDate ?? undefined,
     weeks: (row.weeks ?? [])
       .map(mapWeek)
       .sort((a, b) => a.number - b.number),
@@ -145,6 +150,7 @@ function mapBlock(row: RawBlock): Block {
 export const getSeason = cache(async (): Promise<Season> => {
   try {
     const row = await db.query.seasons.findFirst({
+      where: eq(seasons.isActive, true),
       with: {
         blocks: {
           orderBy: [asc(blocks.sortOrder)],
@@ -166,6 +172,8 @@ export const getSeason = cache(async (): Promise<Season> => {
       return {
         id: row.id,
         year: row.year,
+        isActive: row.isActive,
+        skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
         blocks: (row.blocks as RawBlock[]).map(mapBlock),
       }
     }
@@ -175,6 +183,52 @@ export const getSeason = cache(async (): Promise<Season> => {
   // Fall back to static season data when DB is unreachable or empty
   return season2026
 })
+
+/**
+ * Fetches all seasons (no cache, admin-only).
+ */
+export async function getSeasons(): Promise<Season[]> {
+  try {
+    const rows = await db.query.seasons.findMany({
+      orderBy: [desc(seasons.year)],
+    })
+    return rows.map((row) => ({
+      id: row.id,
+      year: row.year,
+      isActive: row.isActive,
+      skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
+      blocks: [],
+    }))
+  } catch {
+    return []
+  }
+}
+
+/**
+ * Fetches a specific season by ID with its blocks (no cache, admin-only).
+ */
+export async function getSeasonById(id: string): Promise<Season | null> {
+  try {
+    const row = await db.query.seasons.findFirst({
+      where: eq(seasons.id, id),
+      with: {
+        blocks: {
+          orderBy: [asc(blocks.sortOrder)],
+        },
+      },
+    })
+    if (!row) return null
+    return {
+      id: row.id,
+      year: row.year,
+      isActive: row.isActive,
+      skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
+      blocks: (row.blocks as RawBlock[]).map(mapBlock),
+    }
+  } catch {
+    return null
+  }
+}
 
 // ── Derived accessors ─────────────────────────────────────────────────────────
 

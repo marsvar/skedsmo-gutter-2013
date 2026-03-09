@@ -21,12 +21,17 @@ export default async function AdminSessionEditPage({
   ])
   const exercises = Array.from(exerciseMap.values())
 
-  // Find the session in the nested tree
+  // Find the session and its parent block in the nested tree
   let session = null
+  let blockNffCode: string | undefined
   for (const block of season?.blocks ?? []) {
     for (const week of block.weeks) {
       const found = week.sessions.find((s) => s.id === params.id)
-      if (found) { session = found; break }
+      if (found) {
+        session = found
+        blockNffCode = block.nffCode
+        break
+      }
     }
     if (session) break
   }
@@ -47,6 +52,7 @@ export default async function AdminSessionEditPage({
       <SessionEditForm
         session={session}
         exercises={exercises.map((e) => ({ id: e.id, name: e.name, nffCode: e.nffCode }))}
+        blockNffCode={blockNffCode}
       />
     </div>
   )

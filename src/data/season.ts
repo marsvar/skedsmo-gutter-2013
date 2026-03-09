@@ -3,6 +3,8 @@ import type { Season } from './types'
 export const season2026: Season = {
   id: 'season-2026',
   year: 2026,
+  isActive: true,
+  skipPeriods: [],
   blocks: [
     {
       id: 'block-mars-2026',

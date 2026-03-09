@@ -1,5 +1,23 @@
 import { z } from 'zod'
 
+// ── Seasons ───────────────────────────────────────────────────────────────────
+
+export const SeasonCreateSchema = z.object({
+  year: z.number().int().min(2020).max(2040),
+})
+
+export const SeasonUpdateSchema = z.object({
+  isActive:    z.boolean().optional(),
+  skipPeriods: z.array(z.object({
+    name:      z.string().min(1),
+    startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    endDate:   z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  })).optional(),
+})
+
+export type SeasonCreateInput = z.infer<typeof SeasonCreateSchema>
+export type SeasonUpdateInput = z.infer<typeof SeasonUpdateSchema>
+
 // ── Shared primitives ─────────────────────────────────────────────────────────
 
 const GroupVariantSchema = z.object({
@@ -49,6 +67,8 @@ export const BlockCreateSchema = z.object({
   coachingPoints:     z.array(z.string()),
   coreExerciseId:     z.string().min(1),
   sortOrder:          z.number().int().min(0),
+  startDate:          z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable().optional(),
+  endDate:            z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable().optional(),
 })
 
 export const BlockUpdateSchema = BlockCreateSchema.omit({ seasonId: true }).partial()
@@ -58,12 +78,33 @@ export type BlockUpdateInput = z.infer<typeof BlockUpdateSchema>
 
 // ── Weeks ─────────────────────────────────────────────────────────────────────
 
+export const WeekCreateSchema = z.object({
+  blockId:   z.string().min(1),
+  number:    z.number().int().min(1),
+  focus:     z.enum(['Bli kjent', 'Øk presset', 'Integrasjon', 'Konsolidering', 'Overgang', 'Påskebro']),
+  dateRange: z.string().min(1),
+  startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+  endDate:   z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+})
+
 export const WeekUpdateSchema = z.object({
   focus:     z.enum(['Bli kjent', 'Øk presset', 'Integrasjon', 'Konsolidering', 'Overgang', 'Påskebro']),
   dateRange: z.string().min(1),
 })
 
+export type WeekCreateInput = z.infer<typeof WeekCreateSchema>
 export type WeekUpdateInput = z.infer<typeof WeekUpdateSchema>
+
+// ── Sessions (create) ─────────────────────────────────────────────────────────
+
+export const SessionCreateSchema = z.object({
+  weekId:          z.string().min(1),
+  date:            z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  dayOfWeek:       z.enum(['monday', 'tuesday', 'thursday', 'saturday']),
+  resistanceLevel: z.enum(['none', 'passive', 'active', 'full']).default('none'),
+})
+
+export type SessionCreateInput = z.infer<typeof SessionCreateSchema>
 
 // ── Exercises ─────────────────────────────────────────────────────────────────
 
