@@ -10,7 +10,7 @@
 import { cache } from 'react'
 import { asc, eq, desc } from 'drizzle-orm'
 import { db } from '@/db/client'
-import { seasons, blocks, weeks, sessions } from '@/db/schema'
+import { seasons, blocks, weeks, sessions, sessionGroupVariants } from '@/db/schema'
 import { season2026 } from './season'
 import type {
   Season,
@@ -276,6 +276,73 @@ export async function getAllSessions(): Promise<Session[]> {
 
 export async function getSession(id: string): Promise<Session | null> {
   return (await getAllSessions()).find((s) => s.id === id) ?? null
+}
+
+/**
+ * Fetches a single session directly from DB by ID, bypassing the season tree.
+ * Use this in admin edit pages to guarantee correct data regardless of fallback.
+ */
+export async function getSessionById(
+  id: string,
+): Promise<(Session & { weekId: string; blockNffCode: string | null }) | null> {
+  const row = await db
+    .select()
+    .from(sessions)
+    .where(eq(sessions.id, id))
+    .limit(1)
+    .then((r) => r[0] ?? null)
+
+  if (!row) return null
+
+  const gvRows = await db
+    .select()
+    .from(sessionGroupVariants)
+    .where(eq(sessionGroupVariants.sessionId, id))
+
+  // Walk up to find the NFF code
+  const weekRow = await db
+    .select({ blockId: weeks.blockId })
+    .from(weeks)
+    .where(eq(weeks.id, row.weekId))
+    .limit(1)
+    .then((r) => r[0] ?? null)
+
+  let blockNffCode: string | null = null
+  if (weekRow) {
+    const blockRow = await db
+      .select({ nffCode: blocks.nffCode })
+      .from(blocks)
+      .where(eq(blocks.id, weekRow.blockId))
+      .limit(1)
+      .then((r) => r[0] ?? null)
+    blockNffCode = blockRow?.nffCode ?? null
+  }
+
+  const session: Session = {
+    id: row.id,
+    weekId: row.weekId,
+    date: row.date,
+    dayOfWeek: row.dayOfWeek as Session['dayOfWeek'],
+    resistanceLevel: row.resistanceLevel as Session['resistanceLevel'],
+    rondoFormat: row.rondoFormat,
+    sjefOverBallenFocus: row.sjefOverBallenFocus,
+    temaExerciseId: row.temaExerciseId,
+    kamptilpassetSpill: row.kamptilpassetSpill as Session['kamptilpassetSpill'],
+    oppsummering: row.oppsummering ?? '',
+    coachingFocus: (row.coachingFocus ?? []) as string[],
+    hasRRR: row.hasRRR ?? false,
+    rrrDescription: row.rrrDescription ?? undefined,
+    groupVariants: gvRows.map((gv) => ({
+      group: gv.group as GroupVariant['group'],
+      description: gv.description,
+      spaceModifier: gv.spaceModifier as GroupVariant['spaceModifier'],
+      touchLimit: gv.touchLimit,
+      defenderCount: gv.defenderCount,
+      notes: gv.notes,
+    })),
+  }
+
+  return { ...session, blockNffCode }
 }
 
 export async function getWeekForSession(sessionId: string): Promise<Week | null> {

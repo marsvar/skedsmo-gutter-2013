@@ -30,8 +30,8 @@ const GroupVariantSchema = z.object({
 })
 
 const KamptilpassetSpillSchema = z.object({
-  exerciseId: z.string().min(1),
-  format:     z.string().min(1),
+  exerciseId: z.string(),
+  format:     z.string(),
   constraint: z.string(),
   notes:      z.string(),
 })
@@ -44,7 +44,7 @@ export const SessionUpdateSchema = z.object({
   resistanceLevel:     z.enum(['none', 'passive', 'active', 'full']),
   rondoFormat:         z.string().min(1),
   sjefOverBallenFocus: z.string().min(1),
-  temaExerciseId:      z.string().min(1),
+  temaExerciseId:      z.string(),
   kamptilpassetSpill:  KamptilpassetSpillSchema,
   oppsummering:        z.string(),
   coachingFocus:       z.array(z.string()),

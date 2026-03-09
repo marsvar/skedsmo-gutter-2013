@@ -144,9 +144,7 @@ export function SessionEditForm({
 
         <FormRow label="Temaøvelse">
           <Select {...register('temaExerciseId')}>
-            {blockNffCode && filteredExercises.length === 0 && (
-              <option value="">Ingen øvelser for {blockNffCode}</option>
-            )}
+            <option value="">— Velg temaøvelse —</option>
             {filteredExercises.map((e) => (
               <option key={e.id} value={e.id}>
                 [{e.nffCode}] {e.name}
@@ -206,6 +204,7 @@ export function SessionEditForm({
 
         <FormRow label="Øvelse">
           <Select {...register('kamptilpassetSpill.exerciseId')}>
+            <option value="">— Velg øvelse —</option>
             {exercises.map((e) => (
               <option key={e.id} value={e.id}>
                 [{e.nffCode}] {e.name}

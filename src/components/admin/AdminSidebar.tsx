@@ -8,9 +8,9 @@ import { useState } from 'react'
 const navItems = [
   { href: '/admin/sessions',  label: 'Økter',    icon: '📋' },
   { href: '/admin/blocks',    label: 'Blokker',  icon: '📦' },
-  { href: '/admin/seasons',   label: 'Sesonger', icon: '📅' },
   { href: '/admin/exercises', label: 'Øvelser',  icon: '⚽' },
   { href: '/admin/matches',   label: 'Kamper',   icon: '🏆' },
+  { href: '/admin/seasons',   label: 'Sesonger', icon: '📅' },
 ]
 
 export default function AdminSidebar({ email }: { email: string | undefined }) {

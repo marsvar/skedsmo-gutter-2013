@@ -1,4 +1,4 @@
-import { getSeason } from '@/data/db-season'
+import { getSessionById } from '@/data/db-season'
 import { getAllExercises } from '@/data/db-exercises'
 import { exercises as staticExercises } from '@/data/exercises'
 import { notFound } from 'next/navigation'
@@ -11,32 +11,21 @@ export default async function AdminSessionEditPage({
 }: {
   params: { id: string }
 }) {
-  const [season, dbExercises] = await Promise.all([getSeason(), getAllExercises()])
+  const [sessionResult, dbExercises] = await Promise.all([
+    getSessionById(params.id),
+    getAllExercises(),
+  ])
+
+  if (!sessionResult) notFound()
+
+  const { blockNffCode, ...session } = sessionResult
 
   // Merge: static exercises provide the base; DB exercises override/extend by ID.
-  // This ensures the selects are always populated even before exercises are seeded.
   const exerciseMap = new Map([
     ...staticExercises.map((e) => [e.id, e] as const),
     ...dbExercises.map((e) => [e.id, e] as const),
   ])
   const exercises = Array.from(exerciseMap.values())
-
-  // Find the session and its parent block in the nested tree
-  let session = null
-  let blockNffCode: string | undefined
-  for (const block of season?.blocks ?? []) {
-    for (const week of block.weeks) {
-      const found = week.sessions.find((s) => s.id === params.id)
-      if (found) {
-        session = found
-        blockNffCode = block.nffCode
-        break
-      }
-    }
-    if (session) break
-  }
-
-  if (!session) notFound()
 
   return (
     <div className="p-8 max-w-3xl">
@@ -52,7 +41,7 @@ export default async function AdminSessionEditPage({
       <SessionEditForm
         session={session}
         exercises={exercises.map((e) => ({ id: e.id, name: e.name, nffCode: e.nffCode }))}
-        blockNffCode={blockNffCode}
+        blockNffCode={blockNffCode ?? undefined}
       />
     </div>
   )
