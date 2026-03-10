@@ -1,15 +1,19 @@
 import BottomNav from '@/components/BottomNav'
+import AdminPill from '@/components/admin/AdminPill'
+import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-export default function PublicLayout({
+export default async function PublicLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const supabase = createSupabaseServerClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
   return (
     <>
-      {/* App header */}
       <header className="bg-[#0b0b0b] border-b border-skedsmo-red sticky top-0 z-40">
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -26,12 +30,12 @@ export default function PublicLayout({
         </div>
       </header>
 
-      {/* Main content — padded for bottom nav */}
       <main className="max-w-2xl mx-auto px-4 py-6 pb-24">
         {children}
       </main>
 
       <BottomNav />
+      <AdminPill isLoggedIn={!!user} currentSessionId={null} />
       <Analytics />
       <SpeedInsights />
     </>
