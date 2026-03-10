@@ -8,6 +8,20 @@
       "when": 1773003265571,
       "tag": "0000_white_ultron",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1773003265572,
+      "tag": "0001_add_season_active",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1773003265573,
+      "tag": "0002_session_durations",
+      "breakpoints": true
     }
   ]
 }

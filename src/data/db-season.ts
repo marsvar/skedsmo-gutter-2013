@@ -52,6 +52,12 @@ type RawSession = {
   coachingFocus: unknown
   hasRRR: boolean
   rrrDescription: string | null
+  rondoDuration: number | null
+  sjefDuration: number | null
+  temaDuration: number | null
+  spillDuration: number | null
+  oppsummeringDuration: number | null
+  rrrDuration: number | null
   groupVariants?: RawGroupVariant[]
 }
 
@@ -106,6 +112,12 @@ function mapSession(row: RawSession): Session {
     coachingFocus: (row.coachingFocus ?? []) as string[],
     hasRRR: row.hasRRR ?? false,
     rrrDescription: row.rrrDescription ?? undefined,
+    rondoDuration: row.rondoDuration ?? 10,
+    sjefDuration: row.sjefDuration ?? 10,
+    temaDuration: row.temaDuration ?? 30,
+    spillDuration: row.spillDuration ?? 35,
+    oppsummeringDuration: row.oppsummeringDuration ?? 5,
+    rrrDuration: row.rrrDuration ?? 20,
     groupVariants: (row.groupVariants ?? []).map(mapGroupVariant),
   }
 }
@@ -332,6 +344,12 @@ export async function getSessionById(
     coachingFocus: (row.coachingFocus ?? []) as string[],
     hasRRR: row.hasRRR ?? false,
     rrrDescription: row.rrrDescription ?? undefined,
+    rondoDuration: row.rondoDuration ?? 10,
+    sjefDuration: row.sjefDuration ?? 10,
+    temaDuration: row.temaDuration ?? 30,
+    spillDuration: row.spillDuration ?? 35,
+    oppsummeringDuration: row.oppsummeringDuration ?? 5,
+    rrrDuration: row.rrrDuration ?? 20,
     groupVariants: gvRows.map((gv) => ({
       group: gv.group as GroupVariant['group'],
       description: gv.description,
