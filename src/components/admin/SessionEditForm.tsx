@@ -81,6 +81,12 @@ export function SessionEditForm({
         coachingFocus:       session.coachingFocus,
         hasRRR:              session.hasRRR,
         rrrDescription:      session.rrrDescription ?? '',
+        rondoDuration:        session.rondoDuration        ?? 10,
+        sjefDuration:         session.sjefDuration          ?? 10,
+        temaDuration:         session.temaDuration          ?? 30,
+        spillDuration:        session.spillDuration         ?? 35,
+        oppsummeringDuration: session.oppsummeringDuration  ?? 5,
+        rrrDuration:          session.rrrDuration            ?? 20,
         groupVariants:       session.groupVariants,
       },
       resetOptions: {
