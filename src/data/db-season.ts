@@ -90,7 +90,7 @@ type RawSeason = {
   year: number
   isActive: boolean
   skipPeriods: unknown
-  defaultTrainingDays?: string[] | null
+  defaultTrainingDays: string[]
   blocks?: RawBlock[]
 }
 
@@ -197,7 +197,7 @@ export const getSeason = cache(async (): Promise<Season> => {
         year: row.year,
         isActive: row.isActive,
         skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
-        defaultTrainingDays: ((row as RawSeason).defaultTrainingDays ?? ['monday','tuesday','thursday','saturday']) as string[],
+        defaultTrainingDays: row.defaultTrainingDays ?? ['monday','tuesday','thursday','saturday'],
         blocks: (row.blocks as RawBlock[]).map(mapBlock),
       }
     }
@@ -221,7 +221,7 @@ export async function getSeasons(): Promise<Season[]> {
       year: row.year,
       isActive: row.isActive,
       skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
-      defaultTrainingDays: ((row as RawSeason).defaultTrainingDays ?? ['monday','tuesday','thursday','saturday']) as string[],
+      defaultTrainingDays: row.defaultTrainingDays ?? ['monday','tuesday','thursday','saturday'],
       blocks: [],
     }))
   } catch {
@@ -248,7 +248,7 @@ export async function getSeasonById(id: string): Promise<Season | null> {
       year: row.year,
       isActive: row.isActive,
       skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
-      defaultTrainingDays: ((row as RawSeason).defaultTrainingDays ?? ['monday','tuesday','thursday','saturday']) as string[],
+      defaultTrainingDays: row.defaultTrainingDays ?? ['monday','tuesday','thursday','saturday'],
       blocks: (row.blocks as RawBlock[]).map(mapBlock),
     }
   } catch {

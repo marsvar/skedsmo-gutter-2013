@@ -22,7 +22,7 @@ export interface Season {
   year: number
   isActive: boolean
   skipPeriods: SkipPeriod[]
-  defaultTrainingDays?: string[]
+  defaultTrainingDays: string[]
   blocks: Block[]
 }
 
