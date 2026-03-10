@@ -34,6 +34,7 @@ export default async function AdminBlockEditPage({
       </div>
 
       <BlockEditForm
+        key={block.id}
         block={block}
         exercises={exercises.map((e) => ({ id: e.id, name: e.name, nffCode: e.nffCode }))}
       />

@@ -39,6 +39,7 @@ export default async function AdminSessionEditPage({
       </div>
 
       <SessionEditForm
+        key={session.id}
         session={session}
         exercises={exercises.map((e) => ({ id: e.id, name: e.name, nffCode: e.nffCode }))}
         blockNffCode={blockNffCode ?? undefined}
