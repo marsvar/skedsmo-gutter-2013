@@ -16,12 +16,14 @@ interface Props {
 
 export default function EditableRondoCard({ session, isOpen, onOpen, onClose }: Props) {
   const { save, isSaving, savedOk } = useSaveSession(session.id)
-  const [format, setFormat] = useState(session.rondoFormat)
+  const [format, setFormat] = useState(
+    RONDO_FORMATS.includes(session.rondoFormat) ? session.rondoFormat : '4v2'
+  )
   const [duration, setDuration] = useState(session.rondoDuration ?? 10)
 
   async function handleSave() {
-    await save({ rondoFormat: format, rondoDuration: duration })
-    onClose()
+    const ok = await save({ rondoFormat: format, rondoDuration: duration })
+    if (ok) onClose()
   }
 
   return (
