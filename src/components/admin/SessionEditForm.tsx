@@ -67,7 +67,9 @@ export function SessionEditForm({
   const { register, control, handleSubmit, formState: { errors, isSubmitting } } =
     useForm<SessionUpdateInput>({
       resolver: zodResolver(SessionUpdateSchema),
-      defaultValues: {
+      // `values` (not `defaultValues`) keeps the form in sync whenever the
+      // server re-sends new session data, without requiring a full remount.
+      values: {
         date:                session.date,
         dayOfWeek:           session.dayOfWeek,
         resistanceLevel:     session.resistanceLevel,
@@ -80,6 +82,9 @@ export function SessionEditForm({
         hasRRR:              session.hasRRR,
         rrrDescription:      session.rrrDescription ?? '',
         groupVariants:       session.groupVariants,
+      },
+      resetOptions: {
+        keepDirtyValues: true, // don't blow away in-progress edits on refresh
       },
     })
 
