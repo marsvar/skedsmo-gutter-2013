@@ -15,7 +15,8 @@ export const seasons = pgTable('seasons', {
   id:          text('id').primaryKey(),
   year:        integer('year').notNull(),
   isActive:    boolean('is_active').notNull().default(false),
-  skipPeriods: jsonb('skip_periods').$type<SkipPeriod[]>().notNull().default([]),
+  skipPeriods:          jsonb('skip_periods').$type<SkipPeriod[]>().notNull().default([]),
+  defaultTrainingDays:  jsonb('default_training_days').$type<string[]>().notNull().default(['monday','tuesday','thursday','saturday']),
 })
 
 // ── Blocks ────────────────────────────────────────────────────────────────────
@@ -33,6 +34,7 @@ export const blocks = pgTable('blocks', {
   sortOrder:          integer('sort_order').notNull().default(0),
   startDate:          text('start_date'),
   endDate:            text('end_date'),
+  trainingDays:       jsonb('training_days').$type<string[]>(),  // null = use season default
 })
 
 // ── Weeks ─────────────────────────────────────────────────────────────────────

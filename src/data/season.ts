@@ -5,6 +5,7 @@ export const season2026: Season = {
   year: 2026,
   isActive: true,
   skipPeriods: [],
+  defaultTrainingDays: ['monday', 'tuesday', 'thursday', 'saturday'],
   blocks: [
     {
       id: 'block-mars-2026',
@@ -25,6 +26,7 @@ export const season2026: Season = {
         'Første touch fremover',
       ],
       coreExerciseId: 'ex-a1a2-20',
+      trainingDays: null,
       weeks: [
         // ===== UKE 1: 2–7 mars =====
         {
@@ -700,6 +702,7 @@ export const season2026: Season = {
         'Kvikk tanke: fikk vi ball? Gå fremover!',
       ],
       coreExerciseId: 'ex-a1a2-19',
+      trainingDays: null,
       weeks: [
         // ===== UKE 1 "Bli kjent": 23–28 mars =====
         {
@@ -1378,6 +1381,7 @@ export const season2026: Season = {
         'Støttespill rundt avslutteren',
       ],
       coreExerciseId: 'ex-a2a3-35',
+      trainingDays: null,
       weeks: [
         {
           id: 'week-a2a3-1',
@@ -1572,6 +1576,7 @@ export const season2026: Season = {
         'Hele laget presser – kommunisér «press!»',
       ],
       coreExerciseId: 'ex-f1-situasjon',
+      trainingDays: null,
       weeks: [
         {
           id: 'week-f1-1',
@@ -1624,6 +1629,7 @@ export const season2026: Season = {
         'Kompakt – ikke spre deg',
       ],
       coreExerciseId: 'ex-f1f2-situasjon',
+      trainingDays: null,
       weeks: [
         {
           id: 'week-f1f2-1',
@@ -1674,6 +1680,7 @@ export const season2026: Season = {
         'Ikke la motstander snu med ballen i rom',
       ],
       coreExerciseId: 'ex-f1f2-situasjon',
+      trainingDays: null,
       weeks: [
         {
           id: 'week-f2-1',
@@ -1723,6 +1730,7 @@ export const season2026: Season = {
         'Keeper: dominer boksen, kommunisér',
       ],
       coreExerciseId: 'ex-f2f3-situasjon',
+      trainingDays: null,
       weeks: [
         {
           id: 'week-f3-1',

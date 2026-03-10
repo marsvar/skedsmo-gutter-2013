@@ -81,7 +81,17 @@ type RawBlock = {
   coreExerciseId: string
   startDate: string | null
   endDate: string | null
+  trainingDays?: string[] | null
   weeks?: RawWeek[]
+}
+
+type RawSeason = {
+  id: string
+  year: number
+  isActive: boolean
+  skipPeriods: unknown
+  defaultTrainingDays?: string[] | null
+  blocks?: RawBlock[]
 }
 
 // ── Mappers ───────────────────────────────────────────────────────────────────
@@ -147,6 +157,7 @@ function mapBlock(row: RawBlock): Block {
     coreExerciseId: row.coreExerciseId,
     startDate: row.startDate ?? undefined,
     endDate: row.endDate ?? undefined,
+    trainingDays: row.trainingDays ?? null,
     weeks: (row.weeks ?? [])
       .map(mapWeek)
       .sort((a, b) => a.number - b.number),
@@ -186,6 +197,7 @@ export const getSeason = cache(async (): Promise<Season> => {
         year: row.year,
         isActive: row.isActive,
         skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
+        defaultTrainingDays: ((row as RawSeason).defaultTrainingDays ?? ['monday','tuesday','thursday','saturday']) as string[],
         blocks: (row.blocks as RawBlock[]).map(mapBlock),
       }
     }
@@ -209,6 +221,7 @@ export async function getSeasons(): Promise<Season[]> {
       year: row.year,
       isActive: row.isActive,
       skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
+      defaultTrainingDays: ((row as RawSeason).defaultTrainingDays ?? ['monday','tuesday','thursday','saturday']) as string[],
       blocks: [],
     }))
   } catch {
@@ -235,6 +248,7 @@ export async function getSeasonById(id: string): Promise<Season | null> {
       year: row.year,
       isActive: row.isActive,
       skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
+      defaultTrainingDays: ((row as RawSeason).defaultTrainingDays ?? ['monday','tuesday','thursday','saturday']) as string[],
       blocks: (row.blocks as RawBlock[]).map(mapBlock),
     }
   } catch {
