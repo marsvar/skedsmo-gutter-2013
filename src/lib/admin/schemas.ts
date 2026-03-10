@@ -50,6 +50,12 @@ export const SessionUpdateSchema = z.object({
   coachingFocus:       z.array(z.string()),
   hasRRR:              z.boolean(),
   rrrDescription:      z.string().nullable().optional(),
+  rondoDuration:        z.number().int().min(1).max(60).optional(),
+  sjefDuration:         z.number().int().min(1).max(60).optional(),
+  temaDuration:         z.number().int().min(1).max(90).optional(),
+  spillDuration:        z.number().int().min(1).max(90).optional(),
+  oppsummeringDuration: z.number().int().min(1).max(30).optional(),
+  rrrDuration:          z.number().int().min(1).max(60).optional(),
   groupVariants:       z.array(GroupVariantSchema),
 })
 

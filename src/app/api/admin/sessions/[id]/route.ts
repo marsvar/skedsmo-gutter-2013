@@ -43,6 +43,12 @@ export async function PUT(
         coachingFocus:       sessionFields.coachingFocus,
         hasRRR:              sessionFields.hasRRR,
         rrrDescription:      sessionFields.rrrDescription ?? null,
+        rondoDuration:        sessionFields.rondoDuration,
+        sjefDuration:         sessionFields.sjefDuration,
+        temaDuration:         sessionFields.temaDuration,
+        spillDuration:        sessionFields.spillDuration,
+        oppsummeringDuration: sessionFields.oppsummeringDuration,
+        rrrDuration:          sessionFields.rrrDuration,
       })
       .where(eq(sessions.id, sessionId))
 
