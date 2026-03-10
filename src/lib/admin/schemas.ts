@@ -57,7 +57,7 @@ export const SessionUpdateSchema = z.object({
   oppsummeringDuration: z.number().int().min(1).max(30),
   rrrDuration:          z.number().int().min(1).max(60),
   groupVariants:       z.array(GroupVariantSchema),
-})
+}).partial()
 
 export type SessionUpdateInput = z.infer<typeof SessionUpdateSchema>
 

@@ -28,44 +28,73 @@ export async function PUT(
   const { groupVariants, ...sessionFields } = parsed.data
   const sessionId = params.id
 
-  await db.transaction(async (tx) => {
-    await tx
-      .update(sessions)
-      .set({
-        date:                sessionFields.date,
-        dayOfWeek:           sessionFields.dayOfWeek,
-        resistanceLevel:     sessionFields.resistanceLevel,
-        rondoFormat:         sessionFields.rondoFormat,
-        sjefOverBallenFocus: sessionFields.sjefOverBallenFocus,
-        temaExerciseId:      sessionFields.temaExerciseId,
-        kamptilpassetSpill:  sessionFields.kamptilpassetSpill,
-        oppsummering:        sessionFields.oppsummering,
-        coachingFocus:       sessionFields.coachingFocus,
-        hasRRR:              sessionFields.hasRRR,
-        rrrDescription:      sessionFields.rrrDescription ?? null,
-        rondoDuration:        sessionFields.rondoDuration,
-        sjefDuration:         sessionFields.sjefDuration,
-        temaDuration:         sessionFields.temaDuration,
-        spillDuration:        sessionFields.spillDuration,
-        oppsummeringDuration: sessionFields.oppsummeringDuration,
-        rrrDuration:          sessionFields.rrrDuration,
-      })
-      .where(eq(sessions.id, sessionId))
+  // Build a patch object containing only the fields present in the request.
+  // SessionUpdateSchema is now .partial(), so any field may be undefined —
+  // only include defined values so we don't accidentally overwrite columns.
+  type SessionSet = {
+    date?: string
+    dayOfWeek?: string
+    resistanceLevel?: string
+    rondoFormat?: string
+    sjefOverBallenFocus?: string
+    temaExerciseId?: string
+    kamptilpassetSpill?: typeof sessionFields.kamptilpassetSpill
+    oppsummering?: string
+    coachingFocus?: string[]
+    hasRRR?: boolean
+    rrrDescription?: string | null
+    rondoDuration?: number
+    sjefDuration?: number
+    temaDuration?: number
+    spillDuration?: number
+    oppsummeringDuration?: number
+    rrrDuration?: number
+  }
 
-    // Replace group variants atomically
-    await tx.delete(sessionGroupVariants).where(eq(sessionGroupVariants.sessionId, sessionId))
-    if (groupVariants.length > 0) {
-      await tx.insert(sessionGroupVariants).values(
-        groupVariants.map((gv) => ({
-          sessionId,
-          group:         gv.group,
-          description:   gv.description,
-          spaceModifier: gv.spaceModifier,
-          touchLimit:    gv.touchLimit ?? null,
-          defenderCount: gv.defenderCount,
-          notes:         gv.notes,
-        })),
-      )
+  const sessionPatch: SessionSet = {}
+  if (sessionFields.date               !== undefined) sessionPatch.date               = sessionFields.date
+  if (sessionFields.dayOfWeek          !== undefined) sessionPatch.dayOfWeek          = sessionFields.dayOfWeek
+  if (sessionFields.resistanceLevel    !== undefined) sessionPatch.resistanceLevel    = sessionFields.resistanceLevel
+  if (sessionFields.rondoFormat        !== undefined) sessionPatch.rondoFormat        = sessionFields.rondoFormat
+  if (sessionFields.sjefOverBallenFocus !== undefined) sessionPatch.sjefOverBallenFocus = sessionFields.sjefOverBallenFocus
+  if (sessionFields.temaExerciseId     !== undefined) sessionPatch.temaExerciseId     = sessionFields.temaExerciseId
+  if (sessionFields.kamptilpassetSpill !== undefined) sessionPatch.kamptilpassetSpill = sessionFields.kamptilpassetSpill
+  if (sessionFields.oppsummering       !== undefined) sessionPatch.oppsummering       = sessionFields.oppsummering
+  if (sessionFields.coachingFocus      !== undefined) sessionPatch.coachingFocus      = sessionFields.coachingFocus
+  if (sessionFields.hasRRR             !== undefined) sessionPatch.hasRRR             = sessionFields.hasRRR
+  if ('rrrDescription' in sessionFields)              sessionPatch.rrrDescription      = sessionFields.rrrDescription ?? null
+  if (sessionFields.rondoDuration         !== undefined) sessionPatch.rondoDuration         = sessionFields.rondoDuration
+  if (sessionFields.sjefDuration          !== undefined) sessionPatch.sjefDuration          = sessionFields.sjefDuration
+  if (sessionFields.temaDuration          !== undefined) sessionPatch.temaDuration          = sessionFields.temaDuration
+  if (sessionFields.spillDuration         !== undefined) sessionPatch.spillDuration         = sessionFields.spillDuration
+  if (sessionFields.oppsummeringDuration  !== undefined) sessionPatch.oppsummeringDuration  = sessionFields.oppsummeringDuration
+  if (sessionFields.rrrDuration           !== undefined) sessionPatch.rrrDuration           = sessionFields.rrrDuration
+
+  await db.transaction(async (tx) => {
+    // Only update session row if there are scalar fields to patch.
+    if (Object.keys(sessionPatch).length > 0) {
+      await tx
+        .update(sessions)
+        .set(sessionPatch)
+        .where(eq(sessions.id, sessionId))
+    }
+
+    // Only replace group variants when the patch includes them.
+    if (groupVariants !== undefined) {
+      await tx.delete(sessionGroupVariants).where(eq(sessionGroupVariants.sessionId, sessionId))
+      if (groupVariants.length > 0) {
+        await tx.insert(sessionGroupVariants).values(
+          groupVariants.map((gv) => ({
+            sessionId,
+            group:         gv.group,
+            description:   gv.description,
+            spaceModifier: gv.spaceModifier,
+            touchLimit:    gv.touchLimit ?? null,
+            defenderCount: gv.defenderCount,
+            notes:         gv.notes,
+          })),
+        )
+      }
     }
   })
 
