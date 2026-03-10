@@ -17,7 +17,7 @@ interface Props {
 }
 
 export default function EditableSessionHeader({ session, totalMinutes }: Props) {
-  const { save, isSaving, savedOk } = useSaveSession(session.id)
+  const { save, isSaving, savedOk, error } = useSaveSession(session.id)
   const [resistance, setResistance] = useState<ResistanceLevel>(session.resistanceLevel)
 
   const over = totalMinutes > 90
@@ -44,10 +44,13 @@ export default function EditableSessionHeader({ session, totalMinutes }: Props) 
             <button
               key={opt.value}
               onClick={async () => {
+                const previous = resistance
                 setResistance(opt.value)
-                await save({ resistanceLevel: opt.value })
+                const ok = await save({ resistanceLevel: opt.value })
+                if (!ok) setResistance(previous)
               }}
               disabled={isSaving}
+              aria-pressed={resistance === opt.value}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border ${
                 resistance === opt.value
                   ? 'bg-[#c6180e] border-[#c6180e] text-white'
@@ -58,6 +61,7 @@ export default function EditableSessionHeader({ session, totalMinutes }: Props) 
             </button>
           ))}
         </div>
+        {error && <p className="text-xs text-red-400 mt-2">{error}</p>}
       </div>
     </div>
   )
