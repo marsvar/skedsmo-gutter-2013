@@ -63,6 +63,12 @@ export interface Session {
   coachingFocus: string[]
   hasRRR: boolean
   rrrDescription?: string
+  rondoDuration?: number
+  sjefDuration?: number
+  temaDuration?: number
+  spillDuration?: number
+  oppsummeringDuration?: number
+  rrrDuration?: number
 }
 
 export interface GroupVariant {

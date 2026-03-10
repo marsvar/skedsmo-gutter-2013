@@ -61,6 +61,12 @@ export const sessions = pgTable('sessions', {
   coachingFocus:       jsonb('coaching_focus').notNull().$type<string[]>().default([]),
   hasRRR:              boolean('has_rrr').notNull().default(false),
   rrrDescription:      text('rrr_description'),
+  rondoDuration:         integer('rondo_duration').notNull().default(10),
+  sjefDuration:          integer('sjef_duration').notNull().default(10),
+  temaDuration:          integer('tema_duration').notNull().default(30),
+  spillDuration:         integer('spill_duration').notNull().default(35),
+  oppsummeringDuration:  integer('oppsummering_duration').notNull().default(5),
+  rrrDuration:           integer('rrr_duration').notNull().default(20),
 })
 
 // ── Session Group Variants ─────────────────────────────────────────────────────
