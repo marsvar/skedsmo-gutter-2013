@@ -100,7 +100,7 @@ function BlockTimelineCard({ block }: { block: Block }) {
   const [isOpen, setIsOpen] = useState(false)
   const { save, isSaving, savedOk } = useSaveBlock(block.id)
   const [name, setName] = useState(block.name)
-  const [trainingDays, setTrainingDays] = useState<string[]>(block.trainingDays ?? [])
+  const [trainingDays, setTrainingDays] = useState<string[] | null>(block.trainingDays ?? null)
 
   const colors = NFF_COLORS[block.nffCode] ?? { bg: '#111', color: '#fff' }
   const sessionCount = block.weeks.reduce((n, w) => n + w.sessions.length, 0)
@@ -109,6 +109,8 @@ function BlockTimelineCard({ block }: { block: Block }) {
     const ok = await save({ name, trainingDays })
     if (ok) setIsOpen(false)
   }
+
+  const selectedTrainingDays = trainingDays ?? []
 
   return (
     <EditableCard
@@ -131,7 +133,7 @@ function BlockTimelineCard({ block }: { block: Block }) {
           </div>
           <div>
             <label className="text-xs text-white/50 block mb-1.5">Treningsdager</label>
-            <TrainingDaysSelector value={trainingDays} onChange={setTrainingDays} />
+            <TrainingDaysSelector value={selectedTrainingDays} onChange={setTrainingDays} />
           </div>
           {sessionCount > 0 && (
             <div>
@@ -177,9 +179,9 @@ function BlockTimelineCard({ block }: { block: Block }) {
               )}
               &bull; {sessionCount} økt{sessionCount !== 1 ? 'er' : ''}
             </p>
-            {trainingDays.length > 0 && (
+            {selectedTrainingDays.length > 0 && (
               <p className="text-xs text-white/30 mt-1">
-                {trainingDays
+                {selectedTrainingDays
                   .map((d) => DAY_LABELS_SHORT[d as TrainingDay] ?? d)
                   .join(', ')}
               </p>
