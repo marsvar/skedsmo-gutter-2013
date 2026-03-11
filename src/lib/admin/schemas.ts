@@ -75,6 +75,7 @@ export const BlockCreateSchema = z.object({
   sortOrder:          z.number().int().min(0),
   startDate:          z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable().optional(),
   endDate:            z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable().optional(),
+  trainingDays:       z.array(z.enum(['monday','tuesday','wednesday','thursday','friday','saturday','sunday'])).nullable().optional(),
 })
 
 export const BlockUpdateSchema = BlockCreateSchema.omit({ seasonId: true }).partial()
