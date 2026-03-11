@@ -12,9 +12,10 @@ interface Props {
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
+  onDurationSaved?: (minutes: number) => void
 }
 
-export default function EditableRondoCard({ session, isOpen, onOpen, onClose }: Props) {
+export default function EditableRondoCard({ session, isOpen, onOpen, onClose, onDurationSaved }: Props) {
   const { save, isSaving, savedOk } = useSaveSession(session.id)
   const [format, setFormat] = useState(
     RONDO_FORMATS.includes(session.rondoFormat) ? session.rondoFormat : '4v2'
@@ -23,7 +24,7 @@ export default function EditableRondoCard({ session, isOpen, onOpen, onClose }: 
 
   async function handleSave() {
     const ok = await save({ rondoFormat: format, rondoDuration: duration })
-    if (ok) onClose()
+    if (ok) { onDurationSaved?.(duration); onClose() }
   }
 
   return (

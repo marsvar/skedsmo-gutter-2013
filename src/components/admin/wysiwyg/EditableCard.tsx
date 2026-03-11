@@ -47,14 +47,14 @@ export default function EditableCard({
 
           <div className="flex items-center gap-3 pt-1">
             <button
-              onClick={onSave}
+              onClick={(e) => { e.stopPropagation(); onSave() }}
               disabled={isSaving}
               className="bg-[#c6180e] hover:bg-[#a8140c] disabled:opacity-50 text-white text-sm font-medium rounded-lg px-4 py-2 transition-colors"
             >
               {isSaving ? 'Lagrer…' : 'Lagre'}
             </button>
             <button
-              onClick={onClose}
+              onClick={(e) => { e.stopPropagation(); onClose() }}
               className="text-sm text-white/40 hover:text-white/70 transition-colors"
             >
               Avbryt

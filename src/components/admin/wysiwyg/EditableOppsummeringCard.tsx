@@ -10,16 +10,17 @@ interface Props {
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
+  onDurationSaved?: (minutes: number) => void
 }
 
-export default function EditableOppsummeringCard({ session, isOpen, onOpen, onClose }: Props) {
+export default function EditableOppsummeringCard({ session, isOpen, onOpen, onClose, onDurationSaved }: Props) {
   const { save, isSaving, savedOk } = useSaveSession(session.id)
   const [text, setText] = useState(session.oppsummering)
   const [duration, setDuration] = useState(session.oppsummeringDuration ?? 5)
 
   async function handleSave() {
     const ok = await save({ oppsummering: text, oppsummeringDuration: duration })
-    if (ok) onClose()
+    if (ok) { onDurationSaved?.(duration); onClose() }
   }
 
   return (

@@ -10,9 +10,10 @@ interface Props {
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
+  onDurationSaved?: (minutes: number) => void
 }
 
-export default function EditableRRRCard({ session, isOpen, onOpen, onClose }: Props) {
+export default function EditableRRRCard({ session, isOpen, onOpen, onClose, onDurationSaved }: Props) {
   const { save, isSaving, savedOk } = useSaveSession(session.id)
   const [hasRRR, setHasRRR] = useState(session.hasRRR)
   const [description, setDescription] = useState(session.rrrDescription ?? '')
@@ -20,7 +21,7 @@ export default function EditableRRRCard({ session, isOpen, onOpen, onClose }: Pr
 
   async function handleSave() {
     const ok = await save({ hasRRR, rrrDescription: description, rrrDuration: duration })
-    if (ok) onClose()
+    if (ok) { onDurationSaved?.(hasRRR ? duration : 0); onClose() }
   }
 
   return (

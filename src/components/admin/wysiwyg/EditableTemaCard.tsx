@@ -21,9 +21,10 @@ interface Props {
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
+  onDurationSaved?: (minutes: number) => void
 }
 
-export default function EditableTemaCard({ session, exercises, isOpen, onOpen, onClose }: Props) {
+export default function EditableTemaCard({ session, exercises, isOpen, onOpen, onClose, onDurationSaved }: Props) {
   const { save, isSaving, savedOk } = useSaveSession(session.id)
   const [exerciseId, setExerciseId] = useState(session.temaExerciseId)
   const [resistance, setResistance] = useState<ResistanceLevel>(session.resistanceLevel)
@@ -45,7 +46,7 @@ export default function EditableTemaCard({ session, exercises, isOpen, onOpen, o
       temaDuration: duration,
       groupVariants: variants,
     })
-    if (ok) onClose()
+    if (ok) { onDurationSaved?.(duration); onClose() }
   }
 
   return (

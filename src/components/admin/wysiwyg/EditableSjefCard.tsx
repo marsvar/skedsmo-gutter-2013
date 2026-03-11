@@ -17,16 +17,17 @@ interface Props {
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
+  onDurationSaved?: (minutes: number) => void
 }
 
-export default function EditableSjefCard({ session, isOpen, onOpen, onClose }: Props) {
+export default function EditableSjefCard({ session, isOpen, onOpen, onClose, onDurationSaved }: Props) {
   const { save, isSaving, savedOk } = useSaveSession(session.id)
   const [focus, setFocus] = useState(session.sjefOverBallenFocus)
   const [duration, setDuration] = useState(session.sjefDuration ?? 10)
 
   async function handleSave() {
     const ok = await save({ sjefOverBallenFocus: focus, sjefDuration: duration })
-    if (ok) onClose()
+    if (ok) { onDurationSaved?.(duration); onClose() }
   }
 
   return (

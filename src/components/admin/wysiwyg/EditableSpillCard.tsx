@@ -10,9 +10,10 @@ interface Props {
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
+  onDurationSaved?: (minutes: number) => void
 }
 
-export default function EditableSpillCard({ session, isOpen, onOpen, onClose }: Props) {
+export default function EditableSpillCard({ session, isOpen, onOpen, onClose, onDurationSaved }: Props) {
   const { save, isSaving, savedOk } = useSaveSession(session.id)
   const [format, setFormat] = useState(session.kamptilpassetSpill.format)
   const [constraint, setConstraint] = useState(session.kamptilpassetSpill.constraint)
@@ -29,7 +30,7 @@ export default function EditableSpillCard({ session, isOpen, onOpen, onClose }: 
       },
       spillDuration: duration,
     })
-    if (ok) onClose()
+    if (ok) { onDurationSaved?.(duration); onClose() }
   }
 
   return (
