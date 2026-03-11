@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 
 interface AdminPillProps {
@@ -9,6 +10,7 @@ interface AdminPillProps {
 }
 
 export default function AdminPill({ isLoggedIn, currentSessionId }: AdminPillProps) {
+  const pathname = usePathname()
   const [showLogin, setShowLogin] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
   const [email, setEmail] = useState('')
@@ -36,8 +38,11 @@ export default function AdminPill({ isLoggedIn, currentSessionId }: AdminPillPro
     window.location.reload()
   }
 
-  const editHref = currentSessionId
-    ? `/admin/session/${currentSessionId}`
+  const sessionIdFromPath = pathname.match(/^\/session\/([^/]+)$/)?.[1] ?? null
+  const activeSessionId = currentSessionId ?? sessionIdFromPath
+
+  const editHref = activeSessionId
+    ? `/admin/session/${activeSessionId}`
     : '/admin'
 
   if (!isLoggedIn) {
