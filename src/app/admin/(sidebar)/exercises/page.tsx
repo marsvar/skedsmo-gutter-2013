@@ -1,7 +1,7 @@
 import { getAllExercises } from '@/data/db-exercises'
 import { exercises as staticExercises } from '@/data/exercises'
 import { ExerciseCreateButton } from '@/components/admin/ExerciseCreateButton'
-import { ExercisesTable } from '@/components/admin/ExercisesTable'
+import { ExerciseAccordionList } from '@/components/admin/ExerciseAccordionList'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,7 +23,7 @@ export default async function AdminExercisesPage() {
         <ExerciseCreateButton />
       </div>
 
-      <ExercisesTable exercises={exercises} />
+      <ExerciseAccordionList exercises={exercises} />
     </div>
   )
 }
