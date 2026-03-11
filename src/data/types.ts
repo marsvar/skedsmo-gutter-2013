@@ -22,6 +22,7 @@ export interface Season {
   year: number
   isActive: boolean
   skipPeriods: SkipPeriod[]
+  defaultTrainingDays: string[]
   blocks: Block[]
 }
 
@@ -36,6 +37,7 @@ export interface Block {
   coreExerciseId: string
   startDate?: string
   endDate?: string
+  trainingDays?: string[] | null
   weeks: Week[]
 }
 
@@ -63,6 +65,12 @@ export interface Session {
   coachingFocus: string[]
   hasRRR: boolean
   rrrDescription?: string
+  rondoDuration?: number
+  sjefDuration?: number
+  temaDuration?: number
+  spillDuration?: number
+  oppsummeringDuration?: number
+  rrrDuration?: number
 }
 
 export interface GroupVariant {

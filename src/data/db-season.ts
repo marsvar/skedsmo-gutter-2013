@@ -52,6 +52,12 @@ type RawSession = {
   coachingFocus: unknown
   hasRRR: boolean
   rrrDescription: string | null
+  rondoDuration: number | null
+  sjefDuration: number | null
+  temaDuration: number | null
+  spillDuration: number | null
+  oppsummeringDuration: number | null
+  rrrDuration: number | null
   groupVariants?: RawGroupVariant[]
 }
 
@@ -75,7 +81,17 @@ type RawBlock = {
   coreExerciseId: string
   startDate: string | null
   endDate: string | null
+  trainingDays?: string[] | null
   weeks?: RawWeek[]
+}
+
+type RawSeason = {
+  id: string
+  year: number
+  isActive: boolean
+  skipPeriods: unknown
+  defaultTrainingDays: string[]
+  blocks?: RawBlock[]
 }
 
 // ── Mappers ───────────────────────────────────────────────────────────────────
@@ -106,6 +122,12 @@ function mapSession(row: RawSession): Session {
     coachingFocus: (row.coachingFocus ?? []) as string[],
     hasRRR: row.hasRRR ?? false,
     rrrDescription: row.rrrDescription ?? undefined,
+    rondoDuration: row.rondoDuration ?? 10,
+    sjefDuration: row.sjefDuration ?? 10,
+    temaDuration: row.temaDuration ?? 30,
+    spillDuration: row.spillDuration ?? 35,
+    oppsummeringDuration: row.oppsummeringDuration ?? 5,
+    rrrDuration: row.rrrDuration ?? 20,
     groupVariants: (row.groupVariants ?? []).map(mapGroupVariant),
   }
 }
@@ -135,6 +157,7 @@ function mapBlock(row: RawBlock): Block {
     coreExerciseId: row.coreExerciseId,
     startDate: row.startDate ?? undefined,
     endDate: row.endDate ?? undefined,
+    trainingDays: row.trainingDays ?? null,
     weeks: (row.weeks ?? [])
       .map(mapWeek)
       .sort((a, b) => a.number - b.number),
@@ -174,6 +197,7 @@ export const getSeason = cache(async (): Promise<Season> => {
         year: row.year,
         isActive: row.isActive,
         skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
+        defaultTrainingDays: row.defaultTrainingDays ?? ['monday','tuesday','thursday','saturday'],
         blocks: (row.blocks as RawBlock[]).map(mapBlock),
       }
     }
@@ -197,6 +221,7 @@ export async function getSeasons(): Promise<Season[]> {
       year: row.year,
       isActive: row.isActive,
       skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
+      defaultTrainingDays: row.defaultTrainingDays ?? ['monday','tuesday','thursday','saturday'],
       blocks: [],
     }))
   } catch {
@@ -223,6 +248,7 @@ export async function getSeasonById(id: string): Promise<Season | null> {
       year: row.year,
       isActive: row.isActive,
       skipPeriods: (row.skipPeriods ?? []) as SkipPeriod[],
+      defaultTrainingDays: row.defaultTrainingDays ?? ['monday','tuesday','thursday','saturday'],
       blocks: (row.blocks as RawBlock[]).map(mapBlock),
     }
   } catch {
@@ -332,6 +358,12 @@ export async function getSessionById(
     coachingFocus: (row.coachingFocus ?? []) as string[],
     hasRRR: row.hasRRR ?? false,
     rrrDescription: row.rrrDescription ?? undefined,
+    rondoDuration: row.rondoDuration ?? 10,
+    sjefDuration: row.sjefDuration ?? 10,
+    temaDuration: row.temaDuration ?? 30,
+    spillDuration: row.spillDuration ?? 35,
+    oppsummeringDuration: row.oppsummeringDuration ?? 5,
+    rrrDuration: row.rrrDuration ?? 20,
     groupVariants: gvRows.map((gv) => ({
       group: gv.group as GroupVariant['group'],
       description: gv.description,
