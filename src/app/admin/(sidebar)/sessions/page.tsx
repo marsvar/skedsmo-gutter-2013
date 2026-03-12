@@ -80,7 +80,7 @@ export default async function AdminSessionsPage() {
                             <td className="px-4 py-3 text-right">
                               <div className="flex items-center justify-end gap-2">
                                 <Link
-                                  href={`/admin/sessions/${session.id}`}
+                                  href={`/admin/session/${session.id}`}
                                   className="text-xs bg-white/10 hover:bg-white/20 text-white/70 hover:text-white px-3 py-1.5 rounded-lg transition-colors"
                                 >
                                   Rediger

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import EditableCard from './wysiwyg/EditableCard'
 import type { Season, Block } from '@/data/types'
@@ -68,6 +69,7 @@ function TrainingDaysSelector({
 // ── useSaveBlock ─────────────────────────────────────────────────────────────
 
 function useSaveBlock(blockId: string) {
+  const router = useRouter()
   const [isSaving, setIsSaving] = useState(false)
   const [savedOk, setSavedOk] = useState(false)
 
@@ -83,6 +85,7 @@ function useSaveBlock(blockId: string) {
       if (!res.ok) return false
       setSavedOk(true)
       setTimeout(() => setSavedOk(false), 3000)
+      router.refresh()
       return true
     } catch {
       return false

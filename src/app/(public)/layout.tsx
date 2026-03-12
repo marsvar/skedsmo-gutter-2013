@@ -35,7 +35,7 @@ export default async function PublicLayout({
       </main>
 
       <BottomNav />
-      <AdminPill isLoggedIn={!!user} currentSessionId={null} />
+      <AdminPill isLoggedIn={!!user} />
       <Analytics />
       <SpeedInsights />
     </>

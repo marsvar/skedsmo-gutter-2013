@@ -1,14 +1,20 @@
 'use client'
 
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { createSupabaseBrowserClient } from '@/lib/supabase/browser'
 
 interface AdminPillProps {
   isLoggedIn: boolean
-  currentSessionId: string | null  // if on a /session/[id] page
 }
 
-export default function AdminPill({ isLoggedIn, currentSessionId }: AdminPillProps) {
+export default function AdminPill({ isLoggedIn }: AdminPillProps) {
+  const pathname = usePathname()
+  // Derive session ID from URL so the pill works on any session page without
+  // requiring the layout to thread route params down as props.
+  const sessionMatch = pathname?.match(/^\/session\/([^/]+)/)
+  const currentSessionId = sessionMatch ? sessionMatch[1] : null
+
   const [showLogin, setShowLogin] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
   const [email, setEmail] = useState('')
